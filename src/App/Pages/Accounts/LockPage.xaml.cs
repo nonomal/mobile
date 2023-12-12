@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using Bit.App.Models;
 using Bit.App.Resources;
 using Bit.App.Utilities;
+using Bit.Core;
+using Bit.Core.Abstractions;
 using Bit.Core.Utilities;
 using Xamarin.Forms;
 
@@ -10,6 +12,7 @@ namespace Bit.App.Pages
 {
     public partial class LockPage : BaseContentPage
     {
+        private readonly IBroadcasterService _broadcasterService;
         private readonly AppOptions _appOptions;
         private readonly bool _autoPromptBiometric;
         private readonly LockPageViewModel _vm;
@@ -17,16 +20,16 @@ namespace Bit.App.Pages
         private bool _promptedAfterResume;
         private bool _appeared;
 
-        public LockPage(AppOptions appOptions = null, bool autoPromptBiometric = true)
+        public LockPage(AppOptions appOptions = null, bool autoPromptBiometric = true, bool checkPendingAuthRequests = true)
         {
             _appOptions = appOptions;
             _autoPromptBiometric = autoPromptBiometric;
             InitializeComponent();
+            _broadcasterService = ServiceContainer.Resolve<IBroadcasterService>();
             _vm = BindingContext as LockPageViewModel;
+            _vm.CheckPendingAuthRequests = checkPendingAuthRequests;
             _vm.Page = this;
             _vm.UnlockedAction = () => Device.BeginInvokeOnMainThread(async () => await UnlockedAsync());
-            MasterPasswordEntry = _masterPassword;
-            PinEntry = _pin;
 
             if (Device.RuntimePlatform == Device.iOS)
             {
@@ -38,12 +41,21 @@ namespace Bit.App.Pages
             }
         }
 
-        public Entry MasterPasswordEntry { get; set; }
-        public Entry PinEntry { get; set; }
+        public Entry SecretEntry
+        {
+            get
+            {
+                if (_vm?.PinEnabled ?? false)
+                {
+                    return _pin;
+                }
+                return _masterPassword;
+            }
+        }
 
         public async Task PromptBiometricAfterResumeAsync()
         {
-            if (_vm.BiometricLock)
+            if (_vm.BiometricEnabled)
             {
                 await Task.Delay(500);
                 if (!_promptedAfterResume)
@@ -57,6 +69,13 @@ namespace Bit.App.Pages
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+            _broadcasterService.Subscribe(nameof(LockPage), message =>
+            {
+                if (message.Command == Constants.ClearSensitiveFields)
+                {
+                    Device.BeginInvokeOnMainThread(_vm.ResetPinPasswordFields);
+                }
+            });
             if (_appeared)
             {
                 return;
@@ -70,20 +89,16 @@ namespace Bit.App.Pages
             _vm.AvatarImageSource = await GetAvatarImageSourceAsync();
 
             await _vm.InitAsync();
-            if (!_vm.BiometricLock)
+
+            _vm.FocusSecretEntry += PerformFocusSecretEntry;
+
+            if (!_vm.BiometricEnabled)
             {
-                if (_vm.PinLock)
-                {
-                    RequestFocus(PinEntry);
-                }
-                else
-                {
-                    RequestFocus(MasterPasswordEntry);
-                }
+                RequestFocus(SecretEntry);
             }
             else
             {
-                if (_vm.UsingKeyConnector && !_vm.PinLock)
+                if (!_vm.HasMasterPassword && !_vm.PinEnabled)
                 {
                     _passwordGrid.IsVisible = false;
                     _unlockButton.IsVisible = false;
@@ -97,6 +112,18 @@ namespace Bit.App.Pages
                     });
                 }
             }
+        }
+
+        private void PerformFocusSecretEntry(int? cursorPosition)
+        {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                SecretEntry.Focus();
+                if (cursorPosition.HasValue)
+                {
+                    SecretEntry.CursorPosition = cursorPosition.Value;
+                }
+            });
         }
 
         protected override bool OnBackButtonPressed()
@@ -114,6 +141,7 @@ namespace Bit.App.Pages
             base.OnDisappearing();
 
             _accountAvatar?.OnDisappearing();
+            _broadcasterService.Unsubscribe(nameof(LockPage));
         }
 
         private void Unlock_Clicked(object sender, EventArgs e)

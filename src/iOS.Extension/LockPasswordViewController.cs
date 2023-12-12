@@ -4,12 +4,18 @@ using UIKit;
 
 namespace Bit.iOS.Extension
 {
-    public partial class LockPasswordViewController : Core.Controllers.LockPasswordViewController
+    public partial class LockPasswordViewController : Core.Controllers.BaseLockPasswordViewController
     {
+        public LockPasswordViewController()
+        {
+            BiometricIntegritySourceKey = Bit.Core.Constants.iOSExtensionBiometricIntegritySourceKey;
+            DismissModalAction = Cancel;
+        }
+
         public LockPasswordViewController(IntPtr handle)
             : base(handle)
         {
-            BiometricIntegrityKey = Bit.Core.Constants.iOSExtensionBiometricIntegrityKey;
+            BiometricIntegritySourceKey = Bit.Core.Constants.iOSExtensionBiometricIntegritySourceKey;
             DismissModalAction = Cancel;
         }
 
@@ -19,6 +25,8 @@ namespace Bit.iOS.Extension
         public override UIBarButtonItem BaseSubmitButton => SubmitButton;
         public override Action Success => () => LoadingController.DismissLockAndContinue();
         public override Action Cancel => () => LoadingController.CompleteRequest(null, null);
+
+        public override UITableView TableView => MainTableView;
 
         public override void ViewDidLoad()
         {

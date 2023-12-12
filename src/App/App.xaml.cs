@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Bit.App.Abstractions;
 using Bit.App.Models;
@@ -6,9 +7,13 @@ using Bit.App.Pages;
 using Bit.App.Resources;
 using Bit.App.Services;
 using Bit.App.Utilities;
+using Bit.App.Utilities.AccountManagement;
+using Bit.Core;
 using Bit.Core.Abstractions;
 using Bit.Core.Enums;
 using Bit.Core.Models.Data;
+using Bit.Core.Models.Response;
+using Bit.Core.Services;
 using Bit.Core.Utilities;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -16,19 +21,28 @@ using Xamarin.Forms.Xaml;
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Bit.App
 {
-    public partial class App : Application
+    public partial class App : Application, IAccountsManagerHost
     {
+        public const string POP_ALL_AND_GO_TO_TAB_GENERATOR_MESSAGE = "popAllAndGoToTabGenerator";
+        public const string POP_ALL_AND_GO_TO_TAB_MYVAULT_MESSAGE = "popAllAndGoToTabMyVault";
+        public const string POP_ALL_AND_GO_TO_TAB_SEND_MESSAGE = "popAllAndGoToTabSend";
+        public const string POP_ALL_AND_GO_TO_AUTOFILL_CIPHERS_MESSAGE = "popAllAndGoToAutofillCiphers";
+
         private readonly IBroadcasterService _broadcasterService;
         private readonly IMessagingService _messagingService;
         private readonly IStateService _stateService;
         private readonly IVaultTimeoutService _vaultTimeoutService;
         private readonly ISyncService _syncService;
-        private readonly IPlatformUtilsService _platformUtilsService;
         private readonly IAuthService _authService;
-        private readonly IStorageService _secureStorageService;
         private readonly IDeviceActionService _deviceActionService;
-
+        private readonly IFileService _fileService;
+        private readonly IAccountsManager _accountsManager;
+        private readonly IPushNotificationService _pushNotificationService;
+        private readonly IConfigService _configService;
         private static bool _isResumed;
+        // these variables are static because the app is launching new activities on notification click, creating new instances of App. 
+        private static bool _pendingCheckPasswordlessLoginRequests;
+        private static object _processingLoginRequestLock = new object();
 
         public App(AppOptions appOptions)
         {
@@ -44,132 +58,223 @@ namespace Bit.App
             _vaultTimeoutService = ServiceContainer.Resolve<IVaultTimeoutService>("vaultTimeoutService");
             _syncService = ServiceContainer.Resolve<ISyncService>("syncService");
             _authService = ServiceContainer.Resolve<IAuthService>("authService");
-            _platformUtilsService = ServiceContainer.Resolve<IPlatformUtilsService>("platformUtilsService");
-            _secureStorageService = ServiceContainer.Resolve<IStorageService>("secureStorageService");
             _deviceActionService = ServiceContainer.Resolve<IDeviceActionService>("deviceActionService");
+            _fileService = ServiceContainer.Resolve<IFileService>();
+            _accountsManager = ServiceContainer.Resolve<IAccountsManager>("accountsManager");
+            _pushNotificationService = ServiceContainer.Resolve<IPushNotificationService>();
+            _configService = ServiceContainer.Resolve<IConfigService>();
+
+            _accountsManager.Init(() => Options, this);
 
             Bootstrap();
             _broadcasterService.Subscribe(nameof(App), async (message) =>
             {
-                if (message.Command == "showDialog")
+                try
                 {
-                    var details = message.Data as DialogDetails;
-                    var confirmed = true;
-                    var confirmText = string.IsNullOrWhiteSpace(details.ConfirmText) ?
-                        AppResources.Ok : details.ConfirmText;
-                    Device.BeginInvokeOnMainThread(async () =>
+                    if (message.Command == "showDialog")
                     {
-                        if (!string.IsNullOrWhiteSpace(details.CancelText))
+                        var details = message.Data as DialogDetails;
+                        var confirmed = true;
+                        var confirmText = string.IsNullOrWhiteSpace(details.ConfirmText) ?
+                            AppResources.Ok : details.ConfirmText;
+                        Device.BeginInvokeOnMainThread(async () =>
                         {
-                            confirmed = await Current.MainPage.DisplayAlert(details.Title, details.Text, confirmText,
-                                details.CancelText);
-                        }
-                        else
-                        {
-                            await Current.MainPage.DisplayAlert(details.Title, details.Text, confirmText);
-                        }
-                        _messagingService.Send("showDialogResolve", new Tuple<int, bool>(details.DialogId, confirmed));
-                    });
-                }
-                else if (message.Command == "locked")
-                {
-                    var extras = message.Data as Tuple<string, bool>;
-                    var userId = extras?.Item1;
-                    var userInitiated = extras?.Item2 ?? false;
-                    Device.BeginInvokeOnMainThread(async () => await LockedAsync(userId, userInitiated));
-                }
-                else if (message.Command == "lockVault")
-                {
-                    await _vaultTimeoutService.LockAsync(true);
-                }
-                else if (message.Command == "logout")
-                {
-                    var extras = message.Data as Tuple<string, bool, bool>;
-                    var userId = extras?.Item1;
-                    var userInitiated = extras?.Item2 ?? true;
-                    var expired = extras?.Item3 ?? false;
-                    Device.BeginInvokeOnMainThread(async () => await LogOutAsync(userId, userInitiated, expired));
-                }
-                else if (message.Command == "loggedOut")
-                {
-                    // Clean up old migrated key if they ever log out.
-                    await _secureStorageService.RemoveAsync("oldKey");
-                }
-                else if (message.Command == "resumed")
-                {
-                    if (Device.RuntimePlatform == Device.iOS)
-                    {
-                        ResumedAsync().FireAndForget();
+                            if (!string.IsNullOrWhiteSpace(details.CancelText))
+                            {
+                                confirmed = await Current.MainPage.DisplayAlert(details.Title, details.Text, confirmText,
+                                    details.CancelText);
+                            }
+                            else
+                            {
+                                await Current.MainPage.DisplayAlert(details.Title, details.Text, confirmText);
+                            }
+                            _messagingService.Send("showDialogResolve", new Tuple<int, bool>(details.DialogId, confirmed));
+                        });
                     }
-                }
-                else if (message.Command == "slept")
-                {
-                    if (Device.RuntimePlatform == Device.iOS)
+                    else if (message.Command == AppHelpers.RESUMED_MESSAGE_COMMAND)
                     {
-                        await SleptAsync();
-                    }
-                }
-                else if (message.Command == "addAccount")
-                {
-                    await AddAccount();
-                }
-                else if (message.Command == "accountAdded")
-                {
-                    await UpdateThemeAsync();
-                }
-                else if (message.Command == "switchedAccount")
-                {
-                    await SwitchedAccountAsync();
-                }
-                else if (message.Command == "migrated")
-                {
-                    await Task.Delay(1000);
-                    await SetMainPageAsync();
-                }
-                else if (message.Command == "popAllAndGoToTabGenerator" ||
-                    message.Command == "popAllAndGoToTabMyVault" ||
-                    message.Command == "popAllAndGoToTabSend" ||
-                    message.Command == "popAllAndGoToAutofillCiphers")
-                {
-                    Device.BeginInvokeOnMainThread(async () =>
-                    {
-                        if (Current.MainPage is TabsPage tabsPage)
+                        if (Device.RuntimePlatform == Device.iOS)
                         {
-                            while (tabsPage.Navigation.ModalStack.Count > 0)
-                            {
-                                await tabsPage.Navigation.PopModalAsync(false);
-                            }
-                            if (message.Command == "popAllAndGoToAutofillCiphers")
-                            {
-                                Current.MainPage = new NavigationPage(new AutofillCiphersPage(Options));
-                            }
-                            else if (message.Command == "popAllAndGoToTabMyVault")
-                            {
-                                Options.MyVaultTile = false;
-                                tabsPage.ResetToVaultPage();
-                            }
-                            else if (message.Command == "popAllAndGoToTabGenerator")
-                            {
-                                Options.GeneratorTile = false;
-                                tabsPage.ResetToGeneratorPage();
-                            }
-                            else if (message.Command == "popAllAndGoToTabSend")
-                            {
-                                tabsPage.ResetToSendPage();
-                            }
+                            ResumedAsync().FireAndForget();
                         }
-                    });
-                }
-                else if (message.Command == "convertAccountToKeyConnector")
-                {
-                    Device.BeginInvokeOnMainThread(async () =>
+                    }
+                    else if (message.Command == "slept")
                     {
-                        await Application.Current.MainPage.Navigation.PushModalAsync(
-                            new NavigationPage(new RemoveMasterPasswordPage()));
-                    });
-                }
+                        if (Device.RuntimePlatform == Device.iOS)
+                        {
+                            await SleptAsync();
+                        }
+                    }
+                    else if (message.Command == "migrated")
+                    {
+                        await Task.Delay(1000);
+                        await _accountsManager.NavigateOnAccountChangeAsync();
+                    }
+                    else if (message.Command == POP_ALL_AND_GO_TO_TAB_GENERATOR_MESSAGE ||
+                        message.Command == POP_ALL_AND_GO_TO_TAB_MYVAULT_MESSAGE ||
+                        message.Command == POP_ALL_AND_GO_TO_TAB_SEND_MESSAGE ||
+                        message.Command == POP_ALL_AND_GO_TO_AUTOFILL_CIPHERS_MESSAGE ||
+                        message.Command == DeepLinkContext.NEW_OTP_MESSAGE)
+                    {
+                        if (message.Command == DeepLinkContext.NEW_OTP_MESSAGE)
+                        {
+                            Options.OtpData = new OtpData((string)message.Data);
+                        }
 
+                        await Device.InvokeOnMainThreadAsync(async () =>
+                        {
+                            if (Current.MainPage is TabsPage tabsPage)
+                            {
+                                while (tabsPage.Navigation.ModalStack.Count > 0)
+                                {
+                                    await tabsPage.Navigation.PopModalAsync(false);
+                                }
+                                if (message.Command == POP_ALL_AND_GO_TO_AUTOFILL_CIPHERS_MESSAGE)
+                                {
+                                    Current.MainPage = new NavigationPage(new CipherSelectionPage(Options));
+                                }
+                                else if (message.Command == POP_ALL_AND_GO_TO_TAB_MYVAULT_MESSAGE)
+                                {
+                                    Options.MyVaultTile = false;
+                                    tabsPage.ResetToVaultPage();
+                                }
+                                else if (message.Command == POP_ALL_AND_GO_TO_TAB_GENERATOR_MESSAGE)
+                                {
+                                    Options.GeneratorTile = false;
+                                    tabsPage.ResetToGeneratorPage();
+                                }
+                                else if (message.Command == POP_ALL_AND_GO_TO_TAB_SEND_MESSAGE)
+                                {
+                                    tabsPage.ResetToSendPage();
+                                }
+                                else if (message.Command == DeepLinkContext.NEW_OTP_MESSAGE)
+                                {
+                                    tabsPage.ResetToVaultPage();
+                                    await tabsPage.Navigation.PushModalAsync(new NavigationPage(new CipherSelectionPage(Options)));
+                                }
+                            }
+                        });
+                    }
+                    else if (message.Command == "convertAccountToKeyConnector")
+                    {
+                        Device.BeginInvokeOnMainThread(async () =>
+                        {
+                            await Application.Current.MainPage.Navigation.PushModalAsync(
+                                new NavigationPage(new RemoveMasterPasswordPage()));
+                        });
+                    }
+                    else if (message.Command == Constants.ForceUpdatePassword)
+                    {
+                        Device.BeginInvokeOnMainThread(async () =>
+                        {
+                            await Application.Current.MainPage.Navigation.PushModalAsync(
+                                new NavigationPage(new UpdateTempPasswordPage()));
+                        });
+                    }
+                    else if (message.Command == Constants.ForceSetPassword)
+                    {
+                        await Device.InvokeOnMainThreadAsync(() => Application.Current.MainPage.Navigation.PushModalAsync(
+                                new NavigationPage(new SetPasswordPage(orgIdentifier: (string)message.Data))));
+                    }
+                    else if (message.Command == "syncCompleted")
+                    {
+                        await _configService.GetAsync(true);
+                    }
+                    else if (message.Command == Constants.PasswordlessLoginRequestKey
+                        || message.Command == "unlocked"
+                        || message.Command == AccountsManagerMessageCommands.ACCOUNT_SWITCH_COMPLETED)
+                    {
+                        lock (_processingLoginRequestLock)
+                        {
+                            // lock doesn't allow for async execution
+                            CheckPasswordlessLoginRequestsAsync().Wait();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LoggerHelper.LogEvenIfCantBeResolved(ex);
+                }
             });
+        }
+
+        private async Task CheckPasswordlessLoginRequestsAsync()
+        {
+            if (!_isResumed)
+            {
+                _pendingCheckPasswordlessLoginRequests = true;
+                return;
+            }
+            _pendingCheckPasswordlessLoginRequests = false;
+            if (await _vaultTimeoutService.IsLockedAsync())
+            {
+                return;
+            }
+
+            var notification = await _stateService.GetPasswordlessLoginNotificationAsync();
+            if (notification == null)
+            {
+                return;
+            }
+
+            if (await CheckShouldSwitchActiveUserAsync(notification))
+            {
+                return;
+            }
+
+            // Delay to wait for the vault page to appear
+            await Task.Delay(2000);
+            // if there is a request modal opened ignore all incoming requests
+            if (App.Current.MainPage.Navigation.ModalStack.Any(p => p is NavigationPage navPage && navPage.CurrentPage is LoginPasswordlessPage))
+            {
+                return;
+            }
+            var loginRequestData = await _authService.GetPasswordlessLoginRequestByIdAsync(notification.Id);
+            var page = new LoginPasswordlessPage(new LoginPasswordlessDetails()
+            {
+                PubKey = loginRequestData.PublicKey,
+                Id = loginRequestData.Id,
+                IpAddress = loginRequestData.RequestIpAddress,
+                Email = await _stateService.GetEmailAsync(),
+                FingerprintPhrase = loginRequestData.FingerprintPhrase,
+                RequestDate = loginRequestData.CreationDate,
+                DeviceType = loginRequestData.RequestDeviceType,
+                Origin = loginRequestData.Origin
+            });
+            await _stateService.SetPasswordlessLoginNotificationAsync(null);
+            _pushNotificationService.DismissLocalNotification(Constants.PasswordlessNotificationId);
+            if (!loginRequestData.IsExpired)
+            {
+                await Device.InvokeOnMainThreadAsync(() => Application.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(page)));
+            }
+        }
+
+        private async Task<bool> CheckShouldSwitchActiveUserAsync(PasswordlessRequestNotification notification)
+        {
+            var activeUserId = await _stateService.GetActiveUserIdAsync();
+            if (notification.UserId == activeUserId)
+            {
+                return false;
+            }
+
+            var notificationUserEmail = await _stateService.GetEmailAsync(notification.UserId);
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                try
+                {
+                    var result = await _deviceActionService.DisplayAlertAsync(AppResources.LogInRequested, string.Format(AppResources.LoginAttemptFromXDoYouWantToSwitchToThisAccount, notificationUserEmail), AppResources.Cancel, AppResources.Ok);
+                    if (result == AppResources.Ok)
+                    {
+                        await _stateService.SetActiveUserAsync(notification.UserId);
+                        _messagingService.Send(AccountsManagerMessageCommands.SWITCHED_ACCOUNT);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LoggerHelper.LogEvenIfCantBeResolved(ex);
+                }
+            });
+            return true;
         }
 
         public AppOptions Options { get; private set; }
@@ -177,6 +282,7 @@ namespace Bit.App
         protected async override void OnStart()
         {
             System.Diagnostics.Debug.WriteLine("XF App: OnStart");
+            _isResumed = true;
             await ClearCacheIfNeededAsync();
             Prime();
             if (string.IsNullOrWhiteSpace(Options.Uri))
@@ -188,12 +294,18 @@ namespace Bit.App
                     SyncIfNeeded();
                 }
             }
+            if (_pendingCheckPasswordlessLoginRequests)
+            {
+                _messagingService.Send(Constants.PasswordlessLoginRequestKey);
+            }
             if (Device.RuntimePlatform == Device.Android)
             {
                 await _vaultTimeoutService.CheckVaultTimeoutAsync();
                 // Reset delay on every start
                 _vaultTimeoutService.DelayLockAndLogoutMs = null;
             }
+
+            await _configService.GetAsync();
             _messagingService.Send("startEventTimer");
         }
 
@@ -220,6 +332,10 @@ namespace Bit.App
         {
             System.Diagnostics.Debug.WriteLine("XF App: OnResume");
             _isResumed = true;
+            if (_pendingCheckPasswordlessLoginRequests)
+            {
+                _messagingService.Send(Constants.PasswordlessLoginRequestKey);
+            }
             if (Device.RuntimePlatform == Device.Android)
             {
                 ResumedAsync().FireAndForget();
@@ -229,12 +345,15 @@ namespace Bit.App
         private async Task SleptAsync()
         {
             await _vaultTimeoutService.CheckVaultTimeoutAsync();
+            await ClearSensitiveFieldsAsync();
             _messagingService.Send("stopEventTimer");
         }
 
         private async Task ResumedAsync()
         {
+            await _stateService.CheckExtensionActiveUserAndSwitchIfNeededAsync();
             await _vaultTimeoutService.CheckVaultTimeoutAsync();
+            await ClearSensitiveFieldsAsync();
             _messagingService.Send("startEventTimer");
             await UpdateThemeAsync();
             await ClearCacheIfNeededAsync();
@@ -251,7 +370,15 @@ namespace Bit.App
             await Device.InvokeOnMainThreadAsync(() =>
             {
                 ThemeManager.SetTheme(Current.Resources);
-                _messagingService.Send("updatedTheme");
+                _messagingService.Send(ThemeManager.UPDATED_THEME_MESSAGE_KEY);
+            });
+        }
+
+        private async Task ClearSensitiveFieldsAsync()
+        {
+            await Device.InvokeOnMainThreadAsync(() =>
+            {
+                _messagingService.Send(Constants.ClearSensitiveFields);
             });
         }
 
@@ -263,108 +390,12 @@ namespace Bit.App
             new System.Globalization.UmAlQuraCalendar();
         }
 
-        private async Task LogOutAsync(string userId, bool userInitiated, bool expired)
-        {
-            await AppHelpers.LogOutAsync(userId, userInitiated);
-            await SetMainPageAsync();
-            _authService.LogOut(() =>
-            {
-                if (expired)
-                {
-                    _platformUtilsService.ShowToast("warning", null, AppResources.LoginExpired);
-                }
-            });
-        }
-
-        private async Task AddAccount()
-        {
-            Device.BeginInvokeOnMainThread(async () =>
-            {
-                Options.HideAccountSwitcher = false;
-                Current.MainPage = new NavigationPage(new HomePage(Options));
-            });
-        }
-
-        private async Task SwitchedAccountAsync()
-        {
-            await AppHelpers.OnAccountSwitchAsync();
-            Device.BeginInvokeOnMainThread(async () =>
-            {
-                if (await _vaultTimeoutService.ShouldTimeoutAsync())
-                {
-                    await _vaultTimeoutService.ExecuteTimeoutActionAsync();
-                }
-                else
-                {
-                    await SetMainPageAsync();
-                }
-                await Task.Delay(50);
-                await UpdateThemeAsync();
-            });
-        }
-
-        private async Task SetMainPageAsync()
-        {
-            var authed = await _stateService.IsAuthenticatedAsync();
-            if (authed)
-            {
-                if (await _vaultTimeoutService.IsLoggedOutByTimeoutAsync() ||
-                    await _vaultTimeoutService.ShouldLogOutByTimeoutAsync())
-                {
-                    // TODO implement orgIdentifier flow to SSO Login page, same as email flow below
-                    // var orgIdentifier = await _stateService.GetOrgIdentifierAsync();
-
-                    var email = await _stateService.GetEmailAsync();
-                    Options.HideAccountSwitcher = await _stateService.GetActiveUserIdAsync() == null;
-                    Current.MainPage = new NavigationPage(new LoginPage(email, Options));
-                }
-                else if (await _vaultTimeoutService.IsLockedAsync() ||
-                         await _vaultTimeoutService.ShouldLockAsync())
-                {
-                    Current.MainPage = new NavigationPage(new LockPage(Options));
-                }
-                else if (Options.FromAutofillFramework && Options.SaveType.HasValue)
-                {
-                    Current.MainPage = new NavigationPage(new AddEditPage(appOptions: Options));
-                }
-                else if (Options.Uri != null)
-                {
-                    Current.MainPage = new NavigationPage(new AutofillCiphersPage(Options));
-                }
-                else if (Options.CreateSend != null)
-                {
-                    Current.MainPage = new NavigationPage(new SendAddEditPage(Options));
-                }
-                else
-                {
-                    Current.MainPage = new TabsPage(Options);
-                }
-            }
-            else
-            {
-                Options.HideAccountSwitcher = await _stateService.GetActiveUserIdAsync() == null;
-                if (await _vaultTimeoutService.IsLoggedOutByTimeoutAsync() ||
-                    await _vaultTimeoutService.ShouldLogOutByTimeoutAsync())
-                {
-                    // TODO implement orgIdentifier flow to SSO Login page, same as email flow below
-                    // var orgIdentifier = await _stateService.GetOrgIdentifierAsync();
-
-                    var email = await _stateService.GetEmailAsync();
-                    Current.MainPage = new NavigationPage(new LoginPage(email, Options));
-                }
-                else
-                {
-                    Current.MainPage = new NavigationPage(new HomePage(Options));
-                }
-            }
-        }
-
         private async Task ClearCacheIfNeededAsync()
         {
             var lastClear = await _stateService.GetLastFileCacheClearAsync();
             if ((DateTime.UtcNow - lastClear.GetValueOrDefault(DateTime.MinValue)).TotalDays >= 1)
             {
-                var task = Task.Run(() => _deviceActionService.ClearCacheAsync());
+                var task = Task.Run(() => _fileService.ClearCacheAsync());
             }
         }
 
@@ -420,7 +451,7 @@ namespace Bit.App
                 UpdateThemeAsync();
             };
             Current.MainPage = new NavigationPage(new HomePage(Options));
-            var mainPageTask = SetMainPageAsync();
+            _accountsManager.NavigateOnAccountChangeAsync().FireAndForget();
             ServiceContainer.Resolve<MobilePlatformUtilsService>("platformUtilsService").Init();
         }
 
@@ -441,50 +472,72 @@ namespace Bit.App
             });
         }
 
-        private async Task LockedAsync(string userId, bool userInitiated)
+        public async Task SetPreviousPageInfoAsync()
         {
-            if (!await _stateService.IsActiveAccountAsync(userId))
-            {
-                _platformUtilsService.ShowToast("info", null, AppResources.AccountLockedSuccessfully);
-                return;
-            }
-
-            var autoPromptBiometric = !userInitiated;
-            if (autoPromptBiometric && Device.RuntimePlatform == Device.iOS)
-            {
-                var vaultTimeout = await _stateService.GetVaultTimeoutAsync();
-                if (vaultTimeout == 0)
-                {
-                    autoPromptBiometric = false;
-                }
-            }
             PreviousPageInfo lastPageBeforeLock = null;
             if (Current.MainPage is TabbedPage tabbedPage && tabbedPage.Navigation.ModalStack.Count > 0)
             {
                 var topPage = tabbedPage.Navigation.ModalStack[tabbedPage.Navigation.ModalStack.Count - 1];
                 if (topPage is NavigationPage navPage)
                 {
-                    if (navPage.CurrentPage is ViewPage viewPage)
+                    if (navPage.CurrentPage is CipherDetailsPage cipherDetailsPage)
                     {
                         lastPageBeforeLock = new PreviousPageInfo
                         {
                             Page = "view",
-                            CipherId = viewPage.ViewModel.CipherId
+                            CipherId = cipherDetailsPage.ViewModel.CipherId
                         };
                     }
-                    else if (navPage.CurrentPage is AddEditPage addEditPage && addEditPage.ViewModel.EditMode)
+                    else if (navPage.CurrentPage is CipherAddEditPage cipherAddEditPage && cipherAddEditPage.ViewModel.EditMode)
                     {
                         lastPageBeforeLock = new PreviousPageInfo
                         {
                             Page = "edit",
-                            CipherId = addEditPage.ViewModel.CipherId
+                            CipherId = cipherAddEditPage.ViewModel.CipherId
                         };
                     }
                 }
             }
             await _stateService.SetPreviousPageInfoAsync(lastPageBeforeLock);
-            var lockPage = new LockPage(Options, autoPromptBiometric);
-            Device.BeginInvokeOnMainThread(() => Current.MainPage = new NavigationPage(lockPage));
+        }
+
+        public void Navigate(NavigationTarget navTarget, INavigationParams navParams)
+        {
+            switch (navTarget)
+            {
+                case NavigationTarget.HomeLogin:
+                    Current.MainPage = new NavigationPage(new HomePage(Options));
+                    break;
+                case NavigationTarget.Login:
+                    if (navParams is LoginNavigationParams loginParams)
+                    {
+                        Current.MainPage = new NavigationPage(new LoginPage(loginParams.Email, Options));
+                    }
+                    break;
+                case NavigationTarget.Lock:
+                    if (navParams is LockNavigationParams lockParams)
+                    {
+                        Current.MainPage = new NavigationPage(new LockPage(Options, lockParams.AutoPromptBiometric));
+                    }
+                    else
+                    {
+                        Current.MainPage = new NavigationPage(new LockPage(Options));
+                    }
+                    break;
+                case NavigationTarget.Home:
+                    Current.MainPage = new TabsPage(Options);
+                    break;
+                case NavigationTarget.AddEditCipher:
+                    Current.MainPage = new NavigationPage(new CipherAddEditPage(appOptions: Options));
+                    break;
+                case NavigationTarget.AutofillCiphers:
+                case NavigationTarget.OtpCipherSelection:
+                    Current.MainPage = new NavigationPage(new CipherSelectionPage(Options));
+                    break;
+                case NavigationTarget.SendAddEdit:
+                    Current.MainPage = new NavigationPage(new SendAddEditPage(Options));
+                    break;
+            }
         }
     }
 }

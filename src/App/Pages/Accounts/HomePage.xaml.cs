@@ -10,9 +10,12 @@ namespace Bit.App.Pages
 {
     public partial class HomePage : BaseContentPage
     {
+        private bool _checkRememberedEmail;
         private readonly HomeViewModel _vm;
         private readonly AppOptions _appOptions;
         private IBroadcasterService _broadcasterService;
+
+        readonly LazyResolve<ILogger> _logger = new LazyResolve<ILogger>();
 
         public HomePage(AppOptions appOptions = null)
         {
@@ -21,17 +24,22 @@ namespace Bit.App.Pages
             InitializeComponent();
             _vm = BindingContext as HomeViewModel;
             _vm.Page = this;
-            _vm.StartLoginAction = () => Device.BeginInvokeOnMainThread(async () => await StartLoginAsync());
+            _vm.ShowCancelButton = _appOptions?.IosExtension ?? false;
+            _vm.StartLoginAction = async () => await StartLoginAsync();
             _vm.StartRegisterAction = () => Device.BeginInvokeOnMainThread(async () => await StartRegisterAsync());
             _vm.StartSsoLoginAction = () => Device.BeginInvokeOnMainThread(async () => await StartSsoLoginAsync());
             _vm.StartEnvironmentAction = () => Device.BeginInvokeOnMainThread(async () => await StartEnvironmentAsync());
+            _vm.CloseAction = async () =>
+            {
+                await _accountListOverlay.HideAsync();
+                await Navigation.PopModalAsync();
+            };
             UpdateLogo();
 
-            if (_appOptions?.IosExtension ?? false)
+            if (!_vm.ShowCancelButton)
             {
-                _vm.ShowCancelButton = true;
+                ToolbarItems.Remove(_closeButton);
             }
-
             if (_appOptions?.HideAccountSwitcher ?? false)
             {
                 ToolbarItems.Remove(_accountAvatar);
@@ -52,11 +60,11 @@ namespace Bit.App.Pages
 
             if (!_appOptions?.HideAccountSwitcher ?? false)
             {
-                _vm.AvatarImageSource = await GetAvatarImageSourceAsync();
+                _vm.AvatarImageSource = await GetAvatarImageSourceAsync(false);
             }
-            _broadcasterService.Subscribe(nameof(HomePage), async (message) =>
+            _broadcasterService.Subscribe(nameof(HomePage), (message) =>
             {
-                if (message.Command == "updatedTheme")
+                if (message.Command is ThemeManager.UPDATED_THEME_MESSAGE_KEY)
                 {
                     Device.BeginInvokeOnMainThread(() =>
                     {
@@ -64,6 +72,14 @@ namespace Bit.App.Pages
                     });
                 }
             });
+            try
+            {
+                await _vm.UpdateEnvironmentAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.Value?.Exception(ex);
+            }
         }
 
         protected override bool OnBackButtonPressed()
@@ -96,26 +112,10 @@ namespace Bit.App.Pages
             }
         }
 
-        private void LogIn_Clicked(object sender, EventArgs e)
-        {
-            if (DoOnce())
-            {
-                _vm.StartLoginAction();
-            }
-        }
-
         private async Task StartLoginAsync()
         {
-            var page = new LoginPage(null, _appOptions);
+            var page = new LoginPage(_vm.Email, _appOptions);
             await Navigation.PushModalAsync(new NavigationPage(page));
-        }
-
-        private void Register_Clicked(object sender, EventArgs e)
-        {
-            if (DoOnce())
-            {
-                _vm.StartRegisterAction();
-            }
         }
 
         private async Task StartRegisterAsync()
@@ -136,14 +136,6 @@ namespace Bit.App.Pages
         {
             var page = new LoginSsoPage(_appOptions);
             await Navigation.PushModalAsync(new NavigationPage(page));
-        }
-
-        private void Environment_Clicked(object sender, EventArgs e)
-        {
-            if (DoOnce())
-            {
-                _vm.StartEnvironmentAction();
-            }
         }
 
         private async Task StartEnvironmentAsync()

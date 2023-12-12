@@ -19,6 +19,7 @@ namespace Bit.Core.Models.Request
             Favorite = cipher.Favorite;
             LastKnownRevisionDate = cipher.RevisionDate;
             Reprompt = cipher.Reprompt;
+            Key = cipher.Key?.EncryptedString;
 
             switch (Type)
             {
@@ -30,7 +31,8 @@ namespace Bit.Core.Models.Request
                         Username = cipher.Login.Username?.EncryptedString,
                         Password = cipher.Login.Password?.EncryptedString,
                         PasswordRevisionDate = cipher.Login.PasswordRevisionDate,
-                        Totp = cipher.Login.Totp?.EncryptedString
+                        Totp = cipher.Login.Totp?.EncryptedString,
+                        Fido2Credentials = cipher.Login.Fido2Credentials?.Select(f => new Fido2CredentialApi(f)).ToList()
                     };
                     break;
                 case CipherType.Card:
@@ -124,5 +126,6 @@ namespace Bit.Core.Models.Request
         public Dictionary<string, AttachmentRequest> Attachments2 { get; set; }
         public DateTime LastKnownRevisionDate { get; set; }
         public CipherRepromptType Reprompt { get; set; }
+        public string Key { get; set; }
     }
 }

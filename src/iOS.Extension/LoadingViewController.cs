@@ -20,13 +20,13 @@ using Bit.App.Pages;
 using Bit.App.Models;
 using Bit.App.Utilities;
 using Bit.iOS.Core.Views;
+using Bit.Core.Enums;
 
 namespace Bit.iOS.Extension
 {
     public partial class LoadingViewController : ExtendedUIViewController
     {
         private Context _context = new Context();
-        private bool _initedAppCenter;
         private NFCNdefReaderSession _nfcSession = null;
         private Core.NFCReaderDelegate _nfcDelegate = null;
 
@@ -110,6 +110,7 @@ namespace Bit.iOS.Extension
                 else if (navController.TopViewController is LockPasswordViewController passwordViewController)
                 {
                     passwordViewController.LoadingController = this;
+                    passwordViewController.LaunchHomePage = () => DismissViewController(false, () => LaunchHomePage());
                     segue.DestinationViewController.PresentationController.Delegate =
                         new CustomPresentationControllerDelegate(passwordViewController.DismissModalAction);
                 }
@@ -408,11 +409,8 @@ namespace Bit.iOS.Extension
             var messagingService = ServiceContainer.Resolve<IMessagingService>("messagingService");
             ServiceContainer.Init(deviceActionService.DeviceUserAgent, 
                 Bit.Core.Constants.iOSExtensionClearCiphersCacheKey, Bit.Core.Constants.iOSAllClearCipherCacheKeys);
-            if (!_initedAppCenter)
-            {
-                iOSCoreHelpers.RegisterAppCenter();
-                _initedAppCenter = true;
-            }
+            iOSCoreHelpers.InitLogger();
+            iOSCoreHelpers.RegisterFinallyBeforeBootstrap();
             iOSCoreHelpers.Bootstrap();
             var app = new App.App(new AppOptions { IosExtension = true });
             ThemeManager.SetTheme(app.Resources);
@@ -453,13 +451,14 @@ namespace Bit.iOS.Extension
 
         private void LaunchHomePage()
         {
-            var homePage = new HomePage();
-            var app = new App.App(new AppOptions { IosExtension = true });
+            var appOptions = new AppOptions { IosExtension = true };
+            var homePage = new HomePage(appOptions);
+            var app = new App.App(appOptions);
             ThemeManager.SetTheme(app.Resources);
-            ThemeManager.ApplyResourcesToPage(homePage);
+            ThemeManager.ApplyResourcesTo(homePage);
             if (homePage.BindingContext is HomeViewModel vm)
             {
-                vm.StartLoginAction = () => DismissViewController(false, () => LaunchLoginFlow());
+                vm.StartLoginAction = () => DismissViewController(false, () => LaunchLoginFlow(vm.Email));
                 vm.StartRegisterAction = () => DismissViewController(false, () => LaunchRegisterFlow());
                 vm.StartSsoLoginAction = () => DismissViewController(false, () => LaunchLoginSsoFlow());
                 vm.StartEnvironmentAction = () => DismissViewController(false, () => LaunchEnvironmentFlow());
@@ -479,7 +478,7 @@ namespace Bit.iOS.Extension
             var environmentPage = new EnvironmentPage();
             var app = new App.App(new AppOptions { IosExtension = true });
             ThemeManager.SetTheme(app.Resources);
-            ThemeManager.ApplyResourcesToPage(environmentPage);
+            ThemeManager.ApplyResourcesTo(environmentPage);
             if (environmentPage.BindingContext is EnvironmentPageViewModel vm)
             {
                 vm.SubmitSuccessAction = () => DismissViewController(false, () => LaunchHomePage());
@@ -497,7 +496,7 @@ namespace Bit.iOS.Extension
             var registerPage = new RegisterPage(null);
             var app = new App.App(new AppOptions { IosExtension = true });
             ThemeManager.SetTheme(app.Resources);
-            ThemeManager.ApplyResourcesToPage(registerPage);
+            ThemeManager.ApplyResourcesTo(registerPage);
             if (registerPage.BindingContext is RegisterPageViewModel vm)
             {
                 vm.RegistrationSuccess = () => DismissViewController(false, () => LaunchLoginFlow(vm.Email));
@@ -512,19 +511,45 @@ namespace Bit.iOS.Extension
 
         private void LaunchLoginFlow(string email = null)
         {
-            var loginPage = new LoginPage(email);
-            var app = new App.App(new AppOptions { IosExtension = true });
+            var appOptions = new AppOptions { IosExtension = true };
+            var app = new App.App(appOptions);
+            var loginPage = new LoginPage(email, appOptions);
             ThemeManager.SetTheme(app.Resources);
-            ThemeManager.ApplyResourcesToPage(loginPage);
+            ThemeManager.ApplyResourcesTo(loginPage);
             if (loginPage.BindingContext is LoginPageViewModel vm)
             {
                 vm.StartTwoFactorAction = () => DismissViewController(false, () => LaunchTwoFactorFlow(false));
                 vm.UpdateTempPasswordAction = () => DismissViewController(false, () => LaunchUpdateTempPasswordFlow());
+                vm.StartSsoLoginAction = () => DismissViewController(false, () => LaunchLoginSsoFlow());
+                vm.LogInWithDeviceAction = () => DismissViewController(false, () => LaunchLoginWithDevice(AuthRequestType.AuthenticateAndUnlock, email));
                 vm.LogInSuccessAction = () => DismissLockAndContinue();
-                vm.CloseAction = () => CompleteRequest(null, null);
+                vm.CloseAction = () => DismissViewController(false, () => LaunchHomePage());
             }
 
             var navigationPage = new NavigationPage(loginPage);
+            var loginController = navigationPage.CreateViewController();
+            loginController.ModalPresentationStyle = UIModalPresentationStyle.FullScreen;
+            PresentViewController(loginController, true, null);
+
+            LogoutIfAuthed();
+        }
+
+        private void LaunchLoginWithDevice(AuthRequestType authRequestType, string email = null, bool authingWithSso = false)
+        {
+            var appOptions = new AppOptions { IosExtension = true };
+            var app = new App.App(appOptions);
+            var loginWithDevicePage = new LoginPasswordlessRequestPage(email, authRequestType, appOptions, authingWithSso);
+            ThemeManager.SetTheme(app.Resources);
+            ThemeManager.ApplyResourcesTo(loginWithDevicePage);
+            if (loginWithDevicePage.BindingContext is LoginPasswordlessRequestViewModel vm)
+            {
+                vm.StartTwoFactorAction = () => DismissViewController(false, () => LaunchTwoFactorFlow(false));
+                vm.UpdateTempPasswordAction = () => DismissViewController(false, () => LaunchUpdateTempPasswordFlow());
+                vm.LogInSuccessAction = () => DismissLockAndContinue();
+                vm.CloseAction = () => DismissViewController(false, () => LaunchHomePage());
+            }
+
+            var navigationPage = new NavigationPage(loginWithDevicePage);
             var loginController = navigationPage.CreateViewController();
             loginController.ModalPresentationStyle = UIModalPresentationStyle.FullScreen;
             PresentViewController(loginController, true, null);
@@ -537,12 +562,13 @@ namespace Bit.iOS.Extension
             var loginPage = new LoginSsoPage();
             var app = new App.App(new AppOptions { IosExtension = true });
             ThemeManager.SetTheme(app.Resources);
-            ThemeManager.ApplyResourcesToPage(loginPage);
+            ThemeManager.ApplyResourcesTo(loginPage);
             if (loginPage.BindingContext is LoginSsoPageViewModel vm)
             {
                 vm.StartTwoFactorAction = () => DismissViewController(false, () => LaunchTwoFactorFlow(true));
                 vm.StartSetPasswordAction = () => DismissViewController(false, () => LaunchSetPasswordFlow());
                 vm.UpdateTempPasswordAction = () => DismissViewController(false, () => LaunchUpdateTempPasswordFlow());
+                vm.StartDeviceApprovalOptionsAction = () => DismissViewController(false, () => LaunchDeviceApprovalOptionsFlow());
                 vm.SsoAuthSuccessAction = () => DismissLockAndContinue();
                 vm.CloseAction = () => DismissViewController(false, () => LaunchHomePage());
             }
@@ -560,11 +586,12 @@ namespace Bit.iOS.Extension
             var twoFactorPage = new TwoFactorPage();
             var app = new App.App(new AppOptions { IosExtension = true });
             ThemeManager.SetTheme(app.Resources);
-            ThemeManager.ApplyResourcesToPage(twoFactorPage);
+            ThemeManager.ApplyResourcesTo(twoFactorPage);
             if (twoFactorPage.BindingContext is TwoFactorPageViewModel vm)
             {
                 vm.TwoFactorAuthSuccessAction = () => DismissLockAndContinue();
                 vm.StartSetPasswordAction = () => DismissViewController(false, () => LaunchSetPasswordFlow());
+                vm.StartDeviceApprovalOptionsAction = () => DismissViewController(false, () => LaunchDeviceApprovalOptionsFlow());
                 if (authingWithSso)
                 {
                     vm.CloseAction = () => DismissViewController(false, () => LaunchLoginSsoFlow());
@@ -587,7 +614,7 @@ namespace Bit.iOS.Extension
             var setPasswordPage = new SetPasswordPage();
             var app = new App.App(new AppOptions { IosExtension = true });
             ThemeManager.SetTheme(app.Resources);
-            ThemeManager.ApplyResourcesToPage(setPasswordPage);
+            ThemeManager.ApplyResourcesTo(setPasswordPage);
             if (setPasswordPage.BindingContext is SetPasswordPageViewModel vm)
             {
                 vm.UpdateTempPasswordAction = () => DismissViewController(false, () => LaunchUpdateTempPasswordFlow());
@@ -606,7 +633,7 @@ namespace Bit.iOS.Extension
             var updateTempPasswordPage = new UpdateTempPasswordPage();
             var app = new App.App(new AppOptions { IosExtension = true });
             ThemeManager.SetTheme(app.Resources);
-            ThemeManager.ApplyResourcesToPage(updateTempPasswordPage);
+            ThemeManager.ApplyResourcesTo(updateTempPasswordPage);
             if (updateTempPasswordPage.BindingContext is UpdateTempPasswordPageViewModel vm)
             {
                 vm.UpdateTempPasswordSuccessAction = () => DismissViewController(false, () => LaunchHomePage());
@@ -617,6 +644,25 @@ namespace Bit.iOS.Extension
             var updateTempPasswordController = navigationPage.CreateViewController();
             updateTempPasswordController.ModalPresentationStyle = UIModalPresentationStyle.FullScreen;
             PresentViewController(updateTempPasswordController, true, null);
+        }
+
+        private void LaunchDeviceApprovalOptionsFlow()
+        {
+            var loginApproveDevicePage = new LoginApproveDevicePage();
+            var app = new App.App(new AppOptions { IosExtension = true });
+            ThemeManager.SetTheme(app.Resources);
+            ThemeManager.ApplyResourcesTo(loginApproveDevicePage);
+            if (loginApproveDevicePage.BindingContext is LoginApproveDeviceViewModel vm)
+            {
+                vm.LogInWithMasterPasswordAction = () => DismissViewController(false, () => PerformSegue("lockPasswordSegue", this));
+                vm.RequestAdminApprovalAction = () => DismissViewController(false, () => LaunchLoginWithDevice(AuthRequestType.AdminApproval, vm.Email, true));
+                vm.LogInWithDeviceAction = () => DismissViewController(false, () => LaunchLoginWithDevice(AuthRequestType.AuthenticateAndUnlock, vm.Email, true));
+            }
+
+            var navigationPage = new NavigationPage(loginApproveDevicePage);
+            var loginApproveDeviceController = navigationPage.CreateViewController();
+            loginApproveDeviceController.ModalPresentationStyle = UIModalPresentationStyle.FullScreen;
+            PresentViewController(loginApproveDeviceController, true, null);
         }
     }
 }

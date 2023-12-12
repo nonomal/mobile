@@ -129,7 +129,8 @@ namespace Bit.App.Pages
         {
             if (useCurrentActiveAccount)
             {
-                return new AvatarImageSource(await _stateService.GetNameAsync(), await _stateService.GetEmailAsync());
+                var user = await _stateService.GetActiveUserCustomDataAsync(a => (a?.Profile?.UserId, a?.Profile?.Name, a?.Profile?.Email, a?.Profile?.AvatarColor));
+                return new AvatarImageSource(user.UserId, user.Name, user.Email, user.AvatarColor);
             }
             return new AvatarImageSource();
         }
@@ -149,6 +150,12 @@ namespace Bit.App.Pages
         private async Task SaveActivityAsync()
         {
             SetServices();
+            if (await _stateService.GetActiveUserIdAsync() == null)
+            {
+                // Fresh install and/or all users logged out won't have an active user, skip saving last active time
+                return;
+            }
+
             await _stateService.SetLastActiveTimeAsync(_deviceActionService.GetActiveTime());
         }
     }

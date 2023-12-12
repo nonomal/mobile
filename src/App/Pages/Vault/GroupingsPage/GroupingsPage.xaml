@@ -6,6 +6,8 @@
     xmlns:u="clr-namespace:Bit.App.Utilities"
     xmlns:effects="clr-namespace:Bit.App.Effects"
     xmlns:controls="clr-namespace:Bit.App.Controls"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:core="clr-namespace:Bit.Core;assembly=BitwardenCore"
     x:DataType="pages:GroupingsPageViewModel"
     Title="{Binding PageTitle}"
     x:Name="_page">
@@ -23,7 +25,8 @@
             Priority="-1"
             UseOriginalImage="True"
             AutomationProperties.IsInAccessibleTree="True"
-            AutomationProperties.Name="{u:I18n Account}" />
+            AutomationProperties.Name="{u:I18n Account}"
+            AutomationId="AccountIconButton" />
         <ToolbarItem Icon="search.png" Clicked="Search_Clicked"
                      AutomationProperties.IsInAccessibleTree="True"
                      AutomationProperties.Name="{u:I18n Search}" />
@@ -52,10 +55,19 @@
                     WebsiteIconsEnabled="{Binding BindingContext.WebsiteIconsEnabled, Source={x:Reference _page}}" />
             </DataTemplate>
 
+            <DataTemplate x:Key="authenticatorTemplate"
+                          x:DataType="pages:GroupingsPageTOTPListItem">
+                <controls:AuthenticatorViewCell 
+                    Cipher="{Binding Cipher}"
+                    WebsiteIconsEnabled="{Binding BindingContext.WebsiteIconsEnabled, Source={x:Reference _page}}"
+                    TotpSec="{Binding TotpSec}" />
+            </DataTemplate>
+
             <DataTemplate x:Key="groupTemplate"
                           x:DataType="pages:GroupingsPageListItem">
                 <controls:ExtendedStackLayout Orientation="Horizontal" 
-                                                StyleClass="list-row, list-row-platform">
+                                                StyleClass="list-row, list-row-platform"
+                                                AutomationId="{Binding AutomationId}">
                     <controls:IconLabel Text="{Binding Icon, Mode=OneWay}"
                                         HorizontalOptions="Start"
                                         VerticalOptions="Center"
@@ -69,12 +81,14 @@
                             LineBreakMode="TailTruncation"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="CenterAndExpand"
-                            StyleClass="list-title"/>
+                            StyleClass="list-title"
+                            AutomationId="ItemNameLabel" />
                     <Label Text="{Binding ItemCount, Mode=OneWay}"
                             HorizontalOptions="End"
                             VerticalOptions="CenterAndExpand"
                             HorizontalTextAlignment="End"
-                            StyleClass="list-sub"/>
+                            StyleClass="list-sub"
+                            AutomationId="ItemCountLabel" />
                 </controls:ExtendedStackLayout>
             </DataTemplate>
 
@@ -85,7 +99,8 @@
                     Spacing="0"
                     Padding="0"
                     VerticalOptions="FillAndExpand"
-                    StyleClass="list-row-header-container, list-row-header-container-platform">
+                    StyleClass="list-row-header-container, list-row-header-container-platform"
+                    AutomationId="{Binding AutomationId}">
                     <BoxView
                         StyleClass="list-section-separator-top, list-section-separator-top-platform" />
                     <StackLayout StyleClass="list-row-header, list-row-header-platform">
@@ -94,7 +109,8 @@
                             StyleClass="list-header, list-header-platform" />
                         <Label
                             Text="{Binding ItemCount}"
-                            StyleClass="list-header-sub" />
+                            StyleClass="list-header-sub"
+                            AutomationId="SectionItemCount" />
                     </StackLayout>
                     <BoxView StyleClass="list-section-separator-bottom, list-section-separator-bottom-platform" />
                 </StackLayout>
@@ -103,9 +119,33 @@
             <pages:GroupingsPageListItemSelector x:Key="listItemDataTemplateSelector"
                                                  HeaderTemplate="{StaticResource headerTemplate}"
                                                  CipherTemplate="{StaticResource cipherTemplate}"
+                                                 AuthenticatorTemplate="{StaticResource authenticatorTemplate}"
                                                  GroupTemplate="{StaticResource groupTemplate}" />
 
             <StackLayout x:Key="mainLayout" x:Name="_mainLayout">
+                <StackLayout
+                    IsVisible="{Binding ShowVaultFilter}"
+                    Orientation="Horizontal"
+                    HorizontalOptions="FillAndExpand"
+                    Margin="0,5,0,0">
+                    <Label
+                        Text="{Binding VaultFilterDescription}"
+                        LineBreakMode="TailTruncation"
+                        Margin="10,0"
+                        StyleClass="text-md, text-muted"
+                        VerticalOptions="Center"
+                        HorizontalOptions="StartAndExpand"
+                        AutomationProperties.IsInAccessibleTree="True"
+                        AutomationProperties.Name="{u:I18n Filter}" />
+                    <controls:MiButton
+                        Text="{Binding Source={x:Static core:BitwardenIcons.ViewCellMenu}}"
+                        StyleClass="list-row-button-text, list-row-button-platform"
+                        Command="{Binding VaultFilterCommand}"
+                        VerticalOptions="Center"
+                        HorizontalOptions="End"
+                        AutomationProperties.IsInAccessibleTree="True"
+                        AutomationProperties.Name="{u:I18n Filter}" />
+                </StackLayout>
                 <StackLayout
                     VerticalOptions="CenterAndExpand"
                     Padding="20, 0"
@@ -113,7 +153,8 @@
                     IsVisible="{Binding ShowNoData}">
                     <Label
                         Text="{Binding NoDataText}"
-                        HorizontalTextAlignment="Center"></Label>
+                        HorizontalTextAlignment="Center"
+                        AutomationId="NoDataDisplayed"></Label>
                     <Button
                         Text="{u:I18n AddAnItem}"
                         Clicked="AddButton_Clicked"
@@ -130,7 +171,8 @@
                         ItemTemplate="{StaticResource listItemDataTemplateSelector}"
                         SelectionMode="Single"
                         SelectionChanged="RowSelected"
-                        StyleClass="list, list-platform" />
+                        StyleClass="list, list-platform"
+                        ExtraDataForLogging="Groupings Page" />
                 </RefreshView>
             </StackLayout>
         </ResourceDictionary>

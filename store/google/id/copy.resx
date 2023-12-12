@@ -126,15 +126,32 @@
     <comment>Max 80 characters</comment>
   </data>
   <data name="FullDesciption" xml:space="preserve">
-    <value>Bitwarden adalah cara termudah dan teraman untuk menyimpan semua info masuk dan sandi Anda sambil tetap menjaga mereka disinkronkan di antara semua perangkat Anda.
+    <value>Bitwarden, Inc. adalah perusahaan induk dari 8bit Solutions LLC.
 
-Pencurian sandi adalah masalah serius. Situs web dan aplikasi yang Anda gunakan diserang setiap hari. Pelanggaran keamanan terjadi dan sandi Anda dicuri. Ketika Anda menggunakan sandi yang sama di aplikasi dan situs web peretas dapat dengan mudah mengakses email, bank, dan akun penting Anda yang lain.
+DINOBATKAN SEBAGAI PENGELOLA KATA SANDI TERBAIK OLEH THE VERGE, U.S. NEWS &amp; WORLD REPORT, CNET, DAN BANYAK LAGI.
 
-Pakar keamanan merekomendasikan agar Anda menggunakan sandi yang berbeda dan dibuat secara acak untuk setiap akun yang Anda buat. Tapi bagaimana mengelola semua sandi tersebut? Bitwarden membuatnya menjadi mudah untuk Anda membuat, menyimpan dan mengakses sandi Anda.
+Kelola, simpan, amankan, dan bagikan kata sandi tanpa batas di perangkat tanpa batas dari mana saja. Bitwarden memberikan solusi manajemen kata sandi sumber terbuka untuk semua orang, baik di rumah, di tempat kerja, atau di perjalanan.
 
-Bitwarden menyimpan semua info masuk Anda di brankas terenkripsi yang disinkronkan di semua perangkat Anda. Karena sepenuhnya dienkripsi sebelum meninggalkan perangkat Anda, hanya Anda yang memiliki akses ke data Anda. Bahkan tim di Bitwarden tidak dapat membaca data Anda, bahkan jika kami mau. Data Anda disegel dengan ekripsi AES-256 bit, hash yang di-salt, dan PBKDF2 SHA-256.
+Buat kata sandi yang kuat, unik, dan acak berdasarkan persyaratan keamanan untuk setiap situs web yang sering Anda kunjungi.
 
-Bitwarden adalah 100% perangkat lunak sumber terbuka. Kode sumber untuk Bitwarden berada di GitHub dan setiap orang bebas untuk meninjau, mengaudit, dan berkontribusi ke basis kode Bitwarden.</value>
+Bitwarden Send dengan cepat mengirimkan informasi terenkripsi - file dan teks biasa - langsung ke siapa saja.
+
+Bitwarden menawarkan paket Teams dan Enterprise untuk perusahaan sehingga Anda dapat berbagi kata sandi dengan rekan kerja dengan aman.
+
+Mengapa Memilih Bitwarden:
+
+Enkripsi Kelas Dunia
+Kata sandi dilindungi dengan enkripsi end-to-end yang canggih (AES-256 bit, salted hash, dan PBKDF2 SHA-256) sehingga data Anda tetap aman dan pribadi.
+
+Pembuat Kata Sandi Internal
+Hasilkan kata sandi yang kuat, unik, dan acak berdasarkan persyaratan keamanan untuk setiap situs web yang sering Anda kunjungi.
+
+Terjemahan Global
+Terjemahan Bitwarden tersedia dalam 40 bahasa dan terus bertambah, berkat komunitas global kami.
+
+Aplikasi Lintas Platform
+Amankan dan bagikan data sensitif di dalam Bitwarden Vault Anda dari browser, perangkat seluler, atau OS desktop apa pun, dan banyak lagi.
+</value>
   <comment>Max 4000 characters</comment>
   </data>
   <data name="FeatureGraphic" xml:space="preserve">

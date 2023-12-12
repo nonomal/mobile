@@ -118,38 +118,55 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Name" xml:space="preserve">
-    <value>Bitwarden</value>
+    <value>Bitwarden - Gestor de Palavras-passe</value>
     <comment>Max 30 characters</comment>
   </data>
   <data name="Description" xml:space="preserve">
-    <value>O Bitwarden é a maneira mais fácil e segura de armazenar todas as suas credenciais e palavras-passe mantendo-as convenientemente sincronizadas entre todos os seus dispositivos. A aplicação da extensão Bitwarden permite-lhe iniciar sessão em qualquer website através do Safari ou Chrome e é suportada por centenas de aplicações populares.
+    <value>A Bitwarden, Inc. é a empresa-mãe da 8bit Solutions LLC.
 
-O furto de palavras-passe é um problema sério. Os websites e aplicações que utiliza estão sob ataque todos os dias. Quebras de segurança ocorrem e as suas palavras-passe são furtadas. Quando reutiliza as mesmas palavras-passe entre aplicações e websites, os hackers podem facilmente aceder ao seu email, banco, e outras contas importantes.
+NOMEADO O MELHOR GESTOR DE PALAVRAS-PASSE PELO THE VERGE, U.S. NEWS &amp; WORLD REPORT, CNET E MUITO MAIS.
 
-Os especialistas de segurança recomendam que utilize uma palavra-passe diferente e aleatoriamente gerada para todas as contas que cria. Mas como é que gere todas essas palavras-passe? O Bitwarden torna-lhe fácil criar, armazenar, e aceder às suas palavras-passe.
+Gerir, armazenar, proteger e partilhar palavras-passe ilimitadas em dispositivos ilimitados a partir de qualquer lugar. O Bitwarden fornece soluções de gestão de senhas de código aberto para todos, seja em casa, no trabalho ou onde estiver.
 
-O Bitwarden armazena todas as suas credenciais num cofre encriptado que sincroniza entre todos os seus dispositivos. Como são completamente encriptados antes de se quer sair do seu dispositivo, apenas você tem acesso aos seus dados. Nem se quer a equipa do Bitwarden pode ler os seus dados, mesmo se quiséssemos. Os seus dados são selados com encriptação AES-256 bits, salted hashing, e PBKDF2 SHA-256.
+Gera palavras-passe fortes, únicas e aleatórias com base em requisitos de segurança para todos os sites que frequenta.
 
-O Bitwarden é 100% software de código aberto. O código fonte para o Bitwarden está hospedado no GitHub e todos podem revisar, auditar, e contribuir para a base de código do Bitwarden.</value>
+O Bitwarden Send transmite rapidamente informações encriptadas - ficheiros e texto simples - diretamente a qualquer pessoa.
+
+O Bitwarden oferece os planos Equipas e Empresarial destinados a empresas, para que possa partilhar de forma segura as palavras-passe com os seus colegas.
+
+Razões para escolher o Bitwarden:
+
+Encriptação de classe mundial
+As palavras-passe são protegidas com encriptação avançada de ponta a ponta (AES-256 bit, salted hashtag e PBKDF2 SHA-256) para que os seus dados permaneçam seguros e privados.
+
+Gerador de palavras-passe incorporado
+Gera palavras-passe fortes, únicas e aleatórias com base nos requisitos de segurança para todos os sites que frequenta.
+
+Traduções globais
+O Bitwarden está traduzido em 40 idiomas e está a crescer, graças à nossa comunidade global.
+
+Aplicações multiplataforma
+Proteja e partilhe dados confidenciais no seu cofre Bitwarden a partir de qualquer navegador, dispositivo móvel ou sistema operativo de computador, e muito mais.
+</value>
   <comment>Max 4000 characters</comment>
   </data>
   <data name="Keywords" xml:space="preserve">
-    <value>bit warden,8bit,password,free password manager,password manager,login manager</value>
+    <value>bit warden,8bit,palavra-passe,gestor de palavras-passe gratuito,gestor de palavras-passe,gestor de credenciais</value>
     <comment>Max 100 characters</comment>
   </data>
   <data name="Screenshot1" xml:space="preserve">
-    <value>Gira todas as suas credenciais e palavras-passe a partir de um cofre seguro</value>
+    <value>Gira todos as suas credenciais e palavras-passe a partir de um cofre seguro</value>
   </data>
   <data name="Screenshot2" xml:space="preserve">
-    <value>Gira automaticamente palavras-passe fortes, aleatórias e seguras</value>
+    <value>Gera automaticamente palavras-passe fortes, aleatórias e seguras</value>
   </data>
   <data name="Screenshot3" xml:space="preserve">
-    <value>Proteja o seu cofre com Touch ID, código PIN, ou palavra-passe mestra</value>
+    <value>Proteja o seu cofre com Touch ID, código PIN ou palavra-passe mestra</value>
   </data>
   <data name="Screenshot4" xml:space="preserve">
-    <value>Auto-preencha credenciais do Safari, Chrome, e centenas de outras aplicações</value>
+    <value>Preenchimento automático de credenciais no Safari, Chrome e centenas de outras aplicações</value>
   </data>
   <data name="Screenshot5" xml:space="preserve">
-    <value>Sincronize e aceda ao seu cofre através de múltiplos dispositivos</value>
+    <value>Sincronize e aceda ao seu cofre através de vários dispositivos</value>
   </data>
 </root>

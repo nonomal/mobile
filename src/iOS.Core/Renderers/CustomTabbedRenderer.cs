@@ -1,6 +1,7 @@
 ﻿using System;
 using Bit.App.Abstractions;
 using Bit.App.Pages;
+using Bit.App.Utilities;
 using Bit.Core.Abstractions;
 using Bit.Core.Utilities;
 using Bit.iOS.Core.Renderers;
@@ -21,9 +22,9 @@ namespace Bit.iOS.Core.Renderers
         public CustomTabbedRenderer()
         {
             _broadcasterService = ServiceContainer.Resolve<IBroadcasterService>("broadcasterService");
-            _broadcasterService.Subscribe(nameof(CustomTabbedRenderer), async (message) =>
+            _broadcasterService.Subscribe(nameof(CustomTabbedRenderer), (message) =>
             {
-                if (message.Command == "updatedTheme")
+                if (message.Command is ThemeManager.UPDATED_THEME_MESSAGE_KEY)
                 {
                     Device.BeginInvokeOnMainThread(() =>
                     {

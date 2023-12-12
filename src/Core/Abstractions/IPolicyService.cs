@@ -11,6 +11,7 @@ namespace Bit.Core.Abstractions
     {
         void ClearCache();
         Task<IEnumerable<Policy>> GetAll(PolicyType? type, string userId = null);
+        Task<Policy> FirstOrDefault(PolicyType? type, string userId = null);
         Task Replace(Dictionary<string, PolicyData> policies, string userId = null);
         Task ClearAsync(string userId);
         Task<MasterPasswordPolicyOptions> GetMasterPasswordPolicyOptions(IEnumerable<Policy> policies = null, string userId = null);
@@ -19,6 +20,7 @@ namespace Bit.Core.Abstractions
         Tuple<ResetPasswordPolicyOptions, bool> GetResetPasswordPolicyOptions(IEnumerable<Policy> policies,
             string orgId);
         Task<bool> PolicyAppliesToUser(PolicyType policyType, Func<Policy, bool> policyFilter = null, string userId = null);
-        int? GetPolicyInt(Policy policy, string key);
+        Task<bool> ShouldShowVaultFilterAsync();
+        Task<PasswordGeneratorPolicyOptions> GetPasswordGeneratorPolicyOptionsAsync();
     }
 }

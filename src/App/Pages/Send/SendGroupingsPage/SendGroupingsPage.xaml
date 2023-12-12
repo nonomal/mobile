@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <pages:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Bit.App.Pages.SendGroupingsPage"
@@ -44,13 +44,15 @@
                 <controls:SendViewCell
                     Send="{Binding Send}"
                     ButtonCommand="{Binding BindingContext.SendOptionsCommand, Source={x:Reference _page}}"
-                    ShowOptions="{Binding BindingContext.SendEnabled, Source={x:Reference _page}}" />
+                    ShowOptions="{Binding BindingContext.SendEnabled, Source={x:Reference _page}}"
+                    AutomationId="SendCell" />
             </DataTemplate>
 
             <DataTemplate x:Key="sendGroupTemplate"
                           x:DataType="pages:SendGroupingsPageListItem">
                 <controls:ExtendedStackLayout Orientation="Horizontal" 
-                                              StyleClass="list-row, list-row-platform">
+                                              StyleClass="list-row, list-row-platform"
+                                              AutomationId="{Binding AutomationId}">
                     <controls:IconLabel Text="{Binding Icon, Mode=OneWay}"
                                       HorizontalOptions="Start"
                                       VerticalOptions="Center"
@@ -64,12 +66,14 @@
                            LineBreakMode="TailTruncation"
                            HorizontalOptions="FillAndExpand"
                            VerticalOptions="CenterAndExpand"
-                           StyleClass="list-title" />
+                           StyleClass="list-title"
+                           AutomationId="SendFilterNameLabel" />
                     <Label Text="{Binding ItemCount, Mode=OneWay}"
                            HorizontalOptions="End"
                            VerticalOptions="CenterAndExpand"
                            HorizontalTextAlignment="End"
-                           StyleClass="list-sub" />
+                           StyleClass="list-sub"
+                           AutomationId="SendFilterCountLabel" />
                 </controls:ExtendedStackLayout>
             </DataTemplate>
 
@@ -108,7 +112,7 @@
                         Margin="0, 12, 0, 6"
                         HasShadow="False"
                         BackgroundColor="Transparent"
-                        BorderColor="Accent">
+                        BorderColor="{DynamicResource PrimaryColor}">
                         <Label
                             Text="{u:I18n SendDisabledWarning}"
                             StyleClass="text-muted, text-sm, text-bold"
@@ -138,7 +142,8 @@
                         ItemTemplate="{StaticResource sendListItemDataTemplateSelector}"
                         SelectionMode="Single"
                         SelectionChanged="RowSelected"
-                        StyleClass="list, list-platform" />
+                        StyleClass="list, list-platform"
+                        ExtraDataForLogging="Send Groupings Page" />
                 </RefreshView>
             </StackLayout>
         </ResourceDictionary>

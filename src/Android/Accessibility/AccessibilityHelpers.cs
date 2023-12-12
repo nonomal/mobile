@@ -33,6 +33,7 @@ namespace Bit.Droid.Accessibility
             //   - Resources/xml/autofillservice.xml
             new Browser("alook.browser", "search_fragment_input_view"),
             new Browser("alook.browser.google", "search_fragment_input_view"),
+            new Browser("app.vanadium.browser", "url_bar"),
             new Browser("com.amazon.cloud9", "url"),
             new Browser("com.android.browser", "url"),
             new Browser("com.android.chrome", "url_bar"),
@@ -54,6 +55,7 @@ namespace Bit.Droid.Accessibility
             new Browser("com.google.android.apps.chrome", "url_bar"),
             new Browser("com.google.android.apps.chrome_dev", "url_bar"),
             // Rem. for "com.google.android.captiveportallogin": URL displayed in ActionBar subtitle without viewId.
+            new Browser("com.iode.firefox", "mozac_browser_toolbar_url_view"),
             new Browser("com.jamal2367.styx", "search"),
             new Browser("com.kiwibrowser.browser", "url_bar"),
             new Browser("com.kiwibrowser.browser.dev", "url_bar"),
@@ -65,13 +67,16 @@ namespace Bit.Droid.Accessibility
             new Browser("com.mmbox.xbrowser", "search_box"),
             new Browser("com.mycompany.app.soulbrowser", "edit_text"),
             new Browser("com.naver.whale", "url_bar"),
+            new Browser("com.neeva.app", "full_url_text_view"),
             new Browser("com.opera.browser", "url_field"),
             new Browser("com.opera.browser.beta", "url_field"),
+            new Browser("com.opera.gx", "addressbarEdit"),
             new Browser("com.opera.mini.native", "url_field"),
             new Browser("com.opera.mini.native.beta", "url_field"),
             new Browser("com.opera.touch", "addressbarEdit"),
             new Browser("com.qflair.browserq", "url"),
             new Browser("com.qwant.liberty", "mozac_browser_toolbar_url_view,url_bar_title"), // 2nd = Legacy (before v4)
+            new Browser("com.rainsee.create", "search_box"),
             new Browser("com.sec.android.app.sbrowser", "location_bar_edit_text"),
             new Browser("com.sec.android.app.sbrowser.beta", "location_bar_edit_text"),
             new Browser("com.stoutner.privacybrowser.free", "url_edittext"),
@@ -81,6 +86,9 @@ namespace Bit.Droid.Accessibility
             new Browser("com.vivaldi.browser.sopranos", "url_bar"),
             new Browser("com.yandex.browser", "bro_omnibar_address_title_text,bro_omnibox_collapsed_title",
                 (s) => s.Split(new char[]{' ', ' '}).FirstOrDefault()), // 0 = Regular Space, 1 = No-break space (00A0)
+            new Browser("com.yjllq.internet", "search_box"),
+            new Browser("com.yjllq.kito", "search_box"),
+            new Browser("com.yujian.ResideMenuDemo", "search_box"),
             new Browser("com.z28j.feel", "g2"),
             new Browser("idm.internet.download.manager", "search"),
             new Browser("idm.internet.download.manager.adm.lite", "search"),
@@ -88,6 +96,7 @@ namespace Bit.Droid.Accessibility
             new Browser("io.github.forkmaintainers.iceraven", "mozac_browser_toolbar_url_view"),
             new Browser("mark.via", "am,an"),
             new Browser("mark.via.gp", "as"),
+            new Browser("net.dezor.browser", "url_bar"),
             new Browser("net.slions.fulguris.full.download", "search"),
             new Browser("net.slions.fulguris.full.download.debug", "search"),
             new Browser("net.slions.fulguris.full.playstore", "search"),
@@ -98,6 +107,7 @@ namespace Bit.Droid.Accessibility
             new Browser("org.bromite.chromium", "url_bar"),
             new Browser("org.chromium.chrome", "url_bar"),
             new Browser("org.codeaurora.swe.browser", "url_bar"),
+            new Browser("org.cromite.cromite", "url_bar"),
             new Browser("org.gnu.icecat", "url_bar_title,mozac_browser_toolbar_url_view"), // 2nd = Anticipation
             new Browser("org.mozilla.fenix", "mozac_browser_toolbar_url_view"),
             new Browser("org.mozilla.fenix.nightly", "mozac_browser_toolbar_url_view"), // [DEPRECATED ENTRY]
@@ -127,6 +137,7 @@ namespace Bit.Droid.Accessibility
             new Browser("com.htc.sense.browser", "title"),
             new Browser("com.jerky.browser2", "enterUrl"),
             new Browser("com.ksmobile.cb", "address_bar_edit_text"),
+            new Browser("com.lemurbrowser.exts","url_bar"),
             new Browser("com.linkbubble.playstore", "url_text"),
             new Browser("com.mx.browser", "address_editor_with_progress"),
             new Browser("com.mx.browser.tablet", "address_editor_with_progress"),
@@ -365,7 +376,7 @@ namespace Bit.Droid.Accessibility
 
         public static string GetUri(AccessibilityNodeInfo root)
         {
-            var uri = string.Concat(Constants.AndroidAppProtocol, root.PackageName);
+            var uri = string.Concat(Core.Constants.AndroidAppProtocol, root.PackageName);
             if (SupportedBrowsers.ContainsKey(root.PackageName))
             {
                 var browser = SupportedBrowsers[root.PackageName];

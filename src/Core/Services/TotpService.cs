@@ -10,14 +10,11 @@ namespace Bit.Core.Services
     {
         private const string SteamChars = "23456789BCDFGHJKMNPQRTVWXY";
 
-        private readonly IStateService _stateService;
         private readonly ICryptoFunctionService _cryptoFunctionService;
 
         public TotpService(
-            IStateService stateService,
             ICryptoFunctionService cryptoFunctionService)
         {
-            _stateService = stateService;
             _cryptoFunctionService = cryptoFunctionService;
         }
 
@@ -27,7 +24,7 @@ namespace Bit.Core.Services
             {
                 return null;
             }
-            var period = 30;
+            var period = Constants.TotpDefaultTimer;
             var alg = CryptoHashAlgorithm.Sha1;
             var digits = 6;
             var keyB32 = key;
@@ -36,39 +33,22 @@ namespace Bit.Core.Services
             var isSteamAuth = key?.ToLowerInvariant().StartsWith("steam://") ?? false;
             if (isOtpAuth)
             {
-                var qsParams = CoreHelpers.GetQueryParams(key);
-                if (qsParams.ContainsKey("digits") && qsParams["digits"] != null &&
-                    int.TryParse(qsParams["digits"].Trim(), out var digitParam))
+                var otpData = new OtpData(key.ToLowerInvariant());
+                if (otpData.Digits > 0)
                 {
-                    if (digitParam > 10)
-                    {
-                        digits = 10;
-                    }
-                    else if (digitParam > 0)
-                    {
-                        digits = digitParam;
-                    }
+                    digits = Math.Min(otpData.Digits.Value, 10);
                 }
-                if (qsParams.ContainsKey("period") && qsParams["period"] != null &&
-                    int.TryParse(qsParams["period"].Trim(), out var periodParam) && periodParam > 0)
+                if (otpData.Period.HasValue)
                 {
-                    period = periodParam;
+                    period = otpData.Period.Value;
                 }
-                if (qsParams.ContainsKey("secret") && qsParams["secret"] != null)
+                if (otpData.Secret != null)
                 {
-                    keyB32 = qsParams["secret"];
+                    keyB32 = otpData.Secret;
                 }
-                if (qsParams.ContainsKey("algorithm") && qsParams["algorithm"] != null)
+                if (otpData.Algorithm.HasValue)
                 {
-                    var algParam = qsParams["algorithm"].ToLowerInvariant();
-                    if (algParam == "sha256")
-                    {
-                        alg = CryptoHashAlgorithm.Sha256;
-                    }
-                    else if (algParam == "sha512")
-                    {
-                        alg = CryptoHashAlgorithm.Sha512;
-                    }
+                    alg = otpData.Algorithm.Value;
                 }
             }
             else if (isSteamAuth)
@@ -120,7 +100,7 @@ namespace Bit.Core.Services
 
         public int GetTimeInterval(string key)
         {
-            var period = 30;
+            var period = Constants.TotpDefaultTimer;
             if (key != null && key.ToLowerInvariant().StartsWith("otpauth://"))
             {
                 var qsParams = CoreHelpers.GetQueryParams(key);
@@ -131,12 +111,6 @@ namespace Bit.Core.Services
                 }
             }
             return period;
-        }
-
-        public async Task<bool> IsAutoCopyEnabledAsync()
-        {
-            var disabled = await _stateService.GetDisableAutoTotpCopyAsync();
-            return !disabled.GetValueOrDefault();
         }
     }
 }

@@ -6,6 +6,7 @@ using Bit.App.Models;
 using Bit.App.Resources;
 using Bit.Core.Abstractions;
 using Bit.Core.Enums;
+using Bit.Core.Utilities;
 using Plugin.Fingerprint;
 using Plugin.Fingerprint.Abstractions;
 using Xamarin.Essentials;
@@ -20,6 +21,7 @@ namespace Bit.App.Services
         private const int DialogPromiseExpiration = 600000; // 10 minutes
 
         private readonly IDeviceActionService _deviceActionService;
+        private readonly IClipboardService _clipboardService;
         private readonly IMessagingService _messagingService;
         private readonly IBroadcasterService _broadcasterService;
 
@@ -28,10 +30,13 @@ namespace Bit.App.Services
 
         public MobilePlatformUtilsService(
             IDeviceActionService deviceActionService,
+            IClipboardService clipboardService,
             IMessagingService messagingService,
-            IBroadcasterService broadcasterService)
+            IBroadcasterService broadcasterService
+            )
         {
             _deviceActionService = deviceActionService;
+            _clipboardService = clipboardService;
             _messagingService = messagingService;
             _broadcasterService = broadcasterService;
         }
@@ -69,8 +74,13 @@ namespace Bit.App.Services
             });
         }
 
+        /// <summary>
+        /// Gets the device type on the server enum
+        /// </summary>
         public Core.Enums.DeviceType GetDevice()
         {
+            // Can't use Device.RuntimePlatform here because it gets called before Forms.Init() and throws.
+            // so we need to get the DeviceType ourselves
             return _deviceActionService.DeviceType;
         }
 
@@ -114,11 +124,6 @@ namespace Bit.App.Services
             }
         }
 
-        public void SaveFile()
-        {
-            // TODO
-        }
-
         public string GetApplicationVersion()
         {
             return AppInfo.VersionString;
@@ -127,6 +132,11 @@ namespace Bit.App.Services
         public bool SupportsDuo()
         {
             return true;
+        }
+
+        public void ShowToastForCopiedValue(string valueNameCopied)
+        {
+            ShowToast("info", null, string.Format(AppResources.ValueHasBeenCopied, valueNameCopied));
         }
 
         public bool SupportsFido2()
@@ -196,11 +206,6 @@ namespace Bit.App.Services
             return (password, valid);
         }
 
-        public bool IsDev()
-        {
-            return Core.Utilities.CoreHelpers.InDebugMode();
-        }
-
         public bool IsSelfHost()
         {
             return false;
@@ -223,8 +228,22 @@ namespace Bit.App.Services
             }
         }
 
+        public async Task<bool> IsBiometricIntegrityValidAsync(string bioIntegritySrcKey = null)
+        {
+            bioIntegritySrcKey ??= Core.Constants.BiometricIntegritySourceKey;
+
+            var biometricService = ServiceContainer.Resolve<IBiometricService>();
+            if (!await biometricService.IsSystemBiometricIntegrityValidAsync(bioIntegritySrcKey))
+            {
+                return false;
+            }
+
+            var stateService = ServiceContainer.Resolve<IStateService>();
+            return await stateService.IsAccountBiometricIntegrityValidAsync(bioIntegritySrcKey);
+        }
+
         public async Task<bool> AuthenticateBiometricAsync(string text = null, string fallbackText = null,
-            Action fallback = null)
+            Action fallback = null, bool logOutOnTooManyAttempts = false)
         {
             try
             {
@@ -250,6 +269,12 @@ namespace Bit.App.Services
                 if (result.Status == FingerprintAuthenticationResultStatus.FallbackRequested)
                 {
                     fallback?.Invoke();
+                }
+                if (result.Status == FingerprintAuthenticationResultStatus.TooManyAttempts
+                    && logOutOnTooManyAttempts)
+                {
+                    await ShowDialogAsync(AppResources.AccountLoggedOutBiometricExceeded, AppResources.TooManyAttempts, AppResources.Ok);
+                    _messagingService.Send(AccountsManagerMessageCommands.LOGOUT);
                 }
             }
             catch { }

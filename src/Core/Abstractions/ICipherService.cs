@@ -19,7 +19,7 @@ namespace Bit.Core.Abstractions
         Task DeleteWithServerAsync(string id);
         Task<Cipher> EncryptAsync(CipherView model, SymmetricCryptoKey key = null, Cipher originalCipher = null);
         Task<List<Cipher>> GetAllAsync();
-        Task<List<CipherView>> GetAllDecryptedAsync();
+        Task<List<CipherView>> GetAllDecryptedAsync(Func<Cipher, bool> filter = null);
         Task<Tuple<List<CipherView>, List<CipherView>, List<CipherView>>> GetAllDecryptedByUrlAsync(string url,
             List<CipherType> includeOtherTypes = null);
         Task<List<CipherView>> GetAllDecryptedForGroupingAsync(string groupingId, bool folder = true);
@@ -27,9 +27,8 @@ namespace Bit.Core.Abstractions
         Task<Cipher> GetAsync(string id);
         Task<CipherView> GetLastUsedForUrlAsync(string url);
         Task ReplaceAsync(Dictionary<string, CipherData> ciphers);
-        Task<Cipher> SaveAttachmentRawWithServerAsync(Cipher cipher, string filename, byte[] data);
+        Task<Cipher> SaveAttachmentRawWithServerAsync(Cipher cipher, CipherView cipherView, string filename, byte[] data);
         Task SaveCollectionsWithServerAsync(Cipher cipher);
-        Task SaveNeverDomainAsync(string domain);
         Task SaveWithServerAsync(Cipher cipher);
         Task ShareWithServerAsync(CipherView cipher, string organizationId, HashSet<string> collectionIds);
         Task UpdateLastUsedDateAsync(string id);

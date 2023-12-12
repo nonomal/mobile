@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
-using Bit.Core.Models.Domain;
+using Bit.Core.Enums;
+using Bit.Core.Models.Data;
 using Bit.Core.Models.Request;
 using Bit.Core.Models.Response;
 
@@ -26,7 +28,7 @@ namespace Bit.Core.Abstractions
         Task<ProfileResponse> GetProfileAsync();
         Task<SyncResponse> GetSyncAsync();
         Task PostAccountKeysAsync(KeysRequest request);
-        Task PostAccountVerifyPasswordAsync(PasswordVerificationRequest request);
+        Task<VerifyMasterPasswordResponse> PostAccountVerifyPasswordAsync(PasswordVerificationRequest request);
         Task PostAccountRequestOTP();
         Task PostAccountVerifyOTPAsync(VerifyOTPRequest request);
         Task<CipherResponse> PostCipherAsync(CipherRequest request);
@@ -44,10 +46,11 @@ namespace Bit.Core.Abstractions
         Task PutDeleteCipherAsync(string id);
         Task<CipherResponse> PutRestoreCipherAsync(string id);
         Task RefreshIdentityTokenAsync();
-        Task<object> PreValidateSso(string identifier);
+        Task<SsoPrevalidateResponse> PreValidateSsoAsync(string identifier);
         Task<TResponse> SendAsync<TRequest, TResponse>(HttpMethod method, string path,
-            TRequest body, bool authed, bool hasResponse, bool logoutOnUnauthorized = true);
-        void SetUrls(EnvironmentUrls urls);
+            TRequest body, bool authed, bool hasResponse, Action<HttpRequestMessage> alterRequest, bool logoutOnUnauthorized = true, bool sendToIdentity = false);
+        Task<HttpResponseMessage> SendAsync(HttpRequestMessage requestMessage, CancellationToken cancellationToken = default);
+        void SetUrls(EnvironmentUrlData urls);
         [Obsolete("Mar 25 2021: This method has been deprecated in favor of direct uploads. This method still exists for backward compatibility with old server versions.")]
         Task<CipherResponse> PostCipherAttachmentLegacyAsync(string id, MultipartFormDataContent data);
         Task<AttachmentUploadDataResponse> PostCipherAttachmentAsync(string id, AttachmentRequest request);
@@ -61,16 +64,17 @@ namespace Bit.Core.Abstractions
         Task PutDeviceTokenAsync(string identifier, DeviceTokenRequest request);
         Task PostEventsCollectAsync(IEnumerable<EventRequest> request);
         Task PutUpdateTempPasswordAsync(UpdateTempPasswordRequest request);
+        Task PostPasswordAsync(PasswordRequest request);
         Task DeleteAccountAsync(DeleteAccountRequest request);
         Task<OrganizationKeysResponse> GetOrganizationKeysAsync(string id);
         Task<OrganizationAutoEnrollStatusResponse> GetOrganizationAutoEnrollStatusAsync(string identifier);
         Task PutOrganizationUserResetPasswordEnrollmentAsync(string orgId, string userId,
             OrganizationUserResetPasswordEnrollmentRequest request);
-        Task<KeyConnectorUserKeyResponse> GetUserKeyFromKeyConnector(string keyConnectorUrl);
-        Task PostUserKeyToKeyConnector(string keyConnectorUrl, KeyConnectorUserKeyRequest request);
-        Task PostSetKeyConnectorKey(SetKeyConnectorKeyRequest request);
-        Task PostConvertToKeyConnector();
-        Task PostLeaveOrganization(string id);
+        Task<KeyConnectorUserKeyResponse> GetMasterKeyFromKeyConnectorAsync(string keyConnectorUrl);
+        Task PostMasterKeyToKeyConnectorAsync(string keyConnectorUrl, KeyConnectorUserKeyRequest request);
+        Task PostSetKeyConnectorKeyAsync(SetKeyConnectorKeyRequest request);
+        Task PostConvertToKeyConnectorAsync();
+        Task PostLeaveOrganizationAsync(string id);
 
         Task<SendResponse> GetSendAsync(string id);
         Task<SendResponse> PostSendAsync(SendRequest request);
@@ -82,5 +86,17 @@ namespace Bit.Core.Abstractions
         Task<SendResponse> PutSendAsync(string id, SendRequest request);
         Task<SendResponse> PutSendRemovePasswordAsync(string id);
         Task DeleteSendAsync(string id);
+        Task<List<PasswordlessLoginResponse>> GetAuthRequestAsync();
+        Task<PasswordlessLoginResponse> GetAuthRequestAsync(string id);
+        Task<PasswordlessLoginResponse> GetAuthResponseAsync(string id, string accessCode);
+        Task<PasswordlessLoginResponse> PutAuthRequestAsync(string id, string key, string masterPasswordHash, string deviceIdentifier, bool requestApproved);
+        Task<PasswordlessLoginResponse> PostCreateRequestAsync(PasswordlessCreateLoginRequest passwordlessCreateLoginRequest, AuthRequestType authRequestType);
+        Task<bool> GetKnownDeviceAsync(string email, string deviceIdentifier);
+        Task<DeviceResponse> GetDeviceByIdentifierAsync(string deviceIdentifier);
+        Task<DeviceResponse> UpdateTrustedDeviceKeysAsync(string deviceIdentifier, TrustedDeviceKeysRequest deviceRequest);
+        Task<OrganizationDomainSsoDetailsResponse> GetOrgDomainSsoDetailsAsync(string email);
+        Task<bool> GetDevicesExistenceByTypes(DeviceType[] deviceTypes);
+        Task<ConfigResponse> GetConfigsAsync();
+        Task<string> GetFastmailAccountIdAsync(string apiKey);
     }
 }

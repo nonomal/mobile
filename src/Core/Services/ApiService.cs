@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Bit.Core.Abstractions;
 using Bit.Core.Enums;
 using Bit.Core.Exceptions;
-using Bit.Core.Models.Domain;
+using Bit.Core.Models.Data;
 using Bit.Core.Models.Request;
 using Bit.Core.Models.Response;
+using Bit.Core.Utilities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
@@ -39,7 +42,7 @@ namespace Bit.Core.Services
             var device = (int)_platformUtilsService.GetDevice();
             _httpClient.DefaultRequestHeaders.Add("Device-Type", device.ToString());
             _httpClient.DefaultRequestHeaders.Add("Bitwarden-Client-Name", _platformUtilsService.GetClientType().GetString());
-            _httpClient.DefaultRequestHeaders.Add("Bitwarden-Client-Version", _platformUtilsService.GetApplicationVersion());
+            _httpClient.DefaultRequestHeaders.Add("Bitwarden-Client-Version", VersionHelpers.RemoveSuffix(_platformUtilsService.GetApplicationVersion()));
             if (!string.IsNullOrWhiteSpace(customUserAgent))
             {
                 _httpClient.DefaultRequestHeaders.UserAgent.ParseAdd(customUserAgent);
@@ -51,7 +54,7 @@ namespace Bit.Core.Services
         public string IdentityBaseUrl { get; set; }
         public string EventsBaseUrl { get; set; }
 
-        public void SetUrls(EnvironmentUrls urls)
+        public void SetUrls(EnvironmentUrlData urls)
         {
             UrlsSet = true;
             if (!string.IsNullOrWhiteSpace(urls.Base))
@@ -145,7 +148,7 @@ namespace Bit.Core.Services
         public Task<PreloginResponse> PostPreloginAsync(PreloginRequest request)
         {
             return SendAsync<PreloginRequest, PreloginResponse>(HttpMethod.Post, "/accounts/prelogin",
-                request, false, true);
+                request, false, true, sendToIdentity: true);
         }
 
         public Task<long> GetAccountRevisionDateAsync()
@@ -167,7 +170,7 @@ namespace Bit.Core.Services
 
         public Task PostRegisterAsync(RegisterRequest request)
         {
-            return SendAsync<RegisterRequest, object>(HttpMethod.Post, "/accounts/register", request, false, false);
+            return SendAsync<RegisterRequest, object>(HttpMethod.Post, "/accounts/register", request, false, false, sendToIdentity: true);
         }
 
         public Task PostAccountKeysAsync(KeysRequest request)
@@ -175,21 +178,21 @@ namespace Bit.Core.Services
             return SendAsync<KeysRequest, object>(HttpMethod.Post, "/accounts/keys", request, true, false);
         }
 
-        public Task PostAccountVerifyPasswordAsync(PasswordVerificationRequest request)
+        public Task<VerifyMasterPasswordResponse> PostAccountVerifyPasswordAsync(PasswordVerificationRequest request)
         {
-            return SendAsync<PasswordVerificationRequest, object>(HttpMethod.Post, "/accounts/verify-password", request,
-                true, false);
+            return SendAsync<PasswordVerificationRequest, VerifyMasterPasswordResponse>(HttpMethod.Post, "/accounts/verify-password", request,
+                true, true);
         }
 
         public Task PostAccountRequestOTP()
         {
-            return SendAsync<object, object>(HttpMethod.Post, "/accounts/request-otp", null, true, false, false);
+            return SendAsync<object, object>(HttpMethod.Post, "/accounts/request-otp", null, true, false, null, false);
         }
 
         public Task PostAccountVerifyOTPAsync(VerifyOTPRequest request)
         {
             return SendAsync<VerifyOTPRequest, object>(HttpMethod.Post, "/accounts/verify-otp", request,
-                true, false, false);
+                true, false, null, false);
         }
 
         public Task PutUpdateTempPasswordAsync(UpdateTempPasswordRequest request)
@@ -198,17 +201,22 @@ namespace Bit.Core.Services
                 request, true, false);
         }
 
+        public Task PostPasswordAsync(PasswordRequest request)
+        {
+            return SendAsync<PasswordRequest, object>(HttpMethod.Post, "/accounts/password", request, true, false);
+        }
+
         public Task DeleteAccountAsync(DeleteAccountRequest request)
         {
             return SendAsync<DeleteAccountRequest, object>(HttpMethod.Delete, "/accounts", request, true, false);
         }
 
-        public Task PostConvertToKeyConnector()
+        public Task PostConvertToKeyConnectorAsync()
         {
             return SendAsync<object, object>(HttpMethod.Post, "/accounts/convert-to-key-connector", null, true, false);
         }
 
-        public Task PostSetKeyConnectorKey(SetKeyConnectorKeyRequest request)
+        public Task PostSetKeyConnectorKeyAsync(SetKeyConnectorKeyRequest request)
         {
             return SendAsync<SetKeyConnectorKeyRequest>(HttpMethod.Post, "/accounts/set-key-connector-key", request, true);
         }
@@ -389,10 +397,36 @@ namespace Bit.Core.Services
 
         #region Device APIs
 
+
+        public Task<bool> GetKnownDeviceAsync(string email, string deviceIdentifier)
+        {
+            return SendAsync<object, bool>(HttpMethod.Get, "/devices/knowndevice", null, false, true, (message) =>
+            {
+                message.Headers.Add("X-Device-Identifier", deviceIdentifier);
+                message.Headers.Add("X-Request-Email", CoreHelpers.Base64UrlEncode(Encoding.UTF8.GetBytes(email)));
+            });
+        }
+
         public Task PutDeviceTokenAsync(string identifier, DeviceTokenRequest request)
         {
             return SendAsync<DeviceTokenRequest, object>(
                 HttpMethod.Put, $"/devices/identifier/{identifier}/token", request, true, false);
+        }
+
+        public Task<bool> GetDevicesExistenceByTypes(DeviceType[] deviceTypes)
+        {
+            return SendAsync<DeviceType[], bool>(
+                HttpMethod.Post, "/devices/exist-by-types", deviceTypes, true, true);
+        }
+
+        public Task<DeviceResponse> GetDeviceByIdentifierAsync(string deviceIdentifier)
+        {
+            return SendAsync<object, DeviceResponse>(HttpMethod.Get, $"/devices/identifier/{deviceIdentifier}", null, true, true);
+        }
+
+        public Task<DeviceResponse> UpdateTrustedDeviceKeysAsync(string deviceIdentifier, TrustedDeviceKeysRequest trustedDeviceKeysRequest)
+        {
+            return SendAsync<TrustedDeviceKeysRequest, DeviceResponse>(HttpMethod.Put, $"/devices/{deviceIdentifier}/keys", trustedDeviceKeysRequest, true, true);
         }
 
         #endregion
@@ -452,11 +486,16 @@ namespace Bit.Core.Services
                 $"/organizations/{identifier}/auto-enroll-status", null, true, true);
         }
 
-        public Task PostLeaveOrganization(string id)
+        public Task PostLeaveOrganizationAsync(string id)
         {
             return SendAsync<object, object>(HttpMethod.Post, $"/organizations/{id}/leave", null, true, false);
         }
 
+
+        public Task<OrganizationDomainSsoDetailsResponse> GetOrgDomainSsoDetailsAsync(string userEmail)
+        {
+            return SendAsync<OrganizationDomainSsoDetailsRequest, OrganizationDomainSsoDetailsResponse>(HttpMethod.Post, $"/organizations/domain/sso/details", new OrganizationDomainSsoDetailsRequest { Email = userEmail }, false, true);
+        }
         #endregion
 
         #region Organization User APIs
@@ -472,7 +511,7 @@ namespace Bit.Core.Services
 
         #region Key Connector
 
-        public async Task<KeyConnectorUserKeyResponse> GetUserKeyFromKeyConnector(string keyConnectorUrl)
+        public async Task<KeyConnectorUserKeyResponse> GetMasterKeyFromKeyConnectorAsync(string keyConnectorUrl)
         {
             using (var requestMessage = new HttpRequestMessage())
             {
@@ -502,7 +541,7 @@ namespace Bit.Core.Services
             }
         }
 
-        public async Task PostUserKeyToKeyConnector(string keyConnectorUrl, KeyConnectorUserKeyRequest request)
+        public async Task PostMasterKeyToKeyConnectorAsync(string keyConnectorUrl, KeyConnectorUserKeyRequest request)
         {
             using (var requestMessage = new HttpRequestMessage())
             {
@@ -534,6 +573,47 @@ namespace Bit.Core.Services
 
         #endregion
 
+        #region PasswordlessLogin
+
+        public async Task<List<PasswordlessLoginResponse>> GetAuthRequestAsync()
+        {
+            var response = await SendAsync<object, PasswordlessLoginsResponse>(HttpMethod.Get, $"/auth-requests/", null, true, true);
+            return response.Data;
+        }
+
+        public Task<PasswordlessLoginResponse> GetAuthRequestAsync(string id)
+        {
+            return SendAsync<object, PasswordlessLoginResponse>(HttpMethod.Get, $"/auth-requests/{id}", null, true, true);
+        }
+
+        public Task<PasswordlessLoginResponse> GetAuthResponseAsync(string id, string accessCode)
+        {
+            return SendAsync<object, PasswordlessLoginResponse>(HttpMethod.Get, $"/auth-requests/{id}/response?code={accessCode}", null, false, true);
+        }
+
+        public Task<PasswordlessLoginResponse> PostCreateRequestAsync(PasswordlessCreateLoginRequest passwordlessCreateLoginRequest, AuthRequestType authRequestType)
+        {
+            return SendAsync<object, PasswordlessLoginResponse>(HttpMethod.Post, authRequestType == AuthRequestType.AdminApproval ? "/auth-requests/admin-request" : "/auth-requests", passwordlessCreateLoginRequest, authRequestType == AuthRequestType.AdminApproval, true);
+        }
+
+        public Task<PasswordlessLoginResponse> PutAuthRequestAsync(string id, string encKey, string encMasterPasswordHash, string deviceIdentifier, bool requestApproved)
+        {
+            var request = new PasswordlessLoginRequest(encKey, encMasterPasswordHash, deviceIdentifier, requestApproved);
+            return SendAsync<object, PasswordlessLoginResponse>(HttpMethod.Put, $"/auth-requests/{id}", request, true, true);
+        }
+
+        #endregion
+
+        #region Configs
+
+        public async Task<ConfigResponse> GetConfigsAsync()
+        {
+            var accessToken = await _tokenService.GetTokenAsync();
+            return await SendAsync<object, ConfigResponse>(HttpMethod.Get, "/config/", null, !string.IsNullOrEmpty(accessToken), true);
+        }
+
+        #endregion
+
         #region Helpers
 
         public async Task<string> GetActiveBearerTokenAsync()
@@ -547,7 +627,7 @@ namespace Bit.Core.Services
             return accessToken;
         }
 
-        public async Task<object> PreValidateSso(string identifier)
+        public async Task<SsoPrevalidateResponse> PreValidateSsoAsync(string identifier)
         {
             var path = "/account/prevalidate?domainHint=" + WebUtility.UrlEncode(identifier);
             using (var requestMessage = new HttpRequestMessage())
@@ -571,7 +651,8 @@ namespace Bit.Core.Services
                     var error = await HandleErrorAsync(response, false, true);
                     throw new ApiException(error);
                 }
-                return null;
+                var responseJsonString = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<SsoPrevalidateResponse>(responseJsonString);
             }
         }
 
@@ -582,13 +663,26 @@ namespace Bit.Core.Services
         public Task<TResponse> SendAsync<TResponse>(HttpMethod method, string path, bool authed) =>
             SendAsync<object, TResponse>(method, path, null, authed, true);
         public async Task<TResponse> SendAsync<TRequest, TResponse>(HttpMethod method, string path, TRequest body,
-            bool authed, bool hasResponse, bool logoutOnUnauthorized = true)
+            bool authed, bool hasResponse, Action<HttpRequestMessage> alterRequest = null, bool logoutOnUnauthorized = true, bool sendToIdentity = false)
         {
             using (var requestMessage = new HttpRequestMessage())
             {
+                var baseUrl = sendToIdentity ? IdentityBaseUrl : ApiBaseUrl;
                 requestMessage.Version = new Version(1, 0);
                 requestMessage.Method = method;
-                requestMessage.RequestUri = new Uri(string.Concat(ApiBaseUrl, path));
+
+                if (!Uri.IsWellFormedUriString(baseUrl, UriKind.Absolute))
+                {
+                    throw new ApiException(new ErrorResponse
+                    {
+                        StatusCode = HttpStatusCode.BadGateway,
+                        //Note: This message is hardcoded until AppResources.resx gets moved into Core.csproj
+                        Message = "One or more URLs saved in the Settings are incorrect. Please revise it and try to log in again."
+                    });
+                }
+
+                requestMessage.RequestUri = new Uri(string.Concat(baseUrl, path));
+
                 if (body != null)
                 {
                     var bodyType = body.GetType();
@@ -617,6 +711,7 @@ namespace Bit.Core.Services
                 {
                     requestMessage.Headers.Add("Accept", "application/json");
                 }
+                alterRequest?.Invoke(requestMessage);
 
                 HttpResponseMessage response;
                 try
@@ -687,6 +782,56 @@ namespace Bit.Core.Services
             }
         }
 
+        public async Task<HttpResponseMessage> SendAsync(HttpRequestMessage requestMessage, CancellationToken cancellationToken = default)
+        {
+            HttpResponseMessage response;
+            try
+            {
+                response = await _httpClient.SendAsync(requestMessage, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                throw new ApiException(HandleWebError(e));
+            }
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new ApiException(new ErrorResponse
+                {
+                    StatusCode = response.StatusCode,
+                    Message = $"{requestMessage.RequestUri} error: {(int)response.StatusCode} {response.ReasonPhrase}."
+                });
+            }
+            return response;
+        }
+
+        public async Task<string> GetFastmailAccountIdAsync(string apiKey)
+        {
+            using (var httpclient = new HttpClient())
+            {
+                HttpResponseMessage response;
+                try
+                {
+                    httpclient.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
+                    httpclient.DefaultRequestHeaders.Add("Accept", "application/json");
+                    response = await httpclient.GetAsync(new Uri("https://api.fastmail.com/jmap/session"));
+                }
+                catch (Exception e)
+                {
+                    throw new ApiException(HandleWebError(e));
+                }
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new ApiException(new ErrorResponse
+                    {
+                        StatusCode = response.StatusCode,
+                        Message = $"Fastmail error: {(int)response.StatusCode} {response.ReasonPhrase}."
+                    });
+                }
+                var result = JObject.Parse(await response.Content.ReadAsStringAsync());
+                return result["primaryAccounts"]?["https://www.fastmail.com/dev/maskedemail"]?.ToString();
+            }
+        }
+
         private ErrorResponse HandleWebError(Exception e)
         {
             return new ErrorResponse
@@ -702,8 +847,6 @@ namespace Bit.Core.Services
             if (authed
                 &&
                 (
-                    (tokenError && response.StatusCode == HttpStatusCode.BadRequest)
-                    ||
                     (logoutOnUnauthorized && response.StatusCode == HttpStatusCode.Unauthorized)
                     ||
                     response.StatusCode == HttpStatusCode.Forbidden
@@ -720,6 +863,17 @@ namespace Bit.Core.Services
                     var responseJsonString = await response.Content.ReadAsStringAsync();
                     responseJObject = JObject.Parse(responseJsonString);
                 }
+
+                if (authed && tokenError
+                    &&
+                    response.StatusCode == HttpStatusCode.BadRequest
+                    &&
+                    responseJObject?["error"]?.ToString() == "invalid_grant")
+                {
+                    await _logoutCallbackAsync(new Tuple<string, bool, bool>(null, false, true));
+                    return null;
+                }
+
                 return new ErrorResponse(responseJObject, response.StatusCode, tokenError);
             }
             catch
@@ -730,7 +884,19 @@ namespace Bit.Core.Services
 
         private bool IsJsonResponse(HttpResponseMessage response)
         {
-            return (response.Content?.Headers?.ContentType?.MediaType ?? string.Empty) == "application/json";
+            if (response.Content?.Headers is null)
+            {
+                return false;
+            }
+
+            if (response.Content.Headers.ContentType?.MediaType == "application/json")
+            {
+                return true;
+            }
+
+            return response.Content.Headers.TryGetValues("Content-Type", out var vals)
+                   &&
+                   vals?.Any(v => v.Contains("application/json")) is true;
         }
 
         #endregion

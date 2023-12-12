@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Bit.Core.Abstractions;
 using Bit.Core.Exceptions;
 using Bit.Core.Models.Data;
+using Bit.Core.Models.Domain;
 using Bit.Core.Models.Response;
 using Bit.Core.Utilities;
 
@@ -24,7 +25,10 @@ namespace Bit.Core.Services
         private readonly IPolicyService _policyService;
         private readonly ISendService _sendService;
         private readonly IKeyConnectorService _keyConnectorService;
+        private readonly ILogger _logger;
         private readonly Func<Tuple<string, bool, bool>, Task> _logoutCallbackAsync;
+
+        private readonly LazyResolve<IWatchDeviceService> _watchDeviceService = new LazyResolve<IWatchDeviceService>();
 
         public SyncService(
             IStateService stateService,
@@ -39,6 +43,7 @@ namespace Bit.Core.Services
             IPolicyService policyService,
             ISendService sendService,
             IKeyConnectorService keyConnectorService,
+            ILogger logger,
             Func<Tuple<string, bool, bool>, Task> logoutCallbackAsync)
         {
             _stateService = stateService;
@@ -53,6 +58,7 @@ namespace Bit.Core.Services
             _policyService = policyService;
             _sendService = sendService;
             _keyConnectorService = keyConnectorService;
+            _logger = logger;
             _logoutCallbackAsync = logoutCallbackAsync;
         }
 
@@ -106,9 +112,11 @@ namespace Bit.Core.Services
                 await SyncCollectionsAsync(response.Collections);
                 await SyncCiphersAsync(userId, response.Ciphers);
                 await SyncSettingsAsync(userId, response.Domains);
-                await SyncPoliciesAsync(response.Policies);
+                await SyncPoliciesAsync(userId, response.Policies);
                 await SyncSendsAsync(userId, response.Sends);
                 await SetLastSyncAsync(now);
+                _watchDeviceService.Value.SyncDataToWatchAsync().FireAndForget();
+
                 return SyncCompleted(true);
             }
             catch
@@ -267,6 +275,66 @@ namespace Bit.Core.Services
             return SyncCompleted(false);
         }
 
+        public async Task<bool> SyncUpsertSendAsync(SyncSendNotification notification, bool isEdit)
+        {
+            SyncStarted();
+            if (!await _stateService.IsAuthenticatedAsync())
+            {
+                return SyncCompleted(false);
+            }
+
+            try
+            {
+                var localSend = await _sendService.GetAsync(notification.Id);
+                if ((localSend != null && localSend.RevisionDate >= notification.RevisionDate)
+                    || (isEdit && localSend == null) || (!isEdit && localSend != null))
+                {
+                    return SyncCompleted(false);
+                }
+
+                var remoteSend = await _apiService.GetSendAsync(notification.Id);
+                if (remoteSend != null)
+                {
+                    var userId = await _stateService.GetActiveUserIdAsync();
+                    await _sendService.UpsertAsync(new SendData(remoteSend, userId));
+                    _messagingService.Send("syncedUpsertedSend", new Dictionary<string, string>
+                    {
+                        ["sendId"] = notification.Id
+                    });
+                    return SyncCompleted(true);
+                }
+            }
+            catch (ApiException e)
+            {
+                if (e.Error != null && e.Error.StatusCode == System.Net.HttpStatusCode.NotFound && isEdit)
+                {
+                    await _sendService.DeleteAsync(notification.Id);
+                    _messagingService.Send("syncedDeletedSend", new Dictionary<string, string>
+                    {
+                        ["sendId"] = notification.Id
+                    });
+                    return SyncCompleted(true);
+                }
+            }
+
+            return SyncCompleted(false);
+        }
+
+        public async Task<bool> SyncDeleteSendAsync(SyncSendNotification notification)
+        {
+            SyncStarted();
+            if (await _stateService.IsAuthenticatedAsync())
+            {
+                await _sendService.DeleteAsync(notification.Id);
+                _messagingService.Send("syncedDeletedSend", new Dictionary<string, string>
+                {
+                    ["sendId"] = notification.Id
+                });
+                return SyncCompleted(true);
+            }
+            return SyncCompleted(false);
+        }
+
         // Helpers
 
         private void SyncStarted()
@@ -320,15 +388,44 @@ namespace Bit.Core.Services
                 }
                 return;
             }
-            await _cryptoService.SetEncKeyAsync(response.Key);
-            await _cryptoService.SetEncPrivateKeyAsync(response.PrivateKey);
+            await _cryptoService.SetMasterKeyEncryptedUserKeyAsync(response.Key);
+            await _cryptoService.SetUserPrivateKeyAsync(response.PrivateKey);
             await _cryptoService.SetOrgKeysAsync(response.Organizations);
             await _stateService.SetSecurityStampAsync(response.SecurityStamp);
             var organizations = response.Organizations.ToDictionary(o => o.Id, o => new OrganizationData(o));
             await _organizationService.ReplaceAsync(organizations);
             await _stateService.SetEmailVerifiedAsync(response.EmailVerified);
             await _stateService.SetNameAsync(response.Name);
-            await _keyConnectorService.SetUsesKeyConnector(response.UsesKeyConnector);
+            await _stateService.SetPersonalPremiumAsync(response.Premium);
+            await _stateService.SetAvatarColorAsync(response.AvatarColor);
+            await _keyConnectorService.SetUsesKeyConnectorAsync(response.UsesKeyConnector);
+            await SetPasswordSetReasonIfNeededAsync(response);
+        }
+
+        private async Task SetPasswordSetReasonIfNeededAsync(ProfileResponse response)
+        {
+            // The `ForcePasswordReset` flag indicates an admin has reset the user's password and must be updated
+            if (response.ForcePasswordReset)
+            {
+                await _stateService.SetForcePasswordResetReasonAsync(ForcePasswordResetReason.AdminForcePasswordReset);
+            }
+
+            var hasManageResetPasswordPermission = response.Organizations.Any(org =>
+                org.Type == Enums.OrganizationUserType.Owner ||
+                org.Type == Enums.OrganizationUserType.Admin ||
+                org.Permissions?.ManageResetPassword == true);
+            if (!hasManageResetPasswordPermission)
+            {
+                return;
+            }
+
+            var decryptionOptions = await _stateService.GetAccountDecryptionOptions();
+            if (decryptionOptions?.HasMasterPassword == false)
+            {
+                // TDE user w/out MP went from having no password reset permission to having it.
+                // Must set the force password reset reason so the auth guard will redirect to the set password page.
+                await _stateService.SetForcePasswordResetReasonAsync(ForcePasswordResetReason.TdeUserWithoutPasswordHasPasswordResetPermission);
+            }
         }
 
         private async Task SyncFoldersAsync(string userId, List<FolderResponse> response)
@@ -369,11 +466,11 @@ namespace Bit.Core.Services
             await _settingsService.SetEquivalentDomainsAsync(eqDomains);
         }
 
-        private async Task SyncPoliciesAsync(List<PolicyResponse> response)
+        private async Task SyncPoliciesAsync(string userId, List<PolicyResponse> response)
         {
             var policies = response?.ToDictionary(p => p.Id, p => new PolicyData(p)) ??
                 new Dictionary<string, PolicyData>();
-            await _policyService.Replace(policies);
+            await _policyService.Replace(policies, userId);
         }
 
         private async Task SyncSendsAsync(string userId, List<SendResponse> response)
@@ -381,6 +478,46 @@ namespace Bit.Core.Services
             var sends = response?.ToDictionary(s => s.Id, s => new SendData(s, userId)) ??
                 new Dictionary<string, SendData>();
             await _sendService.ReplaceAsync(sends);
+        }
+
+        public async Task SyncPasswordlessLoginRequestsAsync()
+        {
+            try
+            {
+                var userId = await _stateService.GetActiveUserIdAsync();
+                // if the user has not enabled passwordless logins ignore requests
+                if (!await _stateService.GetApprovePasswordlessLoginsAsync(userId))
+                {
+                    return;
+                }
+
+                var loginRequests = await _apiService.GetAuthRequestAsync();
+                if (loginRequests == null || !loginRequests.Any())
+                {
+                    return;
+                }
+
+                var validLoginRequest = loginRequests.Where(l => !l.IsAnswered && !l.IsExpired)
+                                         .OrderByDescending(x => x.CreationDate)
+                                         .FirstOrDefault();
+
+                if (validLoginRequest is null)
+                {
+                    return;
+                }
+
+                await _stateService.SetPasswordlessLoginNotificationAsync(new PasswordlessRequestNotification()
+                {
+                    Id = validLoginRequest.Id,
+                    UserId = userId
+                });
+
+                _messagingService.Send(Constants.PasswordlessLoginRequestKey);
+            }
+            catch (Exception ex)
+            {
+                _logger.Exception(ex);
+            }
         }
     }
 }

@@ -236,7 +236,7 @@
     <comment>The button text that allows user to launch the website to their web browser.</comment>
   </data>
   <data name="HelpAndFeedback" xml:space="preserve">
-    <value>Ayuda &amp; Comentarios</value>
+    <value>Ayuda y comentarios</value>
   </data>
   <data name="Hide" xml:space="preserve">
     <value>Ocultar</value>
@@ -251,7 +251,7 @@
     <comment>Title for the alert when internet connection is required to continue.</comment>
   </data>
   <data name="InvalidMasterPassword" xml:space="preserve">
-    <value>Contraseña maestra no válida. Prueba de nuevo.</value>
+    <value>Contraseña maestra no válida. Inténtelo de nuevo.</value>
   </data>
   <data name="InvalidPIN" xml:space="preserve">
     <value>PIN no válido. Prueba de nuevo.</value>
@@ -298,6 +298,10 @@
   <data name="MyVault" xml:space="preserve">
     <value>Mi caja fuerte</value>
     <comment>The title for the vault page.</comment>
+  </data>
+  <data name="Authenticator" xml:space="preserve">
+    <value>Autenticador</value>
+    <comment>Authenticator TOTP feature</comment>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Nombre</value>
@@ -372,7 +376,7 @@
   </data>
   <data name="ValueHasBeenCopied" xml:space="preserve">
     <value>{0} ha sido copiado.</value>
-    <comment>Confirmation message after suceessfully copying a value to the clipboard.</comment>
+    <comment>Confirmation message after successfully copying a value to the clipboard.</comment>
   </data>
   <data name="VerifyFingerprint" xml:space="preserve">
     <value>Verificar huella dactilar</value>
@@ -391,9 +395,6 @@
   </data>
   <data name="VisitOurWebsite" xml:space="preserve">
     <value>Visita nuestro sitio web</value>
-  </data>
-  <data name="VisitOurWebsiteDescription" xml:space="preserve">
-    <value>Visita nuestro sitio web para recibir ayuda, noticias, contactarnos por correo y/o aprender más sobre como utilizar Bitwarden.</value>
   </data>
   <data name="Website" xml:space="preserve">
     <value>Web</value>
@@ -418,7 +419,7 @@
     <value>Utiliza el servicio de accesibilidad de Bitwarden para autorellenar entradas entre aplicaciones y sitios web.</value>
   </data>
   <data name="AutofillService" xml:space="preserve">
-    <value>Servicio de autocompletado</value>
+    <value>Servicio de autorrellenado</value>
   </data>
   <data name="AvoidAmbiguousCharacters" xml:space="preserve">
     <value>Evitar caracteres ambiguos</value>
@@ -447,9 +448,6 @@
   <data name="ChangeMasterPassword" xml:space="preserve">
     <value>Cambiar contraseña maestra</value>
   </data>
-  <data name="ChangePasswordConfirmation" xml:space="preserve">
-    <value>Puedes cambiar tu contraseña maestra en la caja fuerte web de bitwarden.com. ¿Quieres visitar ahora el sitio web?</value>
-  </data>
   <data name="Close" xml:space="preserve">
     <value>Cerrar</value>
   </data>
@@ -467,7 +465,7 @@
     <value>Editar elemento</value>
   </data>
   <data name="EnableAutomaticSyncing" xml:space="preserve">
-    <value>Habilitar sincronizacion automatica</value>
+    <value>Habilitar sincronización automática</value>
   </data>
   <data name="EnterEmailForHint" xml:space="preserve">
     <value>Introduce el correo electrónico de tu cuenta para recibir la pista de tu contraseña maestra.</value>
@@ -579,8 +577,8 @@
   <data name="MasterPasswordHintDescription" xml:space="preserve">
     <value>Una pista de tu contraseña maestra puede ayudarte a recordarla en caso de que la olvides.</value>
   </data>
-  <data name="MasterPasswordLengthValMessage" xml:space="preserve">
-    <value>La contraseña maestra debe tener al menos 8 caracteres.</value>
+  <data name="MasterPasswordLengthValMessageX" xml:space="preserve">
+    <value>La contraseña maestra debe tener al menos {0} caracteres.</value>
   </data>
   <data name="MinNumbers" xml:space="preserve">
     <value>Mínimo de caracteres numéricos</value>
@@ -703,9 +701,6 @@
   <data name="TwoStepLogin" xml:space="preserve">
     <value>Autenticación en dos pasos</value>
   </data>
-  <data name="TwoStepLoginConfirmation" xml:space="preserve">
-    <value>La autenticación en dos pasos hace que tu cuenta sea mucho más segura requiriendo que introduzcas un código de seguridad de una aplicación de autenticación cada vez que accedes. La autenticación en dos pasos puede ser habilitada en la caja fuerte web de bitwarden.com. ¿Quieres visitar ahora el sitio web?</value>
-  </data>
   <data name="UnlockWith" xml:space="preserve">
     <value>Desbloquear con {0}</value>
   </data>
@@ -769,6 +764,12 @@
   </data>
   <data name="Enabled" xml:space="preserve">
     <value>Activado</value>
+  </data>
+  <data name="Off" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>Sí</value>
   </data>
   <data name="Status" xml:space="preserve">
     <value>Estado</value>
@@ -889,11 +890,9 @@
   <data name="AuthenticatorKeyReadError" xml:space="preserve">
     <value>No se pudo leer la clave de autenticación.</value>
   </data>
-  <data name="CameraInstructionBottom" xml:space="preserve">
-    <value>El escaneo será automático.</value>
-  </data>
-  <data name="CameraInstructionTop" xml:space="preserve">
-    <value>Apunta tu cámara el código QR.</value>
+  <data name="PointYourCameraAtTheQRCode" xml:space="preserve">
+    <value>Apunte su cámara al código QR.
+El escaneo se realizará automáticamente.</value>
   </data>
   <data name="ScanQrTitle" xml:space="preserve">
     <value>Escanear código QR</value>
@@ -907,11 +906,11 @@
   <data name="CopyTotp" xml:space="preserve">
     <value>Copiar código TOTP</value>
   </data>
-  <data name="DisableAutoTotpCopyDescription" xml:space="preserve">
-    <value>Si tu entrada tiene una clave de autenticación adjunta, el código de verificación TOTP es copiado automáticamente al portapapeles cuando autorellenas una entrada.</value>
+  <data name="CopyTotpAutomaticallyDescription" xml:space="preserve">
+    <value>Si un inicio de sesión tiene una clave de autenticador, copie el código de verificación TOTP a su portapapeles cuando autorrellene el inicio de sesión.</value>
   </data>
-  <data name="DisableAutoTotpCopy" xml:space="preserve">
-    <value>Deshabilitar copiado automático de códigos TOTP</value>
+  <data name="CopyTotpAutomatically" xml:space="preserve">
+    <value>Copiar automáticamente TOTP</value>
   </data>
   <data name="PremiumRequired" xml:space="preserve">
     <value>Se quiere membrasía Premium para poder utilizar esta característica.</value>
@@ -945,6 +944,9 @@
   </data>
   <data name="UpdateKey" xml:space="preserve">
     <value>No puedes usar esta característica hasta que actualices tu clave de cifrado.</value>
+  </data>
+  <data name="EncryptionKeyMigrationRequiredDescriptionLong" xml:space="preserve">
+    <value>Se requiere migración de la clave de cifrado. Por favor, inicie sesión a través de la bóveda web para actualizar su clave de cifrado.</value>
   </data>
   <data name="LearnMore" xml:space="preserve">
     <value>Aprender más</value>
@@ -1095,6 +1097,9 @@
   <data name="Ms" xml:space="preserve">
     <value>Srta</value>
   </data>
+  <data name="Mx" xml:space="preserve">
+    <value>"Mx" = "Sr./Sra</value>
+  </data>
   <data name="November" xml:space="preserve">
     <value>Noviembre</value>
   </data>
@@ -1128,11 +1133,11 @@
   <data name="Expiration" xml:space="preserve">
     <value>Expiración</value>
   </data>
-  <data name="DisableWebsiteIcons" xml:space="preserve">
-    <value>Deshabilitar iconos del sitio web</value>
+  <data name="ShowWebsiteIcons" xml:space="preserve">
+    <value>Mostrar los iconos del sitio web</value>
   </data>
-  <data name="DisableWebsiteIconsDescription" xml:space="preserve">
-    <value>Los iconos del sitio web añaden una imagen reconocible al lado de cada entrada de tu caja fuerte.</value>
+  <data name="ShowWebsiteIconsDescription" xml:space="preserve">
+    <value>Mostrar una imagen reconocible junto a cada inicio de sesión.</value>
   </data>
   <data name="IconsUrl" xml:space="preserve">
     <value>URL del servidor de iconos</value>
@@ -1372,11 +1377,15 @@
   <data name="SearchCollection" xml:space="preserve">
     <value>Buscar colección</value>
   </data>
-  <data name="SearchFolder" xml:space="preserve">
-    <value>Buscar carpeta</value>
+  <data name="SearchFileSends" xml:space="preserve">
+    <value>Buscar Sends de archivos</value>
   </data>
-  <data name="SearchType" xml:space="preserve">
-    <value>Tipo de búsqueda</value>
+  <data name="SearchTextSends" xml:space="preserve">
+    <value>Buscar Sends de texto</value>
+  </data>
+  <data name="SearchGroup" xml:space="preserve">
+    <value>Buscar {0}</value>
+    <comment>ex: Search Logins</comment>
   </data>
   <data name="Type" xml:space="preserve">
     <value>Tipo</value>
@@ -1468,13 +1477,13 @@
     <value>Desbloquear</value>
   </data>
   <data name="UnlockVault" xml:space="preserve">
-    <value>Desbloquear bóveda</value>
+    <value>Desbloquear caja fuerte</value>
   </data>
   <data name="ThirtyMinutes" xml:space="preserve">
     <value>30 minutos</value>
   </data>
   <data name="SetPINDescription" xml:space="preserve">
-    <value>Establece su código PIN para desbloquear Bitwarden. Sus ajustes de PIN se reiniciarán si alguna vez cierra su sesión completamente de la aplicación.</value>
+    <value>Establezca su código PIN para desbloquear Bitwarden. Sus ajustes de PIN se reiniciarán si alguna vez cierra su sesión completamente de la aplicación.</value>
   </data>
   <data name="LoggedInAsOn" xml:space="preserve">
     <value>Iniciado como {0} en {1}.</value>
@@ -1537,6 +1546,9 @@
   <data name="ThemeDefault" xml:space="preserve">
     <value>Por defecto (Sistema)</value>
   </data>
+  <data name="DefaultDarkTheme" xml:space="preserve">
+    <value>Tema oscuro por defecto</value>
+  </data>
   <data name="CopyNotes" xml:space="preserve">
     <value>Copiar notas</value>
   </data>
@@ -1553,17 +1565,22 @@
     <value>Negro</value>
     <comment>The color black</comment>
   </data>
-  <data name="BlacklistedUris" xml:space="preserve">
-    <value>URIs en lista negra</value>
+  <data name="Nord" xml:space="preserve">
+    <value>Nord</value>
+    <comment>'Nord' is the name of a specific color scheme. It should not be translated.</comment>
   </data>
-  <data name="BlacklistedUrisDescription" xml:space="preserve">
-    <value>URIs que están en la lista negra no ofrecerán auto-relleno. La lista de aplicaciones debe ser separada por comas. Ej: "https://twitter.com, androidapp://com.twitter.android".</value>
+  <data name="SolarizedDark" xml:space="preserve">
+    <value>Oscuro Solar</value>
+    <comment>'Solarized Dark' is the name of a specific color scheme. It should not be translated.</comment>
   </data>
-  <data name="DisableSavePrompt" xml:space="preserve">
-    <value>Desactivar el aviso de guardado</value>
+  <data name="AutofillBlockedUris" xml:space="preserve">
+    <value>Autorellenar URIs bloqueadas</value>
   </data>
-  <data name="DisableSavePromptDescription" xml:space="preserve">
-    <value>El "aviso de guardado" pregunta automáticamente si quiere guardar nuevas entradas en su caja fuerte cuando se identifica en un sitio web por primera vez.</value>
+  <data name="AskToAddLogin" xml:space="preserve">
+    <value>Pedir que se añada el inicio de sesión</value>
+  </data>
+  <data name="AskToAddLoginDescription" xml:space="preserve">
+    <value>Pedir que se añada un elemento si no se encuentra uno en tu caja fuerte.</value>
   </data>
   <data name="OnRestart" xml:space="preserve">
     <value>Al reiniciar la aplicación</value>
@@ -1597,7 +1614,7 @@
     <value>Verificación biométrica</value>
   </data>
   <data name="Biometrics" xml:space="preserve">
-    <value>Biometría</value>
+    <value>biometría</value>
   </data>
   <data name="UseBiometricsToUnlock" xml:space="preserve">
     <value>Utilizar biometría para desbloquear</value>
@@ -1648,7 +1665,7 @@
     <value>Las claves de cifrado de cuenta son únicas para cada cuenta de usuario de Bitwarden, por lo que no puede importar una exportación cifrada a una cuenta diferente.</value>
   </data>
   <data name="ExportVaultConfirmationTitle" xml:space="preserve">
-    <value>Confirmar exportación de bóveda</value>
+    <value>Confirmar exportación de la caja fuerte</value>
     <comment>Title for the alert to confirm vault exports.</comment>
   </data>
   <data name="Warning" xml:space="preserve">
@@ -1723,17 +1740,17 @@
     <value>¿Seguro que quieres enviarlo a la papelera?</value>
     <comment>Confirmation alert message when soft-deleting a cipher.</comment>
   </data>
-  <data name="BiometricInvalidated" xml:space="preserve">
-    <value>Se ha detectado un cambio biométrico, inicie sesión usando la contraseña maestra para volver a activarlo.</value>
+  <data name="AccountBiometricInvalidated" xml:space="preserve">
+    <value>El desbloqueo biométrico para esta cuenta está deshabilitado hasta que se verifique la contraseña maestra.</value>
   </data>
-  <data name="BiometricInvalidatedExtension" xml:space="preserve">
-    <value>Desbloqueo biométrico para autorrellenar desactivado hasta la verificación de la contraseña maestra.</value>
+  <data name="AccountBiometricInvalidatedExtension" xml:space="preserve">
+    <value>El desbloqueo biométrico para autorrelleno de esta cuenta está deshabilitado hasta que realice la verificación de la contraseña maestra.</value>
   </data>
   <data name="EnableSyncOnRefresh" xml:space="preserve">
     <value>Habilitar sincronización al actualizar</value>
   </data>
   <data name="EnableSyncOnRefreshDescription" xml:space="preserve">
-    <value>Sincronizando caja fuerte con gesto desplegable.</value>
+    <value>Sincronizar caja fuerte deslizando hacia abajo.</value>
   </data>
   <data name="LogInSso" xml:space="preserve">
     <value>Inicio de sesión único empresarial</value>
@@ -1757,7 +1774,7 @@
     <value>Una o más políticas de la organización requieren que su contraseña maestra cumpla con los siguientes requisitos:</value>
   </data>
   <data name="PolicyInEffectMinComplexity" xml:space="preserve">
-    <value>Puntuación mínima de complejidad de $SCORE$</value>
+    <value>Puntuación de complejidad mínima {0}</value>
   </data>
   <data name="PolicyInEffectMinLength" xml:space="preserve">
     <value>Longitud mínima de {0}</value>
@@ -1772,7 +1789,7 @@
     <value>Contiene uno o más números</value>
   </data>
   <data name="PolicyInEffectSpecial" xml:space="preserve">
-    <value>Contiene uno o más de los siguientes caracteres especiales $CHARS$</value>
+    <value>Contienen uno o más de los siguientes caracteres especiales {0}</value>
   </data>
   <data name="MasterPasswordPolicyValidationTitle" xml:space="preserve">
     <value>Contraseña no válida</value>
@@ -1835,7 +1852,7 @@
     <value>Si está activado, la accesibilidad mostrará una ventana emergente para aumentar el servicio de autorelleno para aplicaciones antiguas que no soportan la estructura de autorelleno de Android.</value>
   </data>
   <data name="PersonalOwnershipSubmitError" xml:space="preserve">
-    <value>Debido a una Política Empresarial, usted está restringido a guardar elementos en su bóveda personal. Cambie la opción Propiedad a una organización y elija de entre las colecciones disponibles.</value>
+    <value>Debido a una política empresarial, usted está restringido a guardar elementos en su caja fuerte personal. Cambie la opción Propiedad a una organización y elija de entre las colecciones disponibles.</value>
   </data>
   <data name="PersonalOwnershipPolicyInEffect" xml:space="preserve">
     <value>Una política de organización está afectando sus opciones de propiedad.</value>
@@ -1856,6 +1873,9 @@
     <value>Un nombre amigable para describir este Envío.</value>
     <comment>'Send' is a noun and the name of a feature called 'Bitwarden Send'. It should not be translated.</comment>
   </data>
+  <data name="Text" xml:space="preserve">
+    <value>Texto</value>
+  </data>
   <data name="TypeText" xml:space="preserve">
     <value>Texto</value>
   </data>
@@ -1871,6 +1891,18 @@
   </data>
   <data name="TypeFileInfo" xml:space="preserve">
     <value>El archivo que quieres enviar.</value>
+  </data>
+  <data name="FileTypeIsSelected" xml:space="preserve">
+    <value>El tipo de archivo está seleccionado.</value>
+  </data>
+  <data name="FileTypeIsNotSelected" xml:space="preserve">
+    <value>El tipo de archivo no está seleccionado, toque para seleccionar.</value>
+  </data>
+  <data name="TextTypeIsSelected" xml:space="preserve">
+    <value>El tipo de texto está seleccionado.</value>
+  </data>
+  <data name="TextTypeIsNotSelected" xml:space="preserve">
+    <value>El tipo de texto no está seleccionado, toque para seleccionar.</value>
   </data>
   <data name="DeletionDate" xml:space="preserve">
     <value>Fecha de eliminación</value>
@@ -2026,7 +2058,7 @@
     <comment>'Send' is a noun and the name of a feature called 'Bitwarden Send'. It should not be translated.</comment>
   </data>
   <data name="SendFileEmailVerificationRequired" xml:space="preserve">
-    <value>Debes verificar tu correo electrónico para usar archivos con el Send. Puedes verificar tu correo electrónico en la bóveda web.</value>
+    <value>Debes verificar tu correo electrónico para usar archivos con el Send. Puedes verificar tu correo electrónico en la caja fuerte web.</value>
     <comment>'Send' is a noun and the name of a feature called 'Bitwarden Send'. It should not be translated.</comment>
   </data>
   <data name="PasswordPrompt" xml:space="preserve">
@@ -2098,10 +2130,16 @@
   <data name="VaultTimeoutPolicyInEffect" xml:space="preserve">
     <value>Las políticas de su organización están afectando el tiempo de espera de tu caja fuerte. El máximo permitido de tiempo de espera es {0} hora(s) y {1} minuto(s)</value>
   </data>
+  <data name="VaultTimeoutPolicyWithActionInEffect" xml:space="preserve">
+    <value>Las políticas de tu organización están afectando el tiempo de espera de tu caja fuerte. El tiempo máximo permitido para la bóveda es de {0} hora(s) y de {1} minuto(s). Su acción de tiempo de espera de la bóveda se ha establecido en {2}.</value>
+  </data>
+  <data name="VaultTimeoutActionPolicyInEffect" xml:space="preserve">
+    <value>Las políticas de su organización han establecido la acción de tiempo de espera de su caja fuerte a {0}.</value>
+  </data>
   <data name="VaultTimeoutToLarge" xml:space="preserve">
     <value>El tiempo de espera de tu caja fuerte excede las restricciones establecidas por tu organización.</value>
   </data>
-  <data name="DisablePersonalVaultExportPolicyInEffect">
+  <data name="DisablePersonalVaultExportPolicyInEffect" xml:space="preserve">
     <value>Una o más políticas de organización impiden que usted exporte su caja fuerte personal.</value>
   </data>
   <data name="AddAccount" xml:space="preserve">
@@ -2120,13 +2158,13 @@
     <value>Cambiado a la siguiente cuenta disponible</value>
   </data>
   <data name="AccountLockedSuccessfully" xml:space="preserve">
-    <value>Account Locked</value>
+    <value>Cuenta bloqueada</value>
   </data>
   <data name="AccountLoggedOutSuccessfully" xml:space="preserve">
-    <value>Account logged out successfully</value>
+    <value>Sesión cerrada con éxito</value>
   </data>
   <data name="AccountRemovedSuccessfully" xml:space="preserve">
-    <value>Account removed successfully</value>
+    <value>Cuenta eliminada con éxito</value>
   </data>
   <data name="DeleteAccount" xml:space="preserve">
     <value>Eliminar cuenta</value>
@@ -2175,5 +2213,663 @@
   </data>
   <data name="EnterTheVerificationCodeThatWasSentToYourEmail" xml:space="preserve">
     <value>Introduce el código de verificación enviado a tu correo electrónico</value>
+  </data>
+  <data name="SubmitCrashLogs" xml:space="preserve">
+    <value>Enviar registros de fallos</value>
+  </data>
+  <data name="SubmitCrashLogsDescription" xml:space="preserve">
+    <value>Ayuda a Bitwarden a mejorar la estabilidad de la aplicación mediante el envío de informes de error.</value>
+  </data>
+  <data name="OptionsExpanded" xml:space="preserve">
+    <value>Las opciones están expandidas, toque para colapsar.</value>
+  </data>
+  <data name="OptionsCollapsed" xml:space="preserve">
+    <value>Las opciones están colapsadas, toque para expandir.</value>
+  </data>
+  <data name="UppercaseAtoZ" xml:space="preserve">
+    <value>Mayúsculas (A a la Z)</value>
+  </data>
+  <data name="LowercaseAtoZ" xml:space="preserve">
+    <value>Minúsculas (A a la Z)
+</value>
+  </data>
+  <data name="NumbersZeroToNine" xml:space="preserve">
+    <value>Números (0 al 9)</value>
+  </data>
+  <data name="SpecialCharacters" xml:space="preserve">
+    <value>Carácteres especiales (!@#$%^&amp;*)</value>
+  </data>
+  <data name="TapToGoBack" xml:space="preserve">
+    <value>Toque para regresar</value>
+  </data>
+  <data name="PasswordIsVisibleTapToHide" xml:space="preserve">
+    <value>La contraseña es visible, toque para ocultar.</value>
+  </data>
+  <data name="PasswordIsNotVisibleTapToShow" xml:space="preserve">
+    <value>La contraseña no está visible, toque para mostrar.</value>
+  </data>
+  <data name="FilterByVault" xml:space="preserve">
+    <value>Filtrar elementos por caja fuerte</value>
+  </data>
+  <data name="AllVaults" xml:space="preserve">
+    <value>Todas las cajas fuertes</value>
+  </data>
+  <data name="Vaults" xml:space="preserve">
+    <value>Cajas fuertes</value>
+  </data>
+  <data name="VaultFilterDescription" xml:space="preserve">
+    <value>Caja fuerte: {0}</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Todo</value>
+  </data>
+  <data name="Totp" xml:space="preserve">
+    <value>TOTP</value>
+  </data>
+  <data name="VerificationCodes" xml:space="preserve">
+    <value>Códigos de verificación</value>
+  </data>
+  <data name="PremiumSubscriptionRequired" xml:space="preserve">
+    <value>Se requiere una Suscripción Premium</value>
+  </data>
+  <data name="CannotAddAuthenticatorKey" xml:space="preserve">
+    <value>¿No se puede agregar la clave del autenticador? </value>
+  </data>
+  <data name="ScanQRCode" xml:space="preserve">
+    <value>Escanear código QR</value>
+  </data>
+  <data name="CannotScanQRCode" xml:space="preserve">
+    <value>¿No se puede escanear el código QR? </value>
+  </data>
+  <data name="AuthenticatorKeyScanner" xml:space="preserve">
+    <value>Clave de Autenticador</value>
+  </data>
+  <data name="EnterKeyManually" xml:space="preserve">
+    <value>Introducir Clave manualmente</value>
+  </data>
+  <data name="AddTotp" xml:space="preserve">
+    <value>Añadir TOTP</value>
+  </data>
+  <data name="SetupTotp" xml:space="preserve">
+    <value>Configurar TOTP</value>
+  </data>
+  <data name="OnceTheKeyIsSuccessfullyEntered" xml:space="preserve">
+    <value>Una vez que la clave haya sido ingresada con éxito,
+seleccione Agregar TOTP para almacenar la clave de forma segura</value>
+  </data>
+  <data name="NeverLockWarning" xml:space="preserve">
+    <value>Configurar las opciones de bloqueo a "Nunca" mantiene la caja fuerte disponible para cualquier persona con acceso a su dispositivo. Si utiliza esta opción, debe asegurarse de que mantiene su dispositivo debidamente protegido.</value>
+  </data>
+  <data name="EnvironmentPageUrlsError" xml:space="preserve">
+    <value>Una o más de las URLs introducidas no son válidas. Por favor, revisala e intenta guardar de nuevo.</value>
+  </data>
+  <data name="GenericErrorMessage" xml:space="preserve">
+    <value>No hemos podido procesar su solicitud. Por favor, inténtelo de nuevo o contáctenos.</value>
+  </data>
+  <data name="AllowScreenCapture" xml:space="preserve">
+    <value>Permitir captura de pantalla</value>
+  </data>
+  <data name="AreYouSureYouWantToEnableScreenCapture" xml:space="preserve">
+    <value>¿Estás seguro de que quieres activar captura de pantalla?</value>
+  </data>
+  <data name="LogInRequested" xml:space="preserve">
+    <value>Inicio de sesión solicitado</value>
+  </data>
+  <data name="AreYouTryingToLogIn" xml:space="preserve">
+    <value>¿Estás tratando de iniciar sesión?</value>
+  </data>
+  <data name="LogInAttemptByXOnY" xml:space="preserve">
+    <value>Intento de inicio de sesión por {0} en {1}</value>
+  </data>
+  <data name="DeviceType" xml:space="preserve">
+    <value>Tipo de dispositivo</value>
+  </data>
+  <data name="IpAddress" xml:space="preserve">
+    <value>Dirección IP</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Hora</value>
+  </data>
+  <data name="Near" xml:space="preserve">
+    <value>Cerca</value>
+  </data>
+  <data name="ConfirmLogIn" xml:space="preserve">
+    <value>Confirmar inicio de sesión</value>
+  </data>
+  <data name="DenyLogIn" xml:space="preserve">
+    <value>Denegar inicio de sesión</value>
+  </data>
+  <data name="JustNow" xml:space="preserve">
+    <value>Justo ahora</value>
+  </data>
+  <data name="XMinutesAgo" xml:space="preserve">
+    <value>Hace {0} minutos</value>
+  </data>
+  <data name="LogInAccepted" xml:space="preserve">
+    <value>Inicio de sesión confirmado</value>
+  </data>
+  <data name="LogInDenied" xml:space="preserve">
+    <value>Inicio de sesión denegado</value>
+  </data>
+  <data name="ApproveLoginRequests" xml:space="preserve">
+    <value>Aprobar solicitudes de inicio de sesión</value>
+  </data>
+  <data name="UseThisDeviceToApproveLoginRequestsMadeFromOtherDevices" xml:space="preserve">
+    <value>Use este dispositivo para aprobar solicitudes de inicio de sesión realizadas desde otros dispositivos.</value>
+  </data>
+  <data name="AllowNotifications" xml:space="preserve">
+    <value>Permitir notificaciones</value>
+  </data>
+  <data name="ReceivePushNotificationsForNewLoginRequests" xml:space="preserve">
+    <value>Recibir notificaciones push para nuevas solicitudes de iniciar sesión</value>
+  </data>
+  <data name="NoThanks" xml:space="preserve">
+    <value>No, gracias</value>
+  </data>
+  <data name="ConfimLogInAttempForX" xml:space="preserve">
+    <value>Confirmar intento de inicio de sesión para {0}</value>
+  </data>
+  <data name="AllNotifications" xml:space="preserve">
+    <value>Todas las notificaciones</value>
+  </data>
+  <data name="PasswordType" xml:space="preserve">
+    <value>Tipo de contraseña</value>
+  </data>
+  <data name="WhatWouldYouLikeToGenerate" xml:space="preserve">
+    <value>¿Qué desea generar?</value>
+  </data>
+  <data name="UsernameType" xml:space="preserve">
+    <value>Tipo de nombre de usuario</value>
+  </data>
+  <data name="PlusAddressedEmail" xml:space="preserve">
+    <value>Dirección adicional de correo electrónico</value>
+  </data>
+  <data name="CatchAllEmail" xml:space="preserve">
+    <value>Captura todos los correos</value>
+  </data>
+  <data name="ForwardedEmailAlias" xml:space="preserve">
+    <value>Alias de correo reenviado</value>
+  </data>
+  <data name="RandomWord" xml:space="preserve">
+    <value>Palabra aleatoria</value>
+  </data>
+  <data name="EmailRequiredParenthesis" xml:space="preserve">
+    <value>Email (obligatorio)</value>
+  </data>
+  <data name="DomainNameRequiredParenthesis" xml:space="preserve">
+    <value>Nombre de dominio (requerido)</value>
+  </data>
+  <data name="APIKeyRequiredParenthesis" xml:space="preserve">
+    <value>Clave API (requerida)</value>
+  </data>
+  <data name="Service" xml:space="preserve">
+    <value>Servicio</value>
+  </data>
+  <data name="AddyIo" xml:space="preserve">
+    <value>addy.io</value>
+    <comment>"addy.io" is the product name and should not be translated.</comment>
+  </data>
+  <data name="FirefoxRelay" xml:space="preserve">
+    <value>Firefox Relay</value>
+    <comment>"Firefox Relay" is the product name and should not be translated.</comment>
+  </data>
+  <data name="SimpleLogin" xml:space="preserve">
+    <value>SimpleLogin</value>
+    <comment>"SimpleLogin" is the product name and should not be translated.</comment>
+  </data>
+  <data name="DuckDuckGo" xml:space="preserve">
+    <value>DuckDuckGo</value>
+    <comment>"DuckDuckGo" is the product name and should not be translated.</comment>
+  </data>
+  <data name="Fastmail" xml:space="preserve">
+    <value>Fastmail</value>
+    <comment>"Fastmail" is the product name and should not be translated.</comment>
+  </data>
+  <data name="ForwardEmail" xml:space="preserve">
+    <value>ForwardEmail</value>
+    <comment>"ForwardEmail" is the product name and should not be translated.</comment>
+  </data>
+  <data name="APIAccessToken" xml:space="preserve">
+    <value>Token de acceso API</value>
+  </data>
+  <data name="AreYouSureYouWantToOverwriteTheCurrentUsername" xml:space="preserve">
+    <value>¿Está seguro que desea sobrescribir el nombre de usuario actual?</value>
+  </data>
+  <data name="GenerateUsername" xml:space="preserve">
+    <value>Generar nombre de usuario</value>
+  </data>
+  <data name="EmailType" xml:space="preserve">
+    <value>Tipo de Email</value>
+  </data>
+  <data name="WebsiteRequired" xml:space="preserve">
+    <value>Sitio web (requerido)</value>
+  </data>
+  <data name="UnknownXErrorMessage" xml:space="preserve">
+    <value>Ha ocurrido un error desconocido {0}.</value>
+  </data>
+  <data name="PlusAddressedEmailDescription" xml:space="preserve">
+    <value>Utilice las opciones de alias de su proveedor de correo electrónico</value>
+  </data>
+  <data name="CatchAllEmailDescription" xml:space="preserve">
+    <value>Utilice la bandeja de entrada catch-all configurada por su dominio.</value>
+  </data>
+  <data name="ForwardedEmailDescription" xml:space="preserve">
+    <value>Generar un alias de correo electrónico con un servicio de reenvío externo.</value>
+  </data>
+  <data name="Random" xml:space="preserve">
+    <value>Aleatorio</value>
+  </data>
+  <data name="ConnectToWatch" xml:space="preserve">
+    <value>Conectar al reloj</value>
+  </data>
+  <data name="AccessibilityServiceDisclosure" xml:space="preserve">
+    <value>Revelación del servicio de accesibilidad</value>
+  </data>
+  <data name="AccessibilityDisclosureText" xml:space="preserve">
+    <value>Bitwarden utiliza el Servicio de Accesibilidad para buscar campos de inicio de sesión en aplicaciones y sitios web, establecer los identificadores de campo apropiados para introducir un nombre de usuario y contraseña cuando se encuentre una coincidencia para la aplicación o el sitio. No almacenamos ninguna de las informaciones presentadas por el servicio, tampoco intentamos controlar ningún elemento en pantalla más allá de la introducción de credenciales de texto.</value>
+  </data>
+  <data name="Accept" xml:space="preserve">
+    <value>Aceptar</value>
+  </data>
+  <data name="Decline" xml:space="preserve">
+    <value>Rechazar</value>
+  </data>
+  <data name="LoginRequestHasAlreadyExpired" xml:space="preserve">
+    <value>La solicitud de acceso ya ha caducado.</value>
+  </data>
+  <data name="LoginAttemptFromXDoYouWantToSwitchToThisAccount" xml:space="preserve">
+    <value>Intento de inicio de sesión desde:
+{0}
+¿Desea cambiar a esta cuenta?</value>
+  </data>
+  <data name="NewAroundHere" xml:space="preserve">
+    <value>¿Nuevo por aquí?</value>
+  </data>
+  <data name="GetMasterPasswordwordHint" xml:space="preserve">
+    <value>Obtener pista de contraseña maestra</value>
+  </data>
+  <data name="LoggingInAsXOnY" xml:space="preserve">
+    <value>Iniciando sesión como {0} en {1}</value>
+  </data>
+  <data name="NotYou" xml:space="preserve">
+    <value>¿No eres tú?</value>
+  </data>
+  <data name="LogInWithMasterPassword" xml:space="preserve">
+    <value>Iniciar sesión con contraseña maestra</value>
+  </data>
+  <data name="LogInWithAnotherDevice" xml:space="preserve">
+    <value>Iniciar sesión con otro dispositivo</value>
+  </data>
+  <data name="LogInInitiated" xml:space="preserve">
+    <value>Inicio de sesión en proceso</value>
+  </data>
+  <data name="ANotificationHasBeenSentToYourDevice" xml:space="preserve">
+    <value>Se ha enviado una notificación a tu dispositivo.</value>
+  </data>
+  <data name="PleaseMakeSureYourVaultIsUnlockedAndTheFingerprintPhraseMatchesOnTheOtherDevice" xml:space="preserve">
+    <value>Por favor, asegúrese de que su caja fuerte está desbloqueada y la frase de huella dactilar coincide en el otro dispositivo.</value>
+  </data>
+  <data name="ResendNotification" xml:space="preserve">
+    <value>Enviar nueva notificación</value>
+  </data>
+  <data name="NeedAnotherOption" xml:space="preserve">
+    <value>¿Necesitas otra opción?</value>
+  </data>
+  <data name="ViewAllLoginOptions" xml:space="preserve">
+    <value>Ver todas las opciones de inicio de sesión</value>
+  </data>
+  <data name="ThisRequestIsNoLongerValid" xml:space="preserve">
+    <value>Esta solicitud ya no es válida</value>
+  </data>
+  <data name="PendingLogInRequests" xml:space="preserve">
+    <value>Solicitudes de acceso pendientes</value>
+  </data>
+  <data name="DeclineAllRequests" xml:space="preserve">
+    <value>Rechazar todas las solicitudes</value>
+  </data>
+  <data name="AreYouSureYouWantToDeclineAllPendingLogInRequests" xml:space="preserve">
+    <value>¿Está seguro de que desea rechazar todas las solicitudes de inicio de sesión pendientes?</value>
+  </data>
+  <data name="RequestsDeclined" xml:space="preserve">
+    <value>Solicitudes rechazadas</value>
+  </data>
+  <data name="NoPendingRequests" xml:space="preserve">
+    <value>No hay solicitudes pendientes</value>  
+  </data>
+  <data name="EnableCamerPermissionToUseTheScanner" xml:space="preserve">
+    <value>Habilitar el permiso de la cámara para usar el escáner</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+  <data name="LanguageChangeXDescription" xml:space="preserve">
+    <value>El idioma se ha cambiado a {0}. Por favor, reinicia la aplicación para aplicar los cambios</value>
+  </data>
+  <data name="LanguageChangeRequiresAppRestart" xml:space="preserve">
+    <value>El cambio de idioma requiere reiniciar la aplicación</value>
+  </data>
+  <data name="DefaultSystem" xml:space="preserve">
+    <value>Por defecto (Sistema)</value>
+  </data>
+  <data name="Important" xml:space="preserve">
+    <value>Importante</value>
+  </data>
+  <data name="YourMasterPasswordCannotBeRecoveredIfYouForgetItXCharactersMinimum" xml:space="preserve">
+    <value>Tu contraseña maestra no se puede recuperar si la olvidas! {0} caracteres como mínimo.</value>
+  </data>
+  <data name="WeakMasterPassword" xml:space="preserve">
+    <value>Contraseña maestra débil</value>
+  </data>
+  <data name="WeakPasswordIdentifiedUseAStrongPasswordToProtectYourAccount" xml:space="preserve">
+    <value>Contraseña débil identificada. Utilice una contraseña fuerte para proteger su cuenta. ¿Está seguro de que desea utilizar una contraseña débil?</value>
+  </data>
+  <data name="Weak" xml:space="preserve">
+    <value>Débil</value>
+  </data>
+  <data name="Good" xml:space="preserve">
+    <value>Bueno</value>
+  </data>
+  <data name="Strong" xml:space="preserve">
+    <value>Fuerte</value>
+  </data>
+  <data name="CheckKnownDataBreachesForThisPassword" xml:space="preserve">
+    <value>Comprobar filtración de datos conocidos para esta contraseña</value>
+  </data>
+  <data name="ExposedMasterPassword" xml:space="preserve">
+    <value>Contraseña maestra comprometida</value>
+  </data>
+  <data name="PasswordFoundInADataBreachAlertDescription" xml:space="preserve">
+    <value>Contraseña encontrada en una violación de datos. Utilice una contraseña única para proteger su cuenta. ¿Está seguro de que desea utilizar una contraseña comprometida?</value>
+  </data>
+  <data name="WeakAndExposedMasterPassword" xml:space="preserve">
+    <value>Contraseña maestra débil y comprometida</value>
+  </data>
+  <data name="WeakPasswordIdentifiedAndFoundInADataBreachAlertDescription" xml:space="preserve">
+    <value>Contraseña débil encontrada en una violación de datos. Utilice una contraseña única para proteger su cuenta. ¿Está seguro de que desea utilizar una contraseña comprometida?</value>
+  </data>
+  <data name="OrganizationSsoIdentifierRequired" xml:space="preserve">
+    <value>Se requiere un inicio de sesión único de la organización.</value>
+  </data>
+  <data name="AddTheKeyToAnExistingOrNewItem" xml:space="preserve">
+    <value>Añadir la clave a un elemento existente o nuevo</value>
+  </data>
+  <data name="ThereAreNoItemsInYourVaultThatMatchX" xml:space="preserve">
+    <value>No hay artículos en su caja fuerte que coincidan con "{0}"</value>
+  </data>
+  <data name="SearchForAnItemOrAddANewItem" xml:space="preserve">
+    <value>Buscar un elemento o añadir uno nuevo</value>
+  </data>
+  <data name="ThereAreNoItemsThatMatchTheSearch" xml:space="preserve">
+    <value>No hay elementos que coincidan con la búsqueda</value>
+  </data>
+  <data name="US" xml:space="preserve">
+    <value>EE.UU.</value>
+  </data>
+  <data name="EU" xml:space="preserve">
+    <value>Unión Europea</value>
+  </data>
+  <data name="SelfHosted" xml:space="preserve">
+    <value>Autoalojado</value>
+  </data>
+  <data name="DataRegion" xml:space="preserve">
+    <value>Región de datos</value>
+  </data>
+  <data name="Region" xml:space="preserve">
+    <value>Región</value>
+  </data>
+  <data name="UpdateWeakMasterPasswordWarning" xml:space="preserve">
+    <value>Su contraseña maestra no cumple con una o más de las políticas de su organización. Para acceder a la caja fuerte, debe actualizar su contraseña maestra ahora. Proceder le desconectará de su sesión actual, requiriendo que vuelva a iniciar sesión. Las sesiones activas en otros dispositivos pueden seguir estando activas durante hasta una hora.</value>
+  </data>
+  <data name="CurrentMasterPassword" xml:space="preserve">
+    <value>Contraseña maestra actual</value>
+  </data>
+  <data name="LoggedIn" xml:space="preserve">
+    <value>Conectado</value>
+  </data>
+  <data name="ApproveWithMyOtherDevice" xml:space="preserve">
+    <value>Aprobar con mi otro dispositivo</value>
+  </data>
+  <data name="RequestAdminApproval" xml:space="preserve">
+    <value>Solicitar aprobación del administrador</value>
+  </data>
+  <data name="ApproveWithMasterPassword" xml:space="preserve">
+    <value>Aprobar con contraseña maestra</value>
+  </data>
+  <data name="TurnOffUsingPublicDevice" xml:space="preserve">
+    <value>Deshabilitar usando un dispositivo público</value>
+  </data>
+  <data name="RememberThisDevice" xml:space="preserve">
+    <value>Recordar este dispositivo</value>
+  </data>
+  <data name="Passkey" xml:space="preserve">
+    <value>Passkey</value>
+  </data>
+  <data name="Passkeys" xml:space="preserve">
+    <value>Passkeys</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>Aplicación</value>
+  </data>
+  <data name="YouCannotEditPasskeyApplicationBecauseItWouldInvalidateThePasskey" xml:space="preserve">
+    <value>No puedes editar la aplicación de contraseñas maestras porque podría invalidar la contraseña maestra</value>
+  </data>
+  <data name="PasskeyWillNotBeCopied" xml:space="preserve">
+    <value>La contraseña maestra no será copiada</value>
+  </data>
+  <data name="ThePasskeyWillNotBeCopiedToTheClonedItemDoYouWantToContinueCloningThisItem" xml:space="preserve">
+    <value>La contraseña maestra no será copiada al elemento clonado.
+¿Deseas continuar clonando este elemento?</value>
+  </data>
+  <data name="CopyApplication" xml:space="preserve">
+    <value>Copiar aplicación</value>
+  </data>
+  <data name="AvailableForTwoStepLogin" xml:space="preserve">
+    <value>Disponible para inicio de sesión en dos pasos</value>
+  </data>
+  <data name="MasterPasswordRePromptHelp" xml:space="preserve">
+    <value>Ayuda de volver a pedir contraseña maestra</value>
+  </data>
+  <data name="UnlockingMayFailDueToInsufficientMemoryDecreaseYourKDFMemorySettingsToResolve" xml:space="preserve">
+    <value>El desbloqueo puede fallar por falta de memoria. Disminuye los ajustes de memoria KDF o configura el desbloqueo biométrico para resolverlo.</value>
+  </data>
+  <data name="InvalidAPIKey" xml:space="preserve">
+    <value>Clave API no válida</value>
+  </data>
+  <data name="InvalidAPIToken" xml:space="preserve">
+    <value>Token de API no válido</value>
+  </data>
+  <data name="AdminApprovalRequested" xml:space="preserve">
+    <value>Aprobación del administrador solicitada</value>
+  </data>
+  <data name="YourRequestHasBeenSentToYourAdmin" xml:space="preserve">
+    <value>Tu solicitud ha sido enviada a tu administrador.</value>
+  </data>
+  <data name="YouWillBeNotifiedOnceApproved" xml:space="preserve">
+    <value>Se te notificará una vez aprobada. </value>
+  </data>
+  <data name="TroubleLoggingIn" xml:space="preserve">
+    <value>¿Problema para iniciar sesión?</value>
+  </data>
+  <data name="LoggingInAsX" xml:space="preserve">
+    <value>Iniciando sesión como {0}</value>
+  </data>
+  <data name="VaultTimeoutActionChangedToLogOut" xml:space="preserve">
+    <value>Acción después del tiempo de espera de la caja fuerte cambiado a cerrar sesión</value>
+  </data>
+  <data name="BlockAutoFill" xml:space="preserve">
+    <value>Bloquear autocompletar</value>
+  </data>
+  <data name="AutoFillWillNotBeOfferedForTheseURIs" xml:space="preserve">
+    <value>Autocompletar no se ofrecerá para estas URLs.</value>
+  </data>
+  <data name="NewBlockedURI" xml:space="preserve">
+    <value>Nueva URI bloqueada</value>
+  </data>
+  <data name="URISaved" xml:space="preserve">
+    <value>URI guardada</value>
+  </data>
+  <data name="InvalidFormatUseHttpsHttpOrAndroidApp" xml:space="preserve">
+    <value>Formato no válido. Use https://, http://, o androidapp://</value>
+    <comment>https://, http://, androidapp:// should not be translated</comment>
+  </data>
+  <data name="EditURI" xml:space="preserve">
+    <value>Editar URI</value>
+  </data>
+  <data name="EnterURI" xml:space="preserve">
+    <value>Escribir URI</value>
+  </data>
+  <data name="FormatXSeparateMultipleURIsWithAComma" xml:space="preserve">
+    <value>Formato: {0}. Separar múltiples URIs con una coma.</value>
+  </data>
+  <data name="FormatX" xml:space="preserve">
+    <value>Formato: {0}</value>
+  </data>
+  <data name="InvalidURI" xml:space="preserve">
+    <value>URI no válida</value>
+  </data>
+  <data name="URIRemoved" xml:space="preserve">
+    <value>URI eliminada</value>
+  </data>
+  <data name="ThereAreNoBlockedURIs" xml:space="preserve">
+    <value>No hay URIs bloqueadas</value>
+  </data>
+  <data name="TheURIXIsAlreadyBlocked" xml:space="preserve">
+    <value>El URI {0} ya está bloqueada</value>
+  </data>
+  <data name="CannotEditMultipleURIsAtOnce" xml:space="preserve">
+    <value>No se pueden editar múltiples URIs a la vez</value>
+  </data>
+  <data name="LoginApproved" xml:space="preserve">
+    <value>Inicio de sesión aprobado</value>
+  </data>
+  <data name="LogInWithDeviceMustBeSetUpInTheSettingsOfTheBitwardenAppNeedAnotherOption" xml:space="preserve">
+    <value>Iniciar sesión con el dispositivo debe configurarse en los ajustes de la aplicación Bitwarden. ¿Necesitas otra opción?</value>
+  </data>
+  <data name="LogInWithDevice" xml:space="preserve">
+    <value>Iniciar sesión con el dispositivo</value>
+  </data>
+  <data name="LoggingInOn" xml:space="preserve">
+    <value>Iniciando sesión en</value>
+  </data>
+  <data name="Vault" xml:space="preserve">
+    <value>Caja fuerte</value>
+  </data>
+  <data name="Appearance" xml:space="preserve">
+    <value>Apariencia</value>
+  </data>
+  <data name="AccountSecurity" xml:space="preserve">
+    <value>Seguridad de la cuenta</value>
+  </data>
+  <data name="BitwardenHelpCenter" xml:space="preserve">
+    <value>Centro de ayuda de Bitwarden</value>
+  </data>
+  <data name="ContactBitwardenSupport" xml:space="preserve">
+    <value>Contactar al soporte de Bitwarden</value>
+  </data>
+  <data name="CopyAppInformation" xml:space="preserve">
+    <value>Copiar información de la aplicación</value>
+  </data>
+  <data name="SyncNow" xml:space="preserve">
+    <value>Sincronizar ahora</value>
+  </data>
+  <data name="UnlockOptions" xml:space="preserve">
+    <value>Opciónes de desbloqueo</value>
+  </data>
+  <data name="SessionTimeout" xml:space="preserve">
+    <value>Tiempo de espera de sesión</value>
+  </data>
+  <data name="SessionTimeoutAction" xml:space="preserve">
+    <value>Acción de tiempo de espera de sesión</value>
+  </data>
+  <data name="AccountFingerprintPhrase" xml:space="preserve">
+    <value>Frase de huella digital de su cuenta</value>
+    <comment>A 'fingerprint phrase' is a unique word phrase (similar to a passphrase) that a user can use to authenticate their public key with another user, for the purposes of sharing.</comment>
+  </data>
+  <data name="OneHourAndOneMinute" xml:space="preserve">
+    <value>Una hora y un minuto</value>
+  </data>
+  <data name="OneHourAndXMinute" xml:space="preserve">
+    <value>Una hora y {0} minutos</value>
+  </data>
+  <data name="XHoursAndOneMinute" xml:space="preserve">
+    <value>{0} horas y un minuto</value>
+  </data>
+  <data name="XHoursAndYMinutes" xml:space="preserve">
+    <value>{0} horas y {1} minutos</value>
+  </data>
+  <data name="XHours" xml:space="preserve">
+    <value>{0} horas</value>
+  </data>
+  <data name="AutofillServicesExplanationLong" xml:space="preserve">
+    <value>El Framework de Autofill de Android se utiliza para ayudar a rellenar información de inicio de sesión en otras aplicaciones en tu dispositivo.</value>
+  </data>
+  <data name="UseInlineAutofillExplanationLong" xml:space="preserve">
+    <value>Utilice el autocompletado en línea si tu teclado seleccionado lo soporta. De otra manera, utilice la superposición por defecto.</value>
+  </data>
+  <data name="AdditionalOptions" xml:space="preserve">
+    <value>Opciones adicionales</value>
+  </data>
+  <data name="ContinueToWebApp" xml:space="preserve">
+    <value>¿Continuar a la aplicación web?</value>
+  </data>
+  <data name="ContinueToX" xml:space="preserve">
+    <value>¿Continuar a {0}?</value>
+    <comment>The parameter is an URL, like bitwarden.com.</comment>
+  </data>
+  <data name="ContinueToHelpCenter" xml:space="preserve">
+    <value>¿Continuar al centro de ayuda?</value>
+  </data>
+  <data name="ContinueToContactSupport" xml:space="preserve">
+    <value>¿Continuar con el servicio de asistencia?</value>
+  </data>
+  <data name="ContinueToAppStore" xml:space="preserve">
+    <value>¿Continuar a la App Store?</value>
+  </data>
+  <data name="TwoStepLoginDescriptionLong" xml:space="preserve">
+    <value>Haz tu cuenta más segura al configurar el inicio de sesión en dos pasos en la aplicación web de Bitwarden.</value>
+  </data>
+  <data name="ChangeMasterPasswordDescriptionLong" xml:space="preserve">
+    <value>Puedes cambiar tu contraseña maestra en la aplicación web de Bitwarden.</value>
+  </data>
+  <data name="YouCanImportDataToYourVaultOnX" xml:space="preserve">
+    <value>Puedes importar datos a tu caja fuerte en {0}.</value>
+    <comment>The parameter is an URL, like vault.bitwarden.com.</comment>
+  </data>
+  <data name="LearnMoreAboutHowToUseBitwardenOnTheHelpCenter" xml:space="preserve">
+    <value>Más información sobre cómo usar Bitwarden en el centro de Ayuda.</value>
+  </data>
+  <data name="ContactSupportDescriptionLong" xml:space="preserve">
+    <value>¿No encuentras lo que estás buscando? Contacta con el soporte de Bitwarden en bitwarden.com.</value>
+  </data>
+  <data name="ExploreMoreFeaturesOfYourBitwardenAccountOnTheWebApp" xml:space="preserve">
+    <value>Explora más características de tu cuenta de Bitwarden en la aplicación web.</value>
+  </data>
+  <data name="LearnAboutOrganizationsDescriptionLong" xml:space="preserve">
+    <value>Bitwarden te permite compartir tus elementos de la caja fuerte con otros utilizando una organización. Más información en el sitio web de bitwarden.com.</value>
+  </data>
+  <data name="RateAppDescriptionLong" xml:space="preserve">
+    <value>Ayuda a otros a averiguar si Bitwarden es correcto para ellos. Visita la tienda de aplicaciones y deja una calificación ahora.</value>
+  </data>
+  <data name="DefaultDarkThemeDescriptionLong" xml:space="preserve">
+    <value>Elige el tema oscuro a usar cuando el modo oscuro de tu dispositivo esté en uso</value>
+  </data>
+  <data name="CreatedXY" xml:space="preserve">
+    <value>Creado {0}, {1}</value>
+    <comment>To state the date/time in which the cipher was created: Created 03/21/2023, 09:25 AM. First parameter is the date and the second parameter is the time.</comment>
+  </data>
+  <data name="TooManyAttempts" xml:space="preserve">
+    <value>Demasiados intentos</value>
+  </data>
+  <data name="AccountLoggedOutBiometricExceeded" xml:space="preserve">
+    <value>Sesión de la cuenta cerrada.</value>
+  </data>
+  <data name="YourOrganizationPermissionsWereUpdatedRequeringYouToSetAMasterPassword" xml:space="preserve">
+    <value>Los permisos de su organización han sido actualizados, requiriendo que establezca una contraseña maestra.</value>
+  </data>
+  <data name="YourOrganizationRequiresYouToSetAMasterPassword" xml:space="preserve">
+    <value>Tu organización requiere que establezcas una contraseña maestra.</value> 
+  </data>
+  <data name="SetUpAnUnlockOptionToChangeYourVaultTimeoutAction" xml:space="preserve">
+    <value>Set up an unlock option to change your vault timeout action.</value>
   </data>
 </root>

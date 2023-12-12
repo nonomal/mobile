@@ -1,31 +1,46 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Bit.App.Resources;
 using Bit.Core.Abstractions;
+using Bit.Core.Enums;
 using Bit.Core.Utilities;
-using Xamarin.Forms;
+using Xamarin.CommunityToolkit.ObjectModel;
 
 namespace Bit.App.Pages
 {
     public class EnvironmentPageViewModel : BaseViewModel
     {
         private readonly IEnvironmentService _environmentService;
+        readonly LazyResolve<ILogger> _logger = new LazyResolve<ILogger>("logger");
 
         public EnvironmentPageViewModel()
         {
             _environmentService = ServiceContainer.Resolve<IEnvironmentService>("environmentService");
 
             PageTitle = AppResources.Settings;
+            SubmitCommand = new AsyncCommand(SubmitAsync, onException: ex => OnSubmitException(ex), allowsMultipleExecutions: false);
+            Init();
+        }
+
+        public void Init()
+        {
+            if (_environmentService.SelectedRegion != Region.SelfHosted ||
+                _environmentService.BaseUrl == Region.US.BaseUrl() ||
+                _environmentService.BaseUrl == Region.EU.BaseUrl())
+            {
+                return;
+            }
+
             BaseUrl = _environmentService.BaseUrl;
             WebVaultUrl = _environmentService.WebVaultUrl;
             ApiUrl = _environmentService.ApiUrl;
             IdentityUrl = _environmentService.IdentityUrl;
             IconsUrl = _environmentService.IconsUrl;
             NotificationsUrls = _environmentService.NotificationsUrl;
-            SubmitCommand = new Command(async () => await SubmitAsync());
         }
 
-        public Command SubmitCommand { get; }
+        public ICommand SubmitCommand { get; }
         public string BaseUrl { get; set; }
         public string ApiUrl { get; set; }
         public string IdentityUrl { get; set; }
@@ -37,7 +52,12 @@ namespace Bit.App.Pages
 
         public async Task SubmitAsync()
         {
-            var resUrls = await _environmentService.SetUrlsAsync(new Core.Models.Data.EnvironmentUrlData
+            if (!ValidateUrls())
+            {
+                await Page.DisplayAlert(AppResources.AnErrorHasOccurred, AppResources.EnvironmentPageUrlsError, AppResources.Ok);
+                return;
+            }
+            var urls = new Core.Models.Data.EnvironmentUrlData
             {
                 Base = BaseUrl,
                 Api = ApiUrl,
@@ -45,7 +65,8 @@ namespace Bit.App.Pages
                 WebVault = WebVaultUrl,
                 Icons = IconsUrl,
                 Notifications = NotificationsUrls
-            });
+            };
+            var resUrls = await _environmentService.SetRegionAsync(urls.Region, urls);
 
             // re-set urls since service can change them, ex: prefixing https://
             BaseUrl = resUrls.Base;
@@ -56,6 +77,26 @@ namespace Bit.App.Pages
             NotificationsUrls = resUrls.Notifications;
 
             SubmitSuccessAction?.Invoke();
+        }
+
+        public bool ValidateUrls()
+        {
+            bool IsUrlValid(string url)
+            {
+                return string.IsNullOrEmpty(url) || Uri.IsWellFormedUriString(url, UriKind.RelativeOrAbsolute);
+            }
+
+            return IsUrlValid(BaseUrl)
+                && IsUrlValid(ApiUrl)
+                && IsUrlValid(IdentityUrl)
+                && IsUrlValid(WebVaultUrl)
+                && IsUrlValid(IconsUrl);
+        }
+
+        private void OnSubmitException(Exception ex)
+        {
+            _logger.Value.Exception(ex);
+            Page.DisplayAlert(AppResources.AnErrorHasOccurred, AppResources.GenericErrorMessage, AppResources.Ok);
         }
     }
 }

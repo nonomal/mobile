@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿using System.Text;
 using System.Threading.Tasks;
 using Bit.App.Abstractions;
 using Bit.App.Resources;
+using Bit.Core;
 using Bit.Core.Abstractions;
 using Bit.Core.Models.Domain;
 using Bit.Core.Utilities;
@@ -46,7 +45,11 @@ namespace Bit.App.Pages
         {
             get => _showPassword;
             set => SetProperty(ref _showPassword, value,
-                additionalPropertyNames: new[] { nameof(ShowPasswordIcon) });
+                additionalPropertyNames: new[]
+                {
+                    nameof(ShowPasswordIcon),
+                    nameof(PasswordVisibilityAccessibilityText)
+                });
         }
 
         public bool IsPolicyInEffect
@@ -67,12 +70,13 @@ namespace Bit.App.Pages
             set => SetProperty(ref _policy, value);
         }
 
-        public string ShowPasswordIcon => ShowPassword ? "" : "";
+        public string ShowPasswordIcon => ShowPassword ? BitwardenIcons.EyeSlash : BitwardenIcons.Eye;
+        public string PasswordVisibilityAccessibilityText => ShowPassword ? AppResources.PasswordIsVisibleTapToHide : AppResources.PasswordIsNotVisibleTapToShow;
         public string MasterPassword { get; set; }
         public string ConfirmMasterPassword { get; set; }
         public string Hint { get; set; }
 
-        public async Task InitAsync(bool forceSync = false)
+        public virtual async Task InitAsync(bool forceSync = false)
         {
             if (forceSync)
             {
@@ -142,8 +146,8 @@ namespace Bit.App.Pages
             }
             if (IsPolicyInEffect)
             {
-                var userInput = await GetPasswordStrengthUserInput();
-                var passwordStrength = _passwordGenerationService.PasswordStrength(MasterPassword, userInput);
+                var userInputs = _passwordGenerationService.GetPasswordStrengthUserInput(await _stateService.GetEmailAsync());
+                var passwordStrength = _passwordGenerationService.PasswordStrength(MasterPassword, userInputs);
                 if (!await _policyService.EvaluateMasterPassword(passwordStrength.Score, MasterPassword, Policy))
                 {
                     await _platformUtilsService.ShowDialogAsync(AppResources.MasterPasswordPolicyValidationMessage,
@@ -153,9 +157,9 @@ namespace Bit.App.Pages
             }
             else
             {
-                if (MasterPassword.Length < 8)
+                if (MasterPassword.Length < Constants.MasterPasswordMinimumChars)
                 {
-                    await _platformUtilsService.ShowDialogAsync(AppResources.MasterPasswordLengthValMessage,
+                    await _platformUtilsService.ShowDialogAsync(string.Format(AppResources.MasterPasswordLengthValMessageX, Constants.MasterPasswordMinimumChars),
                         AppResources.MasterPasswordPolicyValidationTitle, AppResources.Ok);
                     return false;
                 }
@@ -168,20 +172,6 @@ namespace Bit.App.Pages
             }
 
             return true;
-        }
-
-        private async Task<List<string>> GetPasswordStrengthUserInput()
-        {
-            var email = await _stateService.GetEmailAsync();
-            List<string> userInput = null;
-            var atPosition = email.IndexOf('@');
-            if (atPosition > -1)
-            {
-                var rx = new Regex("/[^A-Za-z0-9]/", RegexOptions.Compiled);
-                var data = rx.Split(email.Substring(0, atPosition).Trim().ToLower());
-                userInput = new List<string>(data);
-            }
-            return userInput;
         }
     }
 }

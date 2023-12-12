@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Web;
 using Bit.Core.Models.Domain;
+using Bit.Core.Services;
 using Newtonsoft.Json;
 
 namespace Bit.Core.Utilities
@@ -163,26 +166,37 @@ namespace Bit.Core.Utilities
 
         public static Dictionary<string, string> GetQueryParams(string urlString)
         {
-            var dict = new Dictionary<string, string>();
-            if (!Uri.TryCreate(urlString, UriKind.Absolute, out var uri) || string.IsNullOrWhiteSpace(uri.Query))
+            try
             {
-                return dict;
-            }
-            var pairs = uri.Query.Substring(1).Split('&');
-            foreach (var pair in pairs)
-            {
-                var parts = pair.Split('=');
-                if (parts.Length < 1)
+                if (Uri.TryCreate(urlString, UriKind.Absolute, out var uri))
                 {
-                    continue;
-                }
-                var key = System.Net.WebUtility.UrlDecode(parts[0]).ToLower();
-                if (!dict.ContainsKey(key))
-                {
-                    dict.Add(key, parts[1] == null ? string.Empty : System.Net.WebUtility.UrlDecode(parts[1]));
+                    return GetQueryParams(uri);
                 }
             }
-            return dict;
+            catch (Exception ex)
+            {
+                LoggerHelper.LogEvenIfCantBeResolved(ex);
+            }
+            return new Dictionary<string, string>();
+        }
+
+        public static Dictionary<string, string> GetQueryParams(Uri uri)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(uri.Query))
+                {
+                    return new Dictionary<string, string>();
+                }
+
+                var queryStringNameValueCollection = HttpUtility.ParseQueryString(uri.Query);
+                return queryStringNameValueCollection.AllKeys.Where(k => k != null).ToDictionary(k => k, k => queryStringNameValueCollection[k]);
+            }
+            catch (Exception ex)
+            {
+                LoggerHelper.LogEvenIfCantBeResolved(ex);
+            }
+            return new Dictionary<string, string>();
         }
 
         public static string SerializeJson(object obj, bool ignoreNulls = false)
@@ -248,6 +262,37 @@ namespace Bit.Core.Utilities
         public static T Clone<T>(T obj)
         {
             return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(obj));
+        }
+
+        public static string TextColorFromBgColor(string hexColor, int threshold = 166)
+        {
+            if (new ColorConverter().ConvertFromString(hexColor) is Color bgColor)
+            {
+                var luminance = bgColor.R * 0.299 + bgColor.G * 0.587 + bgColor.B * 0.114;
+                return luminance > threshold ? "#ff000000" : "#ffffffff";
+            }
+
+            return "#ff000000";
+        }
+
+        public static string StringToColor(string str, string fallback)
+        {
+            if (str == null)
+            {
+                return fallback;
+            }
+            var hash = 0;
+            for (var i = 0; i < str.Length; i++)
+            {
+                hash = str[i] + ((hash << 5) - hash);
+            }
+            var color = "#FF";
+            for (var i = 0; i < 3; i++)
+            {
+                var value = (hash >> (i * 8)) & 0xff;
+                color += Convert.ToString(value, 16).PadLeft(2, '0');
+            }
+            return color;
         }
     }
 }

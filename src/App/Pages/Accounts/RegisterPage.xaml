@@ -25,7 +25,7 @@
     </ContentPage.ToolbarItems>
 
     <ScrollView>
-        <StackLayout Spacing="20">
+        <StackLayout Spacing="10">
             <StackLayout StyleClass="box">
                 <StackLayout StyleClass="box-row">
                     <Label
@@ -35,7 +35,8 @@
                         x:Name="_email"
                         Text="{Binding Email}"
                         Keyboard="Email"
-                        StyleClass="box-value" />
+                        StyleClass="box-value"
+                        AutomationId="EmailAddressEntry"/>
                 </StackLayout>
                 <Grid StyleClass="box-row">
                     <Grid.RowDefinitions>
@@ -59,7 +60,8 @@
                         IsTextPredictionEnabled="False"
                         IsPassword="{Binding ShowPassword, Converter={StaticResource inverseBool}}"
                         Grid.Row="1"
-                        Grid.Column="0" />
+                        Grid.Column="0"
+                        AutomationId="MasterPasswordEntry"/>
                     <controls:IconButton
                         StyleClass="box-row-button, box-row-button-platform"
                         Text="{Binding ShowPasswordIcon}"
@@ -68,11 +70,24 @@
                         Grid.Column="1"
                         Grid.RowSpan="2"
                         AutomationProperties.IsInAccessibleTree="True"
-                        AutomationProperties.Name="{u:I18n ToggleVisibility}" />
+                        AutomationProperties.Name="{u:I18n ToggleVisibility}" 
+                        AutomationProperties.HelpText="{Binding PasswordVisibilityAccessibilityText}"
+                        AutomationId="PasswordVisibilityToggle"/>
                 </Grid>
                 <Label
-                    Text="{u:I18n MasterPasswordDescription}"
-                    StyleClass="box-footer-label" />
+                    StyleClass="box-sub-label"
+                    Margin="0,0,0,10">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{u:I18n Important}" TextColor="{DynamicResource InfoColor}"/>
+                                <Span Text=": " TextColor="{DynamicResource InfoColor}"/>
+                                <Span Text="{Binding MasterPasswordMininumCharactersDescription}" TextColor="{DynamicResource MutedColor}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                </Label>
+                <controls:PasswordStrengthProgressBar
+                    BindingContext="{Binding PasswordStrengthViewModel}"
+                    Margin="0,0"/>
             </StackLayout>
             <StackLayout StyleClass="box">
                 <Grid StyleClass="box-row">
@@ -97,7 +112,8 @@
                         IsTextPredictionEnabled="False"
                         IsPassword="{Binding ShowPassword, Converter={StaticResource inverseBool}}"
                         Grid.Row="1"
-                        Grid.Column="0" />
+                        Grid.Column="0"
+                        AutomationId="ConfirmMasterPasswordEntry"/>
                     <controls:IconButton
                         StyleClass="box-row-button, box-row-button-platform"
                         Text="{Binding ShowPasswordIcon}"
@@ -106,7 +122,9 @@
                         Grid.Column="1"
                         Grid.RowSpan="2"
                         AutomationProperties.IsInAccessibleTree="True"
-                        AutomationProperties.Name="{u:I18n ToggleVisibility}" />
+                        AutomationId="ConfirmPasswordVisibilityToggle"
+                        AutomationProperties.Name="{u:I18n ToggleVisibility}"
+                        AutomationProperties.HelpText="{Binding PasswordVisibilityAccessibilityText}" />
                 </Grid>
                 <StackLayout StyleClass="box-row">
                     <Label
@@ -117,20 +135,34 @@
                         Text="{Binding Hint}"
                         StyleClass="box-value"
                         ReturnType="Go"
-                        ReturnCommand="{Binding SubmitCommand}" />
+                        ReturnCommand="{Binding SubmitCommand}"
+                        AutomationId="MasterPasswordHintLabel" />
                 </StackLayout>
                 <Label
                     Text="{u:I18n MasterPasswordHintDescription}"
                     StyleClass="box-footer-label" />
             </StackLayout>
             <StackLayout StyleClass="box">
+                <StackLayout StyleClass="box-row, box-row-switch">
+                    <Switch
+                        IsToggled="{Binding CheckExposedMasterPassword}"
+                        StyleClass="box-value"
+                        HorizontalOptions="Start"
+                        Margin="0, 0, 10, 0"
+                        AutomationId="CheckExposedMasterPasswordToggle"/>
+                    <Label
+                        Text="{u:I18n CheckKnownDataBreachesForThisPassword}"
+                        StyleClass="box-footer-label"
+                        VerticalOptions="Center"/>
+                </StackLayout>
                 <StackLayout StyleClass="box-row, box-row-switch"
                             IsVisible="{Binding ShowTerms}">
                     <Switch
                         IsToggled="{Binding AcceptPolicies}"
                         StyleClass="box-value"
                         HorizontalOptions="Start"
-                        Margin="{Binding SwitchMargin}"/>
+                        Margin="0, 0, 10, 0"
+                        AutomationId="AcceptPoliciesToggle"/>
                     <Label StyleClass="box-footer-label"
                            HorizontalOptions="Fill">
                         <Label.FormattedText>

@@ -24,7 +24,8 @@
                 Priority="-1"
                 UseOriginalImage="True"
                 AutomationProperties.IsInAccessibleTree="True"
-                AutomationProperties.Name="{u:I18n Account}" />
+                AutomationProperties.Name="{u:I18n Account}"
+                AutomationId="AccountIconButton" />
     </ContentPage.ToolbarItems>
     
     <ContentPage.Resources>
@@ -45,7 +46,7 @@
                     <StackLayout StyleClass="box">
                         <Grid
                             StyleClass="box-row"
-                            IsVisible="{Binding PinLock}"
+                            IsVisible="{Binding PinEnabled}"
                             Padding="0, 10, 0, 0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -71,7 +72,8 @@
                                 Grid.Row="1"
                                 Grid.Column="0"
                                 ReturnType="Go"
-                                ReturnCommand="{Binding SubmitCommand}" />
+                                ReturnCommand="{Binding SubmitCommand}" 
+                                AutomationId="PinEntry" />
                             <controls:IconButton
                                 StyleClass="box-row-button, box-row-button-platform"
                                 Text="{Binding ShowPasswordIcon}"
@@ -80,12 +82,14 @@
                                 Grid.Column="1"
                                 Grid.RowSpan="2"
                                 AutomationProperties.IsInAccessibleTree="True"
-                                AutomationProperties.Name="{u:I18n ToggleVisibility}" />
+                                AutomationProperties.Name="{u:I18n ToggleVisibility}" 
+                                AutomationProperties.HelpText="{Binding PasswordVisibilityAccessibilityText}"
+                                AutomationId="PinVisibilityToggle" />
                         </Grid>
                         <Grid
                             x:Name="_passwordGrid"
                             StyleClass="box-row"
-                            IsVisible="{Binding PinLock, Converter={StaticResource inverseBool}}"
+                            IsVisible="{Binding PinEnabled, Converter={StaticResource inverseBool}}"
                             Padding="0, 10, 0, 0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -110,7 +114,8 @@
                                 Grid.Row="1"
                                 Grid.Column="0"
                                 ReturnType="Go"
-                                ReturnCommand="{Binding SubmitCommand}" />
+                                ReturnCommand="{Binding SubmitCommand}"
+                                AutomationId="MasterPasswordEntry" />
                             <controls:IconButton
                                 StyleClass="box-row-button, box-row-button-platform"
                                 Text="{Binding ShowPasswordIcon}"
@@ -119,7 +124,10 @@
                                 Grid.Column="1"
                                 Grid.RowSpan="2"
                                 AutomationProperties.IsInAccessibleTree="True"
-                                AutomationProperties.Name="{u:I18n ToggleVisibility}" />
+                                AutomationProperties.Name="{u:I18n ToggleVisibility}"
+                                AutomationProperties.HelpText="{Binding PasswordVisibilityAccessibilityText}"
+                                AutomationId="PasswordVisibilityToggle"
+                                />
                         </Grid>
                         <StackLayout
                             StyleClass="box-row"
@@ -135,7 +143,7 @@
                     </StackLayout>
                     <StackLayout Padding="10, 0">
                         <Label
-                            Text="{u:I18n BiometricInvalidated}"
+                            Text="{u:I18n AccountBiometricInvalidated}"
                             StyleClass="box-footer-label,text-danger,text-bold"
                             IsVisible="{Binding BiometricIntegrityValid, Converter={StaticResource inverseBool}}" />
                         <Button Text="{Binding BiometricButtonText}" Clicked="Biometric_Clicked"
@@ -145,7 +153,8 @@
                             x:Name="_unlockButton"
                             Text="{u:I18n Unlock}"
                             StyleClass="btn-primary"
-                            Clicked="Unlock_Clicked" />
+                            Clicked="Unlock_Clicked"
+                            AutomationId="UnlockVaultButton" />
                     </StackLayout>
                 </StackLayout>
             </ScrollView>

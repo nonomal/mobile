@@ -7,6 +7,7 @@ using Bit.App.Resources;
 using Bit.Core.Abstractions;
 using Bit.Core.Enums;
 using Bit.Core.Models.Data;
+using Bit.Core.Services;
 using Bit.Core.Utilities;
 using Xamarin.Forms;
 
@@ -21,14 +22,15 @@ namespace Bit.App.Pages
         private readonly IVaultTimeoutService _vaultTimeoutService;
         private readonly ICipherService _cipherService;
         private readonly IDeviceActionService _deviceActionService;
+        private readonly IPlatformUtilsService _platformUtilsService;
         private readonly GroupingsPageViewModel _vm;
         private readonly string _pageName;
 
         private PreviousPageInfo _previousPage;
 
         public GroupingsPage(bool mainPage, CipherType? type = null, string folderId = null,
-            string collectionId = null, string pageTitle = null, PreviousPageInfo previousPage = null,
-            bool deleted = false)
+            string collectionId = null, string pageTitle = null, string vaultFilterSelection = null,
+            PreviousPageInfo previousPage = null, bool deleted = false, bool showTotp = false)
         {
             _pageName = string.Concat(nameof(GroupingsPage), "_", DateTime.UtcNow.Ticks);
             InitializeComponent();
@@ -40,6 +42,7 @@ namespace Bit.App.Pages
             _vaultTimeoutService = ServiceContainer.Resolve<IVaultTimeoutService>("vaultTimeoutService");
             _cipherService = ServiceContainer.Resolve<ICipherService>("cipherService");
             _deviceActionService = ServiceContainer.Resolve<IDeviceActionService>("deviceActionService");
+            _platformUtilsService = ServiceContainer.Resolve<IPlatformUtilsService>("platformUtilsService");
             _vm = BindingContext as GroupingsPageViewModel;
             _vm.Page = this;
             _vm.MainPage = mainPage;
@@ -47,10 +50,15 @@ namespace Bit.App.Pages
             _vm.FolderId = folderId;
             _vm.CollectionId = collectionId;
             _vm.Deleted = deleted;
+            _vm.ShowTotp = showTotp;
             _previousPage = previousPage;
             if (pageTitle != null)
             {
                 _vm.PageTitle = pageTitle;
+            }
+            if (vaultFilterSelection != null)
+            {
+                _vm.VaultFilterDescription = vaultFilterSelection;
             }
 
             if (Device.RuntimePlatform == Device.iOS)
@@ -64,7 +72,7 @@ namespace Bit.App.Pages
                 ToolbarItems.Add(_lockItem);
                 ToolbarItems.Add(_exitItem);
             }
-            if (deleted)
+            if (deleted || showTotp)
             {
                 _absLayout.Children.Remove(_fab);
                 ToolbarItems.Remove(_addItem);
@@ -91,44 +99,58 @@ namespace Bit.App.Pages
 
             _broadcasterService.Subscribe(_pageName, async (message) =>
             {
-                if (message.Command == "syncStarted")
+                try
                 {
-                    Device.BeginInvokeOnMainThread(() => IsBusy = true);
-                }
-                else if (message.Command == "syncCompleted")
-                {
-                    await Task.Delay(500);
-                    Device.BeginInvokeOnMainThread(() =>
+                    if (message.Command == "syncStarted")
                     {
-                        IsBusy = false;
-                        if (_vm.LoadedOnce)
+                        Device.BeginInvokeOnMainThread(() => IsBusy = true);
+                    }
+                    else if (message.Command == "syncCompleted")
+                    {
+                        await Task.Delay(500);
+                        if (_vm.MainPage)
                         {
-                            var task = _vm.LoadAsync();
+                            _vm.AvatarImageSource = await GetAvatarImageSourceAsync();
                         }
-                    });
+                        Device.BeginInvokeOnMainThread(() =>
+                        {
+                            IsBusy = false;
+                            if (_vm.LoadedOnce)
+                            {
+                                var task = _vm.LoadAsync();
+                            }
+                        });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LoggerHelper.LogEvenIfCantBeResolved(ex);
                 }
             });
 
             await LoadOnAppearedAsync(_mainLayout, false, async () =>
             {
-                if (!_syncService.SyncInProgress || (await _cipherService.GetAllAsync()).Any())
+                if (_previousPage == null)
                 {
-                    try
+                    if (!_syncService.SyncInProgress || (await _cipherService.GetAllAsync()).Any())
                     {
-                        await _vm.LoadAsync();
+                        try
+                        {
+                            await _vm.LoadAsync();
+                        }
+                        catch (Exception e) when (e.Message.Contains("No key."))
+                        {
+                            await Task.Delay(1000);
+                            await _vm.LoadAsync();
+                        }
                     }
-                    catch (Exception e) when (e.Message.Contains("No key."))
+                    else
                     {
-                        await Task.Delay(1000);
-                        await _vm.LoadAsync();
-                    }
-                }
-                else
-                {
-                    await Task.Delay(5000);
-                    if (!_vm.Loaded)
-                    {
-                        await _vm.LoadAsync();
+                        await Task.Delay(5000);
+                        if (!_vm.Loaded)
+                        {
+                            await _vm.LoadAsync();
+                        }
                     }
                 }
                 await ShowPreviousPageAsync();
@@ -177,10 +199,11 @@ namespace Bit.App.Pages
             return false;
         }
 
-        protected override void OnDisappearing()
+        protected override async void OnDisappearing()
         {
             base.OnDisappearing();
             IsBusy = false;
+            _vm.StopCiphersTotpTick().FireAndForget();
             _broadcasterService.Unsubscribe(_pageName);
             _vm.DisableRefreshing();
             _accountAvatar?.OnDisappearing();
@@ -188,35 +211,54 @@ namespace Bit.App.Pages
 
         private async void RowSelected(object sender, SelectionChangedEventArgs e)
         {
-            ((ExtendedCollectionView)sender).SelectedItem = null;
-            if (!DoOnce())
+            try
             {
-                return;
-            }
-            if (!(e.CurrentSelection?.FirstOrDefault() is GroupingsPageListItem item))
-            {
-                return;
-            }
+                ((ExtendedCollectionView)sender).SelectedItem = null;
+                if (!DoOnce())
+                {
+                    return;
+                }
 
-            if (item.IsTrash)
-            {
-                await _vm.SelectTrashAsync();
+                if (e.CurrentSelection?.FirstOrDefault() is GroupingsPageTOTPListItem totpItem)
+                {
+                    await _vm.SelectCipherAsync(totpItem.Cipher);
+                    return;
+                }
+
+                if (!(e.CurrentSelection?.FirstOrDefault() is GroupingsPageListItem item))
+                {
+                    return;
+                }
+
+                if (item.IsTrash)
+                {
+                    await _vm.SelectTrashAsync();
+                }
+                else if (item.IsTotpCode)
+                {
+                    await _vm.SelectTotpCodesAsync();
+                }
+                else if (item.Cipher != null)
+                {
+                    await _vm.SelectCipherAsync(item.Cipher);
+                }
+                else if (item.Folder != null)
+                {
+                    await _vm.SelectFolderAsync(item.Folder);
+                }
+                else if (item.Collection != null)
+                {
+                    await _vm.SelectCollectionAsync(item.Collection);
+                }
+                else if (item.Type != null)
+                {
+                    await _vm.SelectTypeAsync(item.Type.Value);
+                }
             }
-            else if (item.Cipher != null)
+            catch (Exception ex)
             {
-                await _vm.SelectCipherAsync(item.Cipher);
-            }
-            else if (item.Folder != null)
-            {
-                await _vm.SelectFolderAsync(item.Folder);
-            }
-            else if (item.Collection != null)
-            {
-                await _vm.SelectCollectionAsync(item.Collection);
-            }
-            else if (item.Type != null)
-            {
-                await _vm.SelectTypeAsync(item.Type.Value);
+                LoggerHelper.LogEvenIfCantBeResolved(ex);
+                _platformUtilsService.ShowDialogAsync(AppResources.AnErrorHasOccurred, AppResources.GenericErrorMessage, AppResources.Ok).FireAndForget();
             }
         }
 
@@ -259,7 +301,7 @@ namespace Bit.App.Pages
             }
             if (!_vm.Deleted && DoOnce())
             {
-                var page = new AddEditPage(null, _vm.Type, _vm.FolderId, _vm.CollectionId);
+                var page = new CipherAddEditPage(null, _vm.Type, _vm.FolderId, _vm.CollectionId, _vm.GetVaultFilterOrgId());
                 await Navigation.PushModalAsync(new NavigationPage(page));
             }
         }
@@ -273,11 +315,11 @@ namespace Bit.App.Pages
             await _accountListOverlay.HideAsync();
             if (_previousPage.Page == "view" && !string.IsNullOrWhiteSpace(_previousPage.CipherId))
             {
-                await Navigation.PushModalAsync(new NavigationPage(new ViewPage(_previousPage.CipherId)));
+                await Navigation.PushModalAsync(new NavigationPage(new CipherDetailsPage(_previousPage.CipherId)));
             }
             else if (_previousPage.Page == "edit" && !string.IsNullOrWhiteSpace(_previousPage.CipherId))
             {
-                await Navigation.PushModalAsync(new NavigationPage(new AddEditPage(_previousPage.CipherId)));
+                await Navigation.PushModalAsync(new NavigationPage(new CipherAddEditPage(_previousPage.CipherId)));
             }
             _previousPage = null;
         }

@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <pages:BaseContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     x:Class="Bit.App.Pages.SendAddEditPage"
     xmlns:pages="clr-namespace:Bit.App.Pages"
     xmlns:u="clr-namespace:Bit.App.Utilities"
@@ -66,11 +67,12 @@
                             Margin="0, 12, 0, 0"
                             HasShadow="False"
                             BackgroundColor="Transparent"
-                            BorderColor="Accent">
+                            BorderColor="{DynamicResource PrimaryColor}">
                             <Label
                                 Text="{u:I18n SendDisabledWarning}"
                                 StyleClass="text-muted, text-sm, text-bold"
-                                HorizontalTextAlignment="Center" />
+                                HorizontalTextAlignment="Center"
+                                AutomationId="SendDisabledWarningMessageLabel" />
                         </Frame>
                         <Frame
                             IsVisible="{Binding SendOptionsPolicyInEffect}"
@@ -78,11 +80,12 @@
                             Margin="0, 12, 0, 0"
                             HasShadow="False"
                             BackgroundColor="Transparent"
-                            BorderColor="Accent">
+                            BorderColor="{DynamicResource PrimaryColor}">
                             <Label
                                 Text="{u:I18n SendOptionsPolicyInEffect}"
                                 StyleClass="text-muted, text-sm, text-bold"
-                                HorizontalTextAlignment="Center" />
+                                HorizontalTextAlignment="Center"
+                                AutomationId="SendOptionsPolicyInEffectLabel" />
                         </Frame>
                         <StackLayout StyleClass="box-row">
                             <Label
@@ -92,7 +95,8 @@
                                 x:Name="_nameEntry"
                                 Text="{Binding Send.Name}"
                                 IsEnabled="{Binding SendEnabled}"
-                                StyleClass="box-value" />
+                                StyleClass="box-value"
+                                AutomationId="SendNameEntry" />
                             <Label
                                 Text="{u:I18n NameInfo}"
                                 StyleClass="box-footer-label"
@@ -121,6 +125,8 @@
                                     Clicked="FileType_Clicked"
                                     AutomationProperties.IsInAccessibleTree="True"
                                     AutomationProperties.Name="{u:I18n File}"
+                                    AutomationProperties.HelpText="{Binding FileTypeAccessibilityLabel}"
+                                    AutomationId="SendFileButton"
                                     Grid.Column="0">
                                 </Button>
                                 <Button
@@ -132,6 +138,8 @@
                                     Clicked="TextType_Clicked"
                                     AutomationProperties.IsInAccessibleTree="True"
                                     AutomationProperties.Name="{u:I18n Text}"
+                                    AutomationProperties.HelpText="{Binding TextTypeAccessibilityLabel}"
+                                    AutomationId="SendTextButton"
                                     Grid.Column="1">
                                 </Button>
                             </Grid>
@@ -149,12 +157,14 @@
                                     Text="{Binding Send.File.FileName, Mode=OneWay}"
                                     StyleClass="box-value"
                                     VerticalTextAlignment="Center"
-                                    HorizontalOptions="StartAndExpand" />
+                                    HorizontalOptions="StartAndExpand"
+                                    AutomationId="SendFileNameLabel" />
                                 <Label
                                     Text="{Binding Send.File.SizeName, Mode=OneWay}"
                                     StyleClass="box-sub-label"
                                     HorizontalTextAlignment="End"
-                                    VerticalTextAlignment="Center" />
+                                    VerticalTextAlignment="Center"
+                                    AutomationId="SendFileSizeLabel" />
                             </StackLayout>
                             <StackLayout
                                 IsVisible="{Binding EditMode, Converter={StaticResource inverseBool}}"
@@ -165,26 +175,29 @@
                                     LineBreakMode="CharacterWrap"
                                     StyleClass="text-sm, text-muted"
                                     HorizontalOptions="FillAndExpand"
-                                    HorizontalTextAlignment="Center" />
+                                    HorizontalTextAlignment="Start"
+                                    AutomationId="SendNoFileChosenLabel" />
                                 <Label
                                     IsVisible="{Binding FileName, Converter={StaticResource notNull}}"
                                     Text="{Binding FileName}"
                                     LineBreakMode="CharacterWrap"
                                     StyleClass="text-sm, text-muted"
                                     HorizontalOptions="FillAndExpand"
-                                    HorizontalTextAlignment="Center" />
+                                    HorizontalTextAlignment="Start"
+                                    AutomationId="SendCurrentFileNameLabel" />
                                 <Button
                                     Text="{u:I18n ChooseFile}"
                                     IsVisible="{Binding IsAddFromShare, Converter={StaticResource inverseBool}}"
                                     IsEnabled="{Binding SendEnabled}"
                                     StyleClass="box-button-row"
-                                    Clicked="ChooseFile_Clicked" />
+                                    Clicked="ChooseFile_Clicked"
+                                    AutomationId="SendChooseFileButton" />
                                 <Label
                                     Margin="0, 5, 0, 0"
                                     Text="{u:I18n MaxFileSize}"
                                     StyleClass="text-sm, text-muted"
                                     HorizontalOptions="FillAndExpand"
-                                    HorizontalTextAlignment="Center" />
+                                    HorizontalTextAlignment="Start" />
                             </StackLayout>
                             <Label
                                 Text="{u:I18n TypeFileInfo}"
@@ -204,7 +217,8 @@
                                 Text="{Binding Send.Text.Text}"
                                 IsEnabled="{Binding SendEnabled}"
                                 StyleClass="box-value"
-                                Margin="{Binding EditorMargins}" 
+                                Margin="{Binding EditorMargins}"
+                                AutomationId="SendTextContentEntry"
                                 effects:ScrollEnabledEffect.IsScrollEnabled="false" >
                                 <Editor.Behaviors>
                                     <behaviors:EditorPreventAutoBottomScrollingOnFocusedBehavior ParentScrollView="{x:Reference _scrollView}" />
@@ -232,46 +246,40 @@
                                     IsToggled="{Binding Send.Text.Hidden}"
                                     IsEnabled="{Binding SendEnabled}"
                                     HorizontalOptions="End"
-                                    Margin="10,0,0,0" />
+                                    Margin="10,0,0,0"
+                                    AutomationId="SendHideTextByDefaultToggle" />
                             </StackLayout>
                         </StackLayout>
                         <StackLayout
-                            StyleClass="box-row, box-row-switch">
-                            <Label
-                                Text="{Binding ShareOnSaveText}"
-                                StyleClass="box-label-regular"
-                                VerticalOptions="Center"
-                                HorizontalOptions="StartAndExpand" />
-                            <Switch
-                                IsToggled="{Binding ShareOnSave}"
-                                IsEnabled="{Binding SendEnabled}"
-                                HorizontalOptions="End"
-                                Margin="10,0,0,0" />
-                        </StackLayout>
-                        <StackLayout
                             Orientation="Horizontal"
-                            Spacing="0">
+                            Spacing="0"
+                            xct:TouchEffect.Command="{Binding ToggleOptionsCommand}"
+                            AutomationProperties.IsInAccessibleTree="True"
+                            AutomationProperties.Name="{Binding OptionsAccessilibityText}">
                             <Button
                                 Text="{u:I18n Options}"
                                 x:Name="_btnOptions"
                                 StyleClass="box-row-button"
                                 TextColor="{DynamicResource PrimaryColor}"
                                 Margin="0"
-                                Clicked="ToggleOptions_Clicked"/>
+                                AutomationProperties.IsInAccessibleTree="False"
+                                AutomationId="SendShowHideOptionsButton" />
                             <controls:IconButton
                                 x:Name="_btnOptionsUp"
                                 Text="{Binding Source={x:Static core:BitwardenIcons.ChevronUp}}"
                                 StyleClass="box-row-button"
                                 TextColor="{DynamicResource PrimaryColor}"
-                                Clicked="ToggleOptions_Clicked"
-                                IsVisible="{Binding ShowOptions}" />
+                                IsVisible="{Binding ShowOptions}" 
+                                AutomationProperties.IsInAccessibleTree="False"
+                                AutomationId="SendOptionsDisplayed" />
                             <controls:IconButton
                                 x:Name="_btnOptionsDown"
                                 Text="{Binding Source={x:Static core:BitwardenIcons.AngleDown}}"
                                 StyleClass="box-row-button"
                                 TextColor="{DynamicResource PrimaryColor}"
-                                Clicked="ToggleOptions_Clicked"
-                                IsVisible="{Binding ShowOptions, Converter={StaticResource inverseBool}}" />
+                                IsVisible="{Binding ShowOptions, Converter={StaticResource inverseBool}}" 
+                                AutomationProperties.IsInAccessibleTree="False"
+                                AutomationId="SendOptionsHidden" />
                         </StackLayout>
                         <StackLayout IsVisible="{Binding ShowOptions}">
                             <StackLayout
@@ -288,7 +296,8 @@
                                     IsEnabled="{Binding SendEnabled}"
                                     StyleClass="box-value"
                                     AutomationProperties.IsInAccessibleTree="True"
-                                    AutomationProperties.Name="{u:I18n DeletionTime}" />
+                                    AutomationProperties.Name="{u:I18n DeletionTime}"
+                                    AutomationId="SendDeletionOptionsPicker" />
                                 <Grid
                                     IsVisible="{Binding ShowDeletionCustomPickers}"
                                     Margin="0,5,0,0">
@@ -297,19 +306,21 @@
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <controls:ExtendedDatePicker
-                                        NullableDate="{Binding DeletionDate, Mode=TwoWay}"
+                                        NullableDate="{Binding DeletionDateTimeViewModel.Date, Mode=TwoWay}"
                                         Format="d"
                                         IsEnabled="{Binding SendEnabled}"
                                         AutomationProperties.IsInAccessibleTree="True"
                                         AutomationProperties.Name="{u:I18n DeletionDate}"
-                                        Grid.Column="0" />
+                                        Grid.Column="0"
+                                        AutomationId="SendCustomDeletionDatePicker" />
                                     <controls:ExtendedTimePicker
-                                        NullableTime="{Binding DeletionTime, Mode=TwoWay}"
+                                        NullableTime="{Binding DeletionDateTimeViewModel.Time, Mode=TwoWay}"
                                         Format="t"
                                         IsEnabled="{Binding SendEnabled}"
                                         AutomationProperties.IsInAccessibleTree="True"
                                         AutomationProperties.Name="{u:I18n DeletionTime}"
-                                        Grid.Column="1" />
+                                        Grid.Column="1"
+                                        AutomationId="SendCustomDeletionTimePicker" />
                                 </Grid>
                                 <Label
                                     Text="{u:I18n DeletionDateInfo}"
@@ -328,7 +339,8 @@
                                     IsEnabled="{Binding SendEnabled}"
                                     StyleClass="box-value"
                                     AutomationProperties.IsInAccessibleTree="True"
-                                    AutomationProperties.Name="{u:I18n ExpirationTime}" />
+                                    AutomationProperties.Name="{u:I18n ExpirationTime}"
+                                    AutomationId="SendExpirationOptionsPicker" />
                                 <Grid
                                     IsVisible="{Binding ShowExpirationCustomPickers}"
                                     Margin="0,5,0,0">
@@ -337,21 +349,23 @@
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <controls:ExtendedDatePicker
-                                        NullableDate="{Binding ExpirationDate, Mode=TwoWay}"
+                                        NullableDate="{Binding ExpirationDateTimeViewModel.Date, Mode=TwoWay}"
                                         PlaceHolder="mm/dd/yyyy"
                                         Format="d"
                                         IsEnabled="{Binding SendEnabled}"
                                         AutomationProperties.IsInAccessibleTree="True"
                                         AutomationProperties.Name="{u:I18n ExpirationDate}"
-                                        Grid.Column="0" />
+                                        Grid.Column="0"
+                                        AutomationId="SendCustomExpirationDatePicker" />
                                     <controls:ExtendedTimePicker
-                                        NullableTime="{Binding ExpirationTime, Mode=TwoWay}"
+                                        NullableTime="{Binding ExpirationDateTimeViewModel.Time, Mode=TwoWay}"
                                         PlaceHolder="--:-- --"
                                         Format="t"
                                         IsEnabled="{Binding SendEnabled}"
                                         AutomationProperties.IsInAccessibleTree="True"
                                         AutomationProperties.Name="{u:I18n ExpirationTime}"
-                                        Grid.Column="1" />
+                                        Grid.Column="1"
+                                        AutomationId="SendCustomExpirationTimePicker" />
                                 </Grid>
                                 <StackLayout
                                     Orientation="Horizontal"
@@ -368,7 +382,8 @@
                                         FontSize="{Binding SegmentedButtonFontSize}"
                                         IsEnabled="{Binding SendEnabled}"
                                         StyleClass="box-row-button"
-                                        Clicked="ClearExpirationDate_Clicked" />
+                                        Clicked="ClearExpirationDate_Clicked"
+                                        AutomationId="SendClearExpirationDateButton" />
                                 </StackLayout>
                             </StackLayout>
                             <StackLayout
@@ -387,13 +402,15 @@
                                         Keyboard="Numeric"
                                         MaxLength="9"
                                         TextChanged="OnMaxAccessCountTextChanged"
-                                        HorizontalOptions="FillAndExpand" />
+                                        HorizontalOptions="FillAndExpand"
+                                        AutomationId="SendMaxAccessCountEntry" />
                                     <controls:ExtendedStepper
                                         x:Name="_maxAccessCountStepper"
                                         Value="{Binding MaxAccessCount}"
                                         Maximum="999999999"
                                         IsEnabled="{Binding SendEnabled}"
-                                        Margin="10,0,0,0" />
+                                        Margin="10,0,0,0"
+                                        AutomationId="SendMaxAccessCountStepper" />
                                 </StackLayout>
                                 <Label
                                     Text="{u:I18n MaximumAccessCountInfo}"
@@ -413,7 +430,8 @@
                                     <Label
                                         Text="{Binding Send.AccessCount, Mode=OneWay}"
                                         StyleClass="box-label"
-                                        VerticalTextAlignment="Center" />
+                                        VerticalTextAlignment="Center"
+                                        AutomationId="SendCurrentAccessCountLabel" />
                                 </StackLayout>
                             </StackLayout>
                             <StackLayout
@@ -430,7 +448,8 @@
                                         StyleClass="box-value"
                                         IsSpellCheckEnabled="False"
                                         IsTextPredictionEnabled="False"
-                                        HorizontalOptions="FillAndExpand" />
+                                        HorizontalOptions="FillAndExpand"
+                                        AutomationId="SendNewPasswordEntry" />
                                     <controls:IconButton
                                         IsEnabled="{Binding SendEnabled}"
                                         StyleClass="box-row-button, box-row-button-platform"
@@ -438,7 +457,9 @@
                                         Command="{Binding TogglePasswordCommand}"
                                         Margin="10,0,0,0"
                                         AutomationProperties.IsInAccessibleTree="True"
-                                        AutomationProperties.Name="{u:I18n ToggleVisibility}" />
+                                        AutomationProperties.Name="{u:I18n ToggleVisibility}"
+                                        AutomationProperties.HelpText="{Binding PasswordVisibilityAccessibilityText}"
+                                        AutomationId="SendShowHidePasswordButton" />
                                 </StackLayout>
                                 <Label
                                     Text="{u:I18n PasswordInfo}"
@@ -457,7 +478,8 @@
                                     IsEnabled="{Binding SendEnabled}"
                                     StyleClass="box-value"
                                     Margin="{Binding EditorMargins}"
-                                    effects:ScrollEnabledEffect.IsScrollEnabled="false" >
+                                    effects:ScrollEnabledEffect.IsScrollEnabled="false"
+                                    AutomationId="SendNotesEntry">
                                     <Editor.Behaviors>
                                         <behaviors:EditorPreventAutoBottomScrollingOnFocusedBehavior ParentScrollView="{x:Reference _scrollView}" />
                                     </Editor.Behaviors>
@@ -485,7 +507,8 @@
                                     IsToggled="{Binding Send.HideEmail}"
                                     IsEnabled="{Binding DisableHideEmailControl, Converter={StaticResource inverseBool}}"
                                     HorizontalOptions="End"
-                                    Margin="10,0,0,0" />
+                                    Margin="10,0,0,0"
+                                    AutomationId="SendHideEmailSwitch" />
                             </StackLayout>
                             <StackLayout
                                 StyleClass="box-row, box-row-switch"
@@ -499,7 +522,8 @@
                                     IsToggled="{Binding Send.Disabled}"
                                     IsEnabled="{Binding SendEnabled}"
                                     HorizontalOptions="End"
-                                    Margin="10,0,0,0" />
+                                    Margin="10,0,0,0"
+                                    AutomationId="SendDeactivateSwitch" />
                             </StackLayout>
                         </StackLayout>
 

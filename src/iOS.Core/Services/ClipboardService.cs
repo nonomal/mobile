@@ -16,8 +16,10 @@ namespace Bit.iOS.Core.Services
             _stateService = stateService;
         }
 
-        public async Task CopyTextAsync(string text, int expiresInMs = -1)
+        public async Task CopyTextAsync(string text, int expiresInMs = -1, bool isSensitive = true)
         {
+            // isSensitive is only used by Android for now
+
             int clearSeconds = -1;
             if (expiresInMs < 0)
             {

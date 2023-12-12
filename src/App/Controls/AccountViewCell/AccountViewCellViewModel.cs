@@ -13,7 +13,8 @@ namespace Bit.App.Controls
         public AccountViewCellViewModel(AccountView accountView)
         {
             AccountView = accountView;
-            AvatarImageSource = new AvatarImageSource(AccountView.Name, AccountView.Email);
+            AvatarImageSource = ServiceContainer.Resolve<IAvatarImageSourcePool>("avatarImageSourcePool")
+                ?.GetOrCreateAvatar(AccountView.UserId, AccountView.Name, AccountView.Email, AccountView.AvatarColor);
         }
 
         public AccountView AccountView
@@ -35,7 +36,7 @@ namespace Bit.App.Controls
 
         public bool ShowHostname
         {
-            get => !string.IsNullOrWhiteSpace(AccountView.Hostname) && AccountView.Hostname != "vault.bitwarden.com";
+            get => !string.IsNullOrWhiteSpace(AccountView.Hostname);
         }
 
         public bool IsActive

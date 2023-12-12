@@ -126,15 +126,32 @@
     <comment>Max 80 characters</comment>
   </data>
   <data name="FullDesciption" xml:space="preserve">
-    <value>Bitwarden is the easiest and safest way to store all of your logins and passwords while conveniently keeping them synced between all of your devices.
+    <value>„Bitwarden, Inc.“ е компанията-майка на „8bit Solutions LLC“.
 
-Password theft is a serious problem. The websites and apps that you use are under attack every day. Security breaches occur and your passwords are stolen. When you reuse the same passwords across apps and websites hackers can easily access your email, bank, and other important accounts.
+ОПРЕДЕЛЕН КАТО НАЙ-ДОБРИЯТ УПРАВИТЕЛ НА ПАРОЛИ ОТ „THE VERGE“, „U.S. NEWS &amp; WORLD REPORT“, „CNET“ И ОЩЕ.
 
-Security experts recommend that you use a different, randomly generated password for every account that you create. But how do you manage all those passwords? Bitwarden makes it easy for you to create, store, and access your passwords.
+Управлявайте, съхранявайте, защитавайте и споделяйте неограничен брой пароли на неограничен брой устройства  от всяка точка на света. Битуорден предоставя решение за управление на паролите с отворен код, от което може да се възползва всеки, било то у дома, на работа или на път.
 
-Bitwarden stores all of your logins in an encrypted vault that syncs across all of your devices. Since it's fully encrypted before it ever leaves your device, only you have access to your data. Not even the team at Bitwarden can read your data, even if we wanted to. Your data is sealed with AES-256 bit encryption, salted hashing, and PBKDF2 SHA-256.
+Създавайте сигурни, уникални и случайни пароли според изискванията за сигурност на всеки уеб сайт, който посещавате.
 
-Bitwarden is 100% open source software. The source code for Bitwarden is hosted on GitHub and everyone is free to review, audit, and contribute to the Bitwarden codebase.</value>
+С Изпращанията на Битуорден можете незабавно да предавате шифрована информация под формата на файлове и обикновен текст – директно и с всекиго.
+
+Битуорден предлага планове за екипи и големи фирми, така че служителите в компаниите да могат безопасно да споделят пароли помежду си.
+
+Защо да изберете Битуорден:
+
+Шифроване от най-висока класа
+Паролите са защитени със сложен шифър „от край до край“ (AES-256 bit, salted hashtag и PBKDF2 SHA-256), така че данните Ви остават да са защитени и неприкосновени.
+
+Вграден генератор на пароли
+Създавайте сигурни, уникални и случайни пароли според изискванията за сигурност на всеки уеб сайт, който посещавате.
+
+Глобални преводи
+Битуорден е преведен на 40 езика и този брой не спира да расте, благодарение на нашата глобална общност.
+
+Приложения за всяка система
+Защитете и споделяйте поверителните данни от своя трезор в Битуорден от всеки браузър, мобилно устройство или компютър.
+</value>
   <comment>Max 4000 characters</comment>
   </data>
   <data name="FeatureGraphic" xml:space="preserve">

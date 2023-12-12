@@ -29,7 +29,7 @@
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
     <OptimizePNGs>true</OptimizePNGs>
-    <MtouchExtraArgs>--nodevcodeshare --http-message-handler=NSUrlSessionHandler</MtouchExtraArgs>
+    <MtouchExtraArgs>--nodevcodeshare --http-message-handler=NSUrlSessionHandler -gcc_flags "-L${ProjectDir}/../../lib/ios -largon2 -force_load ${ProjectDir}/../../lib/ios/libargon2.a"</MtouchExtraArgs>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
@@ -41,7 +41,7 @@
     <MtouchLink>Full</MtouchLink>
     <MtouchArch>x86_64</MtouchArch>
     <ConsolePause>false</ConsolePause>
-    <MtouchExtraArgs>--nodevcodeshare --http-message-handler=NSUrlSessionHandler --linkskip=BitwardeniOS --linkskip=BitwardeniOSCore --linkskip=BitwardeniOSAutofill --linkskip=BitwardeniOSExtension --linkskip=BitwardenApp --linkskip=BitwardenCore --linkskip=LiteDB --linkskip=CsvHelper --linkskip=BitwardeniOSShareExtension </MtouchExtraArgs>
+    <MtouchExtraArgs>--nodevcodeshare --http-message-handler=NSUrlSessionHandler --linkskip=BitwardeniOS --linkskip=BitwardeniOSCore --linkskip=BitwardeniOSAutofill --linkskip=BitwardeniOSExtension --linkskip=BitwardenApp --linkskip=BitwardenCore --linkskip=LiteDB --linkskip=CsvHelper --linkskip=BitwardeniOSShareExtension -gcc_flags "-L${ProjectDir}/../../lib/ios -largon2 -force_load ${ProjectDir}/../../lib/ios/libargon2.a"</MtouchExtraArgs>
     <OptimizePNGs>true</OptimizePNGs>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
@@ -60,7 +60,7 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>None</MtouchLink>
     <MtouchFloat32>false</MtouchFloat32>
-    <MtouchExtraArgs>--nodevcodeshare --http-message-handler=NSUrlSessionHandler</MtouchExtraArgs>
+    <MtouchExtraArgs>--nodevcodeshare --http-message-handler=NSUrlSessionHandler -gcc_flags "-L${ProjectDir}/../../lib/ios -largon2 -force_load ${ProjectDir}/../../lib/ios/libargon2.a"</MtouchExtraArgs>
     <OptimizePNGs>true</OptimizePNGs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
@@ -74,7 +74,7 @@
     <CodesignKey>iPhone Developer</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>Full</MtouchLink>
-    <MtouchExtraArgs>--nodevcodeshare --http-message-handler=NSUrlSessionHandler --linkskip=BitwardeniOS --linkskip=BitwardeniOSCore --linkskip=BitwardeniOSAutofill --linkskip=BitwardeniOSExtension --linkskip=BitwardenApp --linkskip=BitwardenCore --linkskip=LiteDB --linkskip=CsvHelper --linkskip=BitwardeniOSShareExtension</MtouchExtraArgs>
+    <MtouchExtraArgs>--nodevcodeshare --http-message-handler=NSUrlSessionHandler --linkskip=BitwardeniOS --linkskip=BitwardeniOSCore --linkskip=BitwardeniOSAutofill --linkskip=BitwardeniOSExtension --linkskip=BitwardenApp --linkskip=BitwardenCore --linkskip=LiteDB --linkskip=CsvHelper --linkskip=BitwardeniOSShareExtension -gcc_flags "-L${ProjectDir}/../../lib/ios -largon2 -force_load ${ProjectDir}/../../lib/ios/libargon2.a"</MtouchExtraArgs>
     <OptimizePNGs>true</OptimizePNGs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
@@ -89,8 +89,7 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>Full</MtouchLink>
-    <MtouchExtraArgs>--nodevcodeshare --http-message-handler=NSUrlSessionHandler --linkskip=BitwardeniOS --linkskip=BitwardeniOSCore --linkskip=BitwardeniOSAutofill --linkskip=BitwardeniOSExtension --linkskip=BitwardenApp --linkskip=BitwardenCore --linkskip=LiteDB --linkskip=CsvHelper --linkskip=BitwardeniOSShareExtension</MtouchExtraArgs>
-    <OptimizePNGs>true</OptimizePNGs>
+    <MtouchExtraArgs>--nodevcodeshare --http-message-handler=NSUrlSessionHandler --linkskip=BitwardeniOS --linkskip=BitwardeniOSCore --linkskip=BitwardeniOSAutofill --linkskip=BitwardeniOSExtension --linkskip=BitwardenApp --linkskip=BitwardenCore --linkskip=LiteDB --linkskip=CsvHelper --linkskip=BitwardeniOSShareExtension -gcc_flags "-L${ProjectDir}/../../lib/ios -largon2 -force_load ${ProjectDir}/../../lib/ios/libargon2.a"</MtouchExtraArgs>
     <CodesignProvision>Automatic:AdHoc</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
@@ -104,7 +103,7 @@
     <CodesignProvision>Automatic:AppStore</CodesignProvision>
     <CodesignKey>iPhone Distribution</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <MtouchExtraArgs>--nodevcodeshare --http-message-handler=NSUrlSessionHandler --linkskip=BitwardeniOS --linkskip=BitwardeniOSCore --linkskip=BitwardeniOSAutofill --linkskip=BitwardeniOSExtension --linkskip=BitwardenApp --linkskip=BitwardenCore --linkskip=LiteDB --linkskip=CsvHelper --linkskip=BitwardeniOSShareExtension</MtouchExtraArgs>
+    <MtouchExtraArgs>--nodevcodeshare --http-message-handler=NSUrlSessionHandler --linkskip=BitwardeniOS --linkskip=BitwardeniOSCore --linkskip=BitwardeniOSAutofill --linkskip=BitwardeniOSExtension --linkskip=BitwardenApp --linkskip=BitwardenCore --linkskip=LiteDB --linkskip=CsvHelper --linkskip=BitwardeniOSShareExtension -gcc_flags "-L${ProjectDir}/../../lib/ios -largon2 -force_load ${ProjectDir}/../../lib/ios/libargon2.a"</MtouchExtraArgs>
     <OptimizePNGs>true</OptimizePNGs>
     <MtouchLink>Full</MtouchLink>
   </PropertyGroup>
@@ -116,7 +115,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <MtouchExtraArgs>--nodevcodeshare --http-message-handler=NSUrlSessionHandler --linkskip=BitwardeniOS --linkskip=BitwardeniOSCore --linkskip=BitwardeniOSAutofill --linkskip=BitwardeniOSExtension --linkskip=BitwardenApp --linkskip=BitwardenCore --linkskip=LiteDB --linkskip=CsvHelper</MtouchExtraArgs>
+    <MtouchExtraArgs>--nodevcodeshare --http-message-handler=NSUrlSessionHandler --linkskip=BitwardeniOS --linkskip=BitwardeniOSCore --linkskip=BitwardeniOSAutofill --linkskip=BitwardeniOSExtension --linkskip=BitwardenApp --linkskip=BitwardenCore --linkskip=LiteDB --linkskip=CsvHelper -gcc_flags "-L${ProjectDir}/../../lib/ios -largon2 -force_load ${ProjectDir}/../../lib/ios/libargon2.a"</MtouchExtraArgs>
     <OptimizePNGs>true</OptimizePNGs>
     <MtouchLink>SdkOnly</MtouchLink>
   </PropertyGroup>
@@ -133,6 +132,15 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
     <AppExtensionDebugBundleId />
+  </PropertyGroup>
+  <PropertyGroup>
+    <WatchAppBuildPath Condition=" '$(Configuration)' == 'Debug' ">$(Home)/Library/Developer/Xcode/DerivedData/bitwarden-cbtqsueryycvflfzbsoteofskiyr/Build/Products</WatchAppBuildPath>
+    <WatchAppBuildPath Condition=" '$(Configuration)' != 'Debug' ">$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..'))/watchOS/bitwarden.xcarchive/Products/Applications/bitwarden.app/Watch</WatchAppBuildPath>
+    <WatchAppBundle>Bitwarden.app</WatchAppBundle>
+    <WatchAppConfiguration Condition=" '$(Platform)' == 'iPhoneSimulator' ">watchsimulator</WatchAppConfiguration>
+    <WatchAppConfiguration Condition=" '$(Platform)' == 'iPhone' ">watchos</WatchAppConfiguration>
+    <WatchAppBundleFullPath Condition=" '$(Configuration)' == 'Debug' ">$(WatchAppBuildPath)/$(Configuration)-$(WatchAppConfiguration)/$(WatchAppBundle)</WatchAppBundleFullPath>
+    <WatchAppBundleFullPath Condition=" '$(Configuration)' != 'Debug' ">$(WatchAppBuildPath)/$(WatchAppBundle)</WatchAppBundleFullPath>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -171,6 +179,13 @@
     <BundleResource Include="Resources\generate.png" />
     <BundleResource Include="Resources\generate%402x.png" />
     <BundleResource Include="Resources\generate%403x.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\Contents.json" />
+    <ImageAsset Include="Resources\Assets.xcassets\empty_items_state.imageset\Empty-items-state-dark.pdf" />
+    <ImageAsset Include="Resources\Assets.xcassets\empty_items_state.imageset\Empty-items-state.pdf" />
+    <ImageAsset Include="Resources\Assets.xcassets\empty_items_state.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Assets.xcassets\empty_login_requests.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Assets.xcassets\empty_login_requests.imageset\empty_login_requests.pdf" />
+    <ImageAsset Include="Resources\Assets.xcassets\empty_login_requests.imageset\empty_login_requests_dark.pdf" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -183,7 +198,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Essentials">
-      <Version>1.7.2</Version>
+      <Version>1.8.0</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
@@ -406,4 +421,17 @@
     <Folder Include="Resources\Assets.xcassets\LaunchScreen.imageset\" />
     <Folder Include="Resources\Assets.xcassets\ic_warning.imageset\" />
   </ItemGroup>
+  <ItemGroup Condition=" '$(Configuration)' == 'Debug' AND Exists('$(WatchAppBundleFullPath)') ">
+      <_ResolvedWatchAppReferences Include="$(WatchAppBundleFullPath)" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(Configuration)' != 'Debug' AND '$(Platform)' != 'iPhoneSimulator' ">
+      <_ResolvedWatchAppReferences Include="$(WatchAppBundleFullPath)" />
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(_ResolvedWatchAppReferences)' != '' ">
+      <CodesignExtraArgs>--deep</CodesignExtraArgs>
+  </PropertyGroup>
+  <Target Name="PrintWatchAppBundleStatus" BeforeTargets="Build">
+      <Message Text="WatchAppBundleFullPath: '$(WatchAppBundleFullPath)' exists" Condition=" Exists('$(WatchAppBundleFullPath)') " />
+      <Message Text="WatchAppBundleFullPath: '$(WatchAppBundleFullPath)' does NOT exist" Condition=" !Exists('$(WatchAppBundleFullPath)') " />
+  </Target>
 </Project>

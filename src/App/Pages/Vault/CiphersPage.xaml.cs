@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
-using Bit.App.Abstractions;
 using Bit.App.Controls;
+using Bit.App.Models;
 using Bit.App.Resources;
+using Bit.Core.Abstractions;
 using Bit.Core.Models.View;
 using Bit.Core.Utilities;
 using Xamarin.Forms;
@@ -12,19 +13,23 @@ namespace Bit.App.Pages
     public partial class CiphersPage : BaseContentPage
     {
         private readonly string _autofillUrl;
-        private readonly IDeviceActionService _deviceActionService;
+        private readonly IAutofillHandler _autofillHandler;
 
         private CiphersPageViewModel _vm;
         private bool _hasFocused;
 
-        public CiphersPage(Func<CipherView, bool> filter, string pageTitle = null, string autofillUrl = null, bool deleted = false)
+        public CiphersPage(Func<CipherView, bool> filter,
+            string pageTitle = null,
+            string vaultFilterSelection = null,
+            bool deleted = false,
+            AppOptions appOptions = null)
         {
             InitializeComponent();
             _vm = BindingContext as CiphersPageViewModel;
             _vm.Page = this;
-            _vm.Filter = filter;
-            _vm.AutofillUrl = _autofillUrl = autofillUrl;
-            _vm.Deleted = deleted;
+            _autofillUrl = appOptions?.Uri;
+            _vm.Prepare(filter, deleted, appOptions);
+
             if (pageTitle != null)
             {
                 _vm.PageTitle = string.Format(AppResources.SearchGroup, pageTitle);
@@ -33,6 +38,7 @@ namespace Bit.App.Pages
             {
                 _vm.PageTitle = AppResources.SearchVault;
             }
+            _vm.VaultFilterDescription = vaultFilterSelection;
 
             if (Device.RuntimePlatform == Device.iOS)
             {
@@ -46,7 +52,7 @@ namespace Bit.App.Pages
             {
                 NavigationPage.SetTitleView(this, _titleLayout);
             }
-            _deviceActionService = ServiceContainer.Resolve<IDeviceActionService>("deviceActionService");
+            _autofillHandler = ServiceContainer.Resolve<IAutofillHandler>();
         }
 
         public SearchBar SearchBar => _searchBar;
@@ -105,7 +111,7 @@ namespace Bit.App.Pages
             }
             else
             {
-                _deviceActionService.CloseAutofill();
+                _autofillHandler.CloseAutofill();
             }
         }
 

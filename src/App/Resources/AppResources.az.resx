@@ -209,7 +209,7 @@
     <value>GitHub repository-də problemi bildirin.</value>
   </data>
   <data name="FingerprintDirection" xml:space="preserve">
-    <value>Təsdiqləmək üçün barmaq izinizi istifadə edin.</value>
+    <value>Doğrulamaq üçün barmaq izinizi istifadə edin.</value>
   </data>
   <data name="Folder" xml:space="preserve">
     <value>Qovluq</value>
@@ -229,21 +229,21 @@
     <value>Qovluqlar</value>
   </data>
   <data name="FolderUpdated" xml:space="preserve">
-    <value>Qovluq yeniləndi.</value>
+    <value>Qovluq güncəlləndi.</value>
   </data>
   <data name="GoToWebsite" xml:space="preserve">
     <value>Veb sayta gedin</value>
     <comment>The button text that allows user to launch the website to their web browser.</comment>
   </data>
   <data name="HelpAndFeedback" xml:space="preserve">
-    <value>Kömək və əks əlaqə</value>
+    <value>Kömək və əks-əlaqə</value>
   </data>
   <data name="Hide" xml:space="preserve">
     <value>Gizlət</value>
     <comment>Hide a secret value that is currently shown (password).</comment>
   </data>
   <data name="InternetConnectionRequiredMessage" xml:space="preserve">
-    <value>Davam etməzdən əvvəl zəhmət olmasa internetə bağlanın.</value>
+    <value>Davam etməzdən əvvəl lütfən internetə bağlanın.</value>
     <comment>Description message for the alert when internet connection is required to continue.</comment>
   </data>
   <data name="InternetConnectionRequiredTitle" xml:space="preserve">
@@ -251,10 +251,10 @@
     <comment>Title for the alert when internet connection is required to continue.</comment>
   </data>
   <data name="InvalidMasterPassword" xml:space="preserve">
-    <value>Etibarsız ana parol. Yenidən sınayın.</value>
+    <value>Yararsız ana parol. Yenidən sınayın.</value>
   </data>
   <data name="InvalidPIN" xml:space="preserve">
-    <value>Etibarsız PIN. Yenidən sınayın.</value>
+    <value>Yararsız PIN. Yenidən sınayın.</value>
   </data>
   <data name="Launch" xml:space="preserve">
     <value>Başlat</value>
@@ -299,6 +299,10 @@
     <value>Anbarım</value>
     <comment>The title for the vault page.</comment>
   </data>
+  <data name="Authenticator" xml:space="preserve">
+    <value>Kimlik doğrulayıcı</value>
+    <comment>Authenticator TOTP feature</comment>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Ad</value>
     <comment>Label for an entity name.</comment>
@@ -330,7 +334,7 @@
     <comment>Message shown when interacting with the server</comment>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Tənzimləmələr</value>
+    <value>Ayarlar</value>
     <comment>The title for the settings page.</comment>
   </data>
   <data name="Show" xml:space="preserve">
@@ -372,16 +376,16 @@
   </data>
   <data name="ValueHasBeenCopied" xml:space="preserve">
     <value>{0} kopyalandı.</value>
-    <comment>Confirmation message after suceessfully copying a value to the clipboard.</comment>
+    <comment>Confirmation message after successfully copying a value to the clipboard.</comment>
   </data>
   <data name="VerifyFingerprint" xml:space="preserve">
-    <value>Barmaq izini təsdiqlə</value>
+    <value>Barmaq izini doğrula</value>
   </data>
   <data name="VerifyMasterPassword" xml:space="preserve">
-    <value>Ana parolu təsdiqlə</value>
+    <value>Ana parolu doğrula</value>
   </data>
   <data name="VerifyPIN" xml:space="preserve">
-    <value>PIN-i təsdiqlə</value>
+    <value>PIN-i doğrula</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Versiya</value>
@@ -391,9 +395,6 @@
   </data>
   <data name="VisitOurWebsite" xml:space="preserve">
     <value>Veb saytımızı ziyarət edin</value>
-  </data>
-  <data name="VisitOurWebsiteDescription" xml:space="preserve">
-    <value>Kömək almaq, xəbərlərə baxmaq, bizə e-poçt göndərmək və/və ya "Bitwarden"in necə istifadə edildiyini öyrənmək üçün veb saytımızı ziyarət edin.</value>
   </data>
   <data name="Website" xml:space="preserve">
     <value>Veb sayt</value>
@@ -412,7 +413,7 @@
     <value>Element əlavə et</value>
   </data>
   <data name="AppExtension" xml:space="preserve">
-    <value>Tətbiq genişləndirməsi</value>
+    <value>Tətbiq uzantısı</value>
   </data>
   <data name="AutofillAccessibilityDescription" xml:space="preserve">
     <value>Tətbiq və veb saytda giriş məlumatlarının avto-doldurulması üçün Bitwarden əlçatımlılıq xidmətini istifadə edin.</value>
@@ -424,10 +425,10 @@
     <value>Anlaşılmaz simvollardan çəkinin</value>
   </data>
   <data name="BitwardenAppExtension" xml:space="preserve">
-    <value>Bitwarden tətbiq genişləndirməsi</value>
+    <value>Bitwarden tətbiq uzantısı</value>
   </data>
   <data name="BitwardenAppExtensionAlert2" xml:space="preserve">
-    <value>Anbarınıza yeni hesab əlavə etməyin ən asan yolu, Bitwarden tətbiq genişləndirməsidir. Bu genişləndirmə haqqında daha ətraflı məlumat üçün "Tənzimləmələr" ekranına gedin.</value>
+    <value>Anbarınıza yeni hesab əlavə etməyin ən asan yolu, Bitwarden tətbiq uzantısıdır. Bu uzantı haqqında daha ətraflı məlumat üçün "Ayarlar" ekranına gedin.</value>
   </data>
   <data name="BitwardenAppExtensionDescription" xml:space="preserve">
     <value>Giriş məlumatlarının avto-doldurulması üçün Safari-də və digər tətbiqlərdə Bitwarden-i istifadə edin.</value>
@@ -446,9 +447,6 @@
   </data>
   <data name="ChangeMasterPassword" xml:space="preserve">
     <value>Ana parolu dəyişdir</value>
-  </data>
-  <data name="ChangePasswordConfirmation" xml:space="preserve">
-    <value>Ana parolunuzu bitwarden.com veb anbarında dəyişdirə bilərsiniz. İndi saytı ziyarət etmək istəyirsiniz?</value>
   </data>
   <data name="Close" xml:space="preserve">
     <value>Bağla</value>
@@ -473,13 +471,13 @@
     <value>Ana parol məsləhətini alacağınız hesabınızın e-poçt ünvanını daxil edin.</value>
   </data>
   <data name="ExntesionReenable" xml:space="preserve">
-    <value>Tətbiq genişləndirməsini təkrar fəallaşdır</value>
+    <value>Tətbiq uzantısını təkrar aktivləşdir</value>
   </data>
   <data name="ExtensionAlmostDone" xml:space="preserve">
     <value>Demək olar ki, hazırdır!</value>
   </data>
   <data name="ExtensionEnable" xml:space="preserve">
-    <value>Tətbiq genişləndirməsini fəallaşdır</value>
+    <value>Tətbiq uzantısını aktivləşdir</value>
   </data>
   <data name="ExtensionInSafari" xml:space="preserve">
     <value>Safari-də paylaş nişanını istifadə edərək Bitwarden-i tapın (məsləhət: Menyunun ən alt sətrinin sağ hissəsinə baxın).</value>
@@ -498,7 +496,7 @@
     <value>Safari və Chrome-da paylaş nişanını istifadə edərək Bitwarden-i tapın (məsləhət: Paylaş menyusunun ən alt sətrinin sağ hissəsinə baxın).</value>
   </data>
   <data name="ExtensionTapIcon" xml:space="preserve">
-    <value>Genişləndirməni başlatmaq üçün menyudakı Bitwarden nişanına toxunun.</value>
+    <value>Uzantını başlatmaq üçün menyudakı Bitwarden nişanına toxunun.</value>
   </data>
   <data name="ExtensionTurnOn" xml:space="preserve">
     <value>Safari və digər tətbiqlərdə Bitwarden-i işə salmaq üçün menyunun ən alt sətrindəki "daha çox" nişanına toxunun.</value>
@@ -516,13 +514,13 @@
     <value>Ana parolunuz üçün məsləhət alın</value>
   </data>
   <data name="ImportItems" xml:space="preserve">
-    <value>Elementləri idxal et</value>
+    <value>Elementləri daxilə köçür</value>
   </data>
   <data name="ImportItemsConfirmation" xml:space="preserve">
-    <value>bitwarden.com veb anbarından elementləri toplu formada idxal edə bilərsiniz. Veb saytı indi ziyarət etmək istəyirsiniz?</value>
+    <value>bitwarden.com veb anbarından elementləri toplu formada daxilə köçürə bilərsiniz. Veb saytı indi ziyarət etmək istəyirsiniz?</value>
   </data>
   <data name="ImportItemsDescription" xml:space="preserve">
-    <value>Digər parol idarəetmə tətbiqlərindəki elementləri cəld və toplu formada idxal edin.</value>
+    <value>Digər parol idarəetmə tətbiqlərindəki elementləri cəld və toplu formada daxilə köçürün.</value>
   </data>
   <data name="LastSync" xml:space="preserve">
     <value>Son eyniləşdirmə:</value>
@@ -555,14 +553,14 @@
     <value>Anbara müraciət vaxtının bitmə əməliyyatı</value>
   </data>
   <data name="VaultTimeoutLogOutConfirmation" xml:space="preserve">
-    <value>Çıxış edəndə, anbarınıza bütün müraciətiniz dayanacaq və vaxt bitməsindən sonra onlayn kimlik təsdiqləməsi tələb olunacaq. Bu tənzimləməni istifadə etmək istədiyinizə əminsiniz?</value>
+    <value>Çıxış edəndə, anbarınıza bütün müraciətiniz dayanacaq və vaxt bitməsindən sonra onlayn kimlik doğrulaması tələb olunacaq. Bu ayarı istifadə etmək istədiyinizə əminsiniz?</value>
   </data>
   <data name="LoggingIn" xml:space="preserve">
     <value>Giriş edilir...</value>
     <comment>Message shown when interacting with the server</comment>
   </data>
   <data name="LoginOrCreateNewAccount" xml:space="preserve">
-    <value>Təhlükəsiz anbarınıza müraciət etmək üçün giriş edin və ya yeni bir hesab yaradın.</value>
+    <value>Güvənli anbarınıza müraciət etmək üçün giriş edin və ya yeni bir hesab yaradın.</value>
   </data>
   <data name="Manage" xml:space="preserve">
     <value>İdarə et</value>
@@ -579,8 +577,8 @@
   <data name="MasterPasswordHintDescription" xml:space="preserve">
     <value>Ana parol məsləhəti, unutduğunuz parolu xatırlamağınıza kömək edir.</value>
   </data>
-  <data name="MasterPasswordLengthValMessage" xml:space="preserve">
-    <value>Ana parol ən azı 8 simvol uzunluğunda olmalıdır.</value>
+  <data name="MasterPasswordLengthValMessageX" xml:space="preserve">
+    <value>Ana parol ən azı {0} simvol uzunluğunda olmalıdır.</value>
   </data>
   <data name="MinNumbers" xml:space="preserve">
     <value>Minimum rəqəm</value>
@@ -591,10 +589,10 @@
     <comment>Minimum special characters for password generator settings</comment>
   </data>
   <data name="MoreSettings" xml:space="preserve">
-    <value>Daha çox tənzimləmə</value>
+    <value>Daha çox ayar</value>
   </data>
   <data name="MustLogInMainApp" xml:space="preserve">
-    <value>Genişləndirməni istifadə edə bilmək üçün Bitwarden tətbiqində giriş etməlisiniz.</value>
+    <value>Uzantını istifadə edə bilmək üçün Bitwarden tətbiqində giriş etməlisiniz.</value>
   </data>
   <data name="Never" xml:space="preserve">
     <value>Heç vaxt</value>
@@ -619,7 +617,7 @@
     <comment>Confirmation, like "Ok, I understand it"</comment>
   </data>
   <data name="OptionDefaults" xml:space="preserve">
-    <value>İlkin tənzimləmələr, əsas Bitwarden tətbiqinin parol yaratma alətindən tənzimlənir.</value>
+    <value>İlkin seçim dəyərləri, əsas Bitwarden tətbiqinin parol yaratma alətindən ayarlanır.</value>
   </data>
   <data name="Options" xml:space="preserve">
     <value>Seçimlər</value>
@@ -662,7 +660,7 @@
     <value>Anbarda axtar</value>
   </data>
   <data name="Security" xml:space="preserve">
-    <value>Təhlükəsizlik</value>
+    <value>Güvənlik</value>
   </data>
   <data name="Select" xml:space="preserve">
     <value>Seçin</value>
@@ -677,7 +675,7 @@
     <value>Element məlumatları</value>
   </data>
   <data name="ItemUpdated" xml:space="preserve">
-    <value>Element yeniləndi</value>
+    <value>Element güncəlləndi.</value>
   </data>
   <data name="Submitting" xml:space="preserve">
     <value>Göndərilir...</value>
@@ -703,9 +701,6 @@
   <data name="TwoStepLogin" xml:space="preserve">
     <value>İki mərhələli giriş</value>
   </data>
-  <data name="TwoStepLoginConfirmation" xml:space="preserve">
-    <value>İki mərhələli giriş, təhlükəsizlik açarı, kimlik təsdiqləyici tətbiq, SMS, telefon zəngi və ya e-poçt kimi digər cihazlarla girişinizi təsdiqləməyinizi tələb edərək hesabınızı daha da təhlükəsiz edir. İki mərhələli giriş, bitwarden.com veb anbarında fəallaşdırıla bilər. Veb saytı indi ziyarət etmək istəyirsiniz?</value>
-  </data>
   <data name="UnlockWith" xml:space="preserve">
     <value>{0} ilə kilidi açın</value>
   </data>
@@ -713,11 +708,11 @@
     <value>PIN kod ilə kilidi açın</value>
   </data>
   <data name="Validating" xml:space="preserve">
-    <value>Təsdiqlənir</value>
+    <value>Doğrulanır</value>
     <comment>Message shown when interacting with the server</comment>
   </data>
   <data name="VerificationCode" xml:space="preserve">
-    <value>Təsdiqləmə kodu</value>
+    <value>Doğrulama kodu</value>
   </data>
   <data name="ViewItem" xml:space="preserve">
     <value>Elementə bax</value>
@@ -726,14 +721,14 @@
     <value>Bitwarden veb anbarı</value>
   </data>
   <data name="Lost2FAApp" xml:space="preserve">
-    <value>Kimlik təsdiqləyici tətbiqini itirmisiniz?</value>
+    <value>Kimlik doğrulayıcı tətbiqini itirmisiniz?</value>
   </data>
   <data name="Items" xml:space="preserve">
     <value>Elementlər</value>
     <comment>Screen title</comment>
   </data>
   <data name="ExtensionActivated" xml:space="preserve">
-    <value>Genişləndirmə aktivləşdirildi!</value>
+    <value>Uzantı aktivləşdirildi!</value>
   </data>
   <data name="Icons" xml:space="preserve">
     <value>Nişanlar</value>
@@ -756,13 +751,13 @@
     <value>Anbarınızdakı bir elementi avto-doldurmaq üçün bu bildirişə toxunun.</value>
   </data>
   <data name="BitwardenAutofillServiceOpenAccessibilitySettings" xml:space="preserve">
-    <value>Əlçatımlılıq tənzimləmələrini açın</value>
+    <value>Əlçatımlılıq Ayarlarını aç</value>
   </data>
   <data name="BitwardenAutofillServiceStep1" xml:space="preserve">
     <value>1. Android əlçatımlılıq xidmətləri ekranında Xidmətlər başlığı altındakı "Bitwarden"ə toxunun.</value>
   </data>
   <data name="BitwardenAutofillServiceStep2" xml:space="preserve">
-    <value>2. Tənzimləməni açın və Olduya basaraq qəbul edin.</value>
+    <value>2. Ayarı açın və Olduya basaraq qəbul edin.</value>
   </data>
   <data name="Disabled" xml:space="preserve">
     <value>Sıradan çıxarıldı</value>
@@ -770,11 +765,17 @@
   <data name="Enabled" xml:space="preserve">
     <value>Fəallaşdırıldı</value>
   </data>
+  <data name="Off" xml:space="preserve">
+    <value>Bağlı</value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>Açıq</value>
+  </data>
   <data name="Status" xml:space="preserve">
     <value>Vəziyyət</value>
   </data>
   <data name="BitwardenAutofillServiceAlert2" xml:space="preserve">
-    <value>Anbarınıza yeni hesab əlavə etməyin ən asan yolu, Bitwarden avto-doldurma xidmətidir. Bu xidmət haqqında daha ətraflı məlumat üçün "Tənzimləmələr" ekranına gedin.</value>
+    <value>Anbarınıza yeni hesab əlavə etməyin ən asan yolu, Bitwarden avto-doldurma xidmətidir. Bu xidmət haqqında daha ətraflı məlumat üçün "Ayarlar" ekranına gedin.</value>
   </data>
   <data name="Autofill" xml:space="preserve">
     <value>Avto-doldurma</value>
@@ -805,15 +806,15 @@
     <comment>Message shown when trying to launch an app that does not exist on the user's device.</comment>
   </data>
   <data name="AuthenticatorAppTitle" xml:space="preserve">
-    <value>Kimlik təsdiqləyici tətbiqi</value>
+    <value>Kimlik doğrulayıcı tətbiqi</value>
     <comment>For 2FA</comment>
   </data>
   <data name="EnterVerificationCodeApp" xml:space="preserve">
-    <value>Kimlik təsdiqləyici tətbiqindən 6 rəqəmli təsdiqləmə kodunu daxil edin.</value>
+    <value>Kimlik doğrulayıcı tətbiqindən 6 rəqəmli doğrulama kodunu daxil edin.</value>
     <comment>For 2FA</comment>
   </data>
   <data name="EnterVerificationCodeEmail" xml:space="preserve">
-    <value>{0} ünvanına göndərilən e-poçtdakı 6 rəqəmli təsdiqləmə kodunu daxil edin.</value>
+    <value>{0} ünvanına göndərilən e-poçtdakı 6 rəqəmli doğrulama kodunu daxil edin.</value>
     <comment>For 2FA</comment>
   </data>
   <data name="LoginUnavailable" xml:space="preserve">
@@ -821,7 +822,7 @@
     <comment>For 2FA whenever there are no available providers on this device.</comment>
   </data>
   <data name="NoTwoStepAvailable" xml:space="preserve">
-    <value>Bu hesabda ikir mərhələli giriş fəaldır, ancaq konfiqurasiya edilmiş iki mərhələli təchizatçıların heç biri bu cihazda dəstəklənmir. Zəhmət olmasa dəstəklənən cihaz istifadə edin və/və ya fərqli cihazda dəstəklənən yeni təchizatçılar əlavə edin (məs. kimlik təsdiqləyici tətbiqi).</value>
+    <value>Bu hesabda iki addımlı giriş qurulub, ancaq konfiqurasiya edilmiş iki addımlı provayderlərin heç biri bu cihazda dəstəklənmir. Lütfən dəstəklənən cihaz istifadə edin və/və ya fərqli cihazda dəstəklənən yeni provayderlər əlavə edin (məs. kimlik doğrulayıcı tətbiq).</value>
   </data>
   <data name="RecoveryCodeTitle" xml:space="preserve">
     <value>Bərpa kodu</value>
@@ -832,7 +833,7 @@
     <comment>Remember my two-step login</comment>
   </data>
   <data name="SendVerificationCodeAgain" xml:space="preserve">
-    <value>Təsdiqləmə kodu olan e-poçtu yenidən göndər</value>
+    <value>Doğrulama kodu olan e-poçtu yenidən göndər</value>
     <comment>For 2FA</comment>
   </data>
   <data name="TwoStepLoginOptions" xml:space="preserve">
@@ -842,18 +843,18 @@
     <value>Başqa bir iki mərhələli giriş metodu istifadə edin</value>
   </data>
   <data name="VerificationEmailNotSent" xml:space="preserve">
-    <value>Təsdiqləmə e-poçtu göndərilə bilmədi. Yenidən sınayın.</value>
+    <value>Doğrulama e-poçtu göndərilə bilmədi. Yenidən sınayın.</value>
     <comment>For 2FA</comment>
   </data>
   <data name="VerificationEmailSent" xml:space="preserve">
-    <value>Təsdiqləmə e-poçtu göndərildi.</value>
+    <value>Doğrulama e-poçtu göndərildi</value>
     <comment>For 2FA</comment>
   </data>
   <data name="YubiKeyInstruction" xml:space="preserve">
     <value>Davam etmək üçün Yubikey NEO açarınızı cihazınızın arxasına tutun və ya YubiKey-i cihazınızın USB portuna taxıb düyməsinə toxunun.</value>
   </data>
   <data name="YubiKeyTitle" xml:space="preserve">
-    <value>YubiKey təhlükəsizlik açarı</value>
+    <value>YubiKey güvənlik açarı</value>
     <comment>"YubiKey" is the product name and should not be translated.</comment>
   </data>
   <data name="AddNewAttachment" xml:space="preserve">
@@ -877,23 +878,21 @@
     <comment>The placeholder will show the file size of the attachment. Ex "25 MB"</comment>
   </data>
   <data name="AuthenticatorKey" xml:space="preserve">
-    <value>Kimlik təsdiqləyici açarı (TOTP)</value>
+    <value>Kimlik doğrulayıcı açarı (TOTP)</value>
   </data>
   <data name="VerificationCodeTotp" xml:space="preserve">
-    <value>Təsdiqləmə kodu (TOTP)</value>
+    <value>Doğrulama kodu (TOTP)</value>
     <comment>Totp code label</comment>
   </data>
   <data name="AuthenticatorKeyAdded" xml:space="preserve">
-    <value>Kimlik təsdiqləyici açarı əlavə edildi.</value>
+    <value>Kimlik doğrulayıcı açarı əlavə edildi.</value>
   </data>
   <data name="AuthenticatorKeyReadError" xml:space="preserve">
-    <value>Kimlik təsdiqləyici açarı oxuna bilmir.</value>
+    <value>Kimlik doğrulayıcı açarı oxuna bilmir.</value>
   </data>
-  <data name="CameraInstructionBottom" xml:space="preserve">
-    <value>Skan avtomatik olaraq icra ediləcək.</value>
-  </data>
-  <data name="CameraInstructionTop" xml:space="preserve">
-    <value>Kameranı QR koduna yönləndirin.</value>
+  <data name="PointYourCameraAtTheQRCode" xml:space="preserve">
+    <value>Kameranızı QR koduna yönəldin.
+Skan prosesi avtomatik baş tutacaq.</value>
   </data>
   <data name="ScanQrTitle" xml:space="preserve">
     <value>QR kodu skan edin</value>
@@ -907,11 +906,11 @@
   <data name="CopyTotp" xml:space="preserve">
     <value>TOTP-ni kopyala</value>
   </data>
-  <data name="DisableAutoTotpCopyDescription" xml:space="preserve">
-    <value>Hesabınıza əlavə edilən kimlik təsdiqləyici açarı varsa, giriş məlumatları avto-doldurulanda TOTP təsdiqləmə kodu da avtomatik olaraq lövhəyə kopyalanacaq.</value>
+  <data name="CopyTotpAutomaticallyDescription" xml:space="preserve">
+    <value>Bir giriş prosesinin kimlik doğrulayıcı açarı varsa, giriş məlumatları avto-doldurulanda TOTP doğrulama kodunu kopyalayın.</value>
   </data>
-  <data name="DisableAutoTotpCopy" xml:space="preserve">
-    <value>Avtomatik TOTP kopyalamasını sıradan çıxart</value>
+  <data name="CopyTotpAutomatically" xml:space="preserve">
+    <value>TOTP-ni avtomatik kopyala</value>
   </data>
   <data name="PremiumRequired" xml:space="preserve">
     <value>Bu özəlliyi istifadə etmək üçün premium üzvlük lazımdır.</value>
@@ -944,7 +943,10 @@
     <value>Maksimal fayl həcmi 100 MB-dır</value>
   </data>
   <data name="UpdateKey" xml:space="preserve">
-    <value>Şifrələmə açarınızı yeniləyənə qədər bu özəlliyi istifadə edə bilməzsiniz.</value>
+    <value>Şifrələmə açarınızı güncəlləyənə qədər bu özəlliyi istifadə edə bilməzsiniz.</value>
+  </data>
+  <data name="EncryptionKeyMigrationRequiredDescriptionLong" xml:space="preserve">
+    <value>Şifrələmə açarının daşınması tələb olunur. Şifrələmə açarınızı güncəlləmək üçün lütfən veb anbar üzərindən giriş edin.</value>
   </data>
   <data name="LearnMore" xml:space="preserve">
     <value>Daha ətraflı</value>
@@ -991,13 +993,13 @@
     <value>Nömrəni kopyala</value>
   </data>
   <data name="CopySecurityCode" xml:space="preserve">
-    <value>Təhlükəsizlik kodunu kopyala</value>
+    <value>Güvənlik kodunu kopyala</value>
   </data>
   <data name="Number" xml:space="preserve">
     <value>Nömrə</value>
   </data>
   <data name="SecurityCode" xml:space="preserve">
-    <value>Təhlükəsizlik kodu</value>
+    <value>Güvənlik kodu</value>
   </data>
   <data name="TypeCard" xml:space="preserve">
     <value>Kart</value>
@@ -1009,7 +1011,7 @@
     <value>Giriş</value>
   </data>
   <data name="TypeSecureNote" xml:space="preserve">
-    <value>Təhlükəsizlik qeydi</value>
+    <value>Güvənli qeyd</value>
   </data>
   <data name="Address1" xml:space="preserve">
     <value>Ünvan 1</value>
@@ -1095,6 +1097,9 @@
   <data name="Ms" xml:space="preserve">
     <value>Hörmətli</value>
   </data>
+  <data name="Mx" xml:space="preserve">
+    <value>Hörmətli</value>
+  </data>
   <data name="November" xml:space="preserve">
     <value>Noyabr</value>
   </data>
@@ -1111,7 +1116,7 @@
     <value>Sentyabr</value>
   </data>
   <data name="SSN" xml:space="preserve">
-    <value>Sosial təhlükəsizlik nömrəsi</value>
+    <value>Sosial güvənlik nömrəsi</value>
   </data>
   <data name="StateProvince" xml:space="preserve">
     <value>Ölkə/Əyalət</value>
@@ -1128,11 +1133,11 @@
   <data name="Expiration" xml:space="preserve">
     <value>Bitmə vaxtı</value>
   </data>
-  <data name="DisableWebsiteIcons" xml:space="preserve">
-    <value>Veb sayt nişanlarını sıradan çıxart</value>
+  <data name="ShowWebsiteIcons" xml:space="preserve">
+    <value>Veb sayt nişanlarını göstər</value>
   </data>
-  <data name="DisableWebsiteIconsDescription" xml:space="preserve">
-    <value>Veb sayt nişanları, anbarınızda hər bir giriş elementinin yanında tanımağınıza kömək edən bir təsvir təqdim edir.</value>
+  <data name="ShowWebsiteIconsDescription" xml:space="preserve">
+    <value>Hər girişin yanında tanına bilən təsvir göstər.</value>
   </data>
   <data name="IconsUrl" xml:space="preserve">
     <value>Nişan server URL-si</value>
@@ -1168,26 +1173,26 @@
     <value>Digər tətbiqlərdəki giriş məlumatlarının, kredit kartlarının və kimlik məlumatlarının doldurulması üçün Bitwarden avto-doldurma xidmətini istifadə edin.</value>
   </data>
   <data name="BitwardenAutofillServiceOpenAutofillSettings" xml:space="preserve">
-    <value>Avto-doldurma tənzimləmələrini açın</value>
+    <value>Avto-doldurma ayarlarını aç</value>
   </data>
   <data name="FaceID" xml:space="preserve">
     <value>Face ID</value>
     <comment>What Apple calls their facial recognition reader.</comment>
   </data>
   <data name="FaceIDDirection" xml:space="preserve">
-    <value>Təsdiqləmə üçün Face ID istifadə edin.</value>
+    <value>Doğrulamaq üçün Face ID istifadə edin.</value>
   </data>
   <data name="UseFaceIDToUnlock" xml:space="preserve">
     <value>Kilidi açmaq üçün Face ID istifadə edin</value>
   </data>
   <data name="VerifyFaceID" xml:space="preserve">
-    <value>Face ID-ni təsdiqlə</value>
+    <value>Face ID-ni doğrula</value>
   </data>
   <data name="WindowsHello" xml:space="preserve">
     <value>Windows Hello</value>
   </data>
   <data name="BitwardenAutofillGoToSettings" xml:space="preserve">
-    <value>Android avto-doldurma tənzimləmələri menyusunu avtomatik aça bilmədik. Bu menyunu tapmaq üçün Android Tənzimləmələri &gt; Sistem &gt; Dillər və daxiletmə &gt; Qabaqcıl &gt; "Avto-doldurma xidməti"nə gedin.</value>
+    <value>Android avto-doldurma ayarları menyusunu avtomatik aça bilmədik. Bu menyunu tapmaq üçün Android Ayarları &gt; Sistem &gt; Dillər və giriş &gt; Qabaqcıl &gt; "Avto-doldurma xidməti"nə gedin.</value>
   </data>
   <data name="CustomFieldName" xml:space="preserve">
     <value>Özəl sahə adı</value>
@@ -1270,11 +1275,11 @@
     <value>Əlçatımlılıq xidməti, standart avto-doldurma xidmətini dəstəkləməyən tətbiqlərdə kömək edə bilər.</value>
   </data>
   <data name="DatePasswordUpdated" xml:space="preserve">
-    <value>Parol yeniləndi</value>
+    <value>Parol güncəlləndi</value>
     <comment>ex. Date this password was updated</comment>
   </data>
   <data name="DateUpdated" xml:space="preserve">
-    <value>Yeniləndi</value>
+    <value>Güncəlləndi</value>
     <comment>ex. Date this item was updated</comment>
   </data>
   <data name="AutofillActivated" xml:space="preserve">
@@ -1287,7 +1292,7 @@
     <value>Tətbiqlərdə və veb saytlarda giriş edərkən giriş etmə məlumatlarınıza klaviaturadan asanlıqla müraciət edə bilərsiniz.</value>
   </data>
   <data name="AutofillSetup2" xml:space="preserve">
-    <value>Digər Avto-doldurma tətbiqləriniz varssa və onları istifadə etməyi düşünmürsünüzsə, Tənzimləmələrdə sıradan çıxara bilərsiniz.</value>
+    <value>İstifadə etməyi düşünmürsünüzsə, digər Avto-doldurma tətbiqlərini Ayarlarda sıradan çıxartmağı tövsiyə edirik.</value>
   </data>
   <data name="BitwardenAutofillDescription" xml:space="preserve">
     <value>Parollarınızın cəld avto-doldurulması üçün anbarınıza birbaşa klaviaturanızdan müraciət edin.</value>
@@ -1296,7 +1301,7 @@
     <value>Cihazınızda parolun avto-doldurulması üçün aşağıdakı təlimatları izləyin:</value>
   </data>
   <data name="AutofillTurnOn1" xml:space="preserve">
-    <value>1. iOS "Tənzimləmələri"nə gedin</value>
+    <value>1. iOS "Ayarları"na gedin</value>
   </data>
   <data name="AutofillTurnOn2" xml:space="preserve">
     <value>2. "Parollar və Hesablar"a toxunun.</value>
@@ -1314,10 +1319,10 @@
     <value>Parolun avto-doldurulması</value>
   </data>
   <data name="BitwardenAutofillAlert2" xml:space="preserve">
-    <value>Anbarınıza yeni giriş məlumatlarını əlavə etməyin ən asan yolu, Bitwarden parol avto-doldurma genişləndirməsidir. Bu genişləndirmə haqqında daha ətraflı məlumat almaq üçün "Tənzimləmələr" ekranına gedin.</value>
+    <value>Anbarınıza yeni giriş məlumatlarını əlavə etməyin ən asan yolu, Bitwarden parol avto-doldurma uzantısıdır. Bu uzantı haqqında daha ətraflı məlumat almaq üçün "Ayarlar" ekranına gedin.</value>
   </data>
   <data name="InvalidEmail" xml:space="preserve">
-    <value>Etibarsız e-poçt ünvanı.</value>
+    <value>Yararsız e-poçt ünvanı.</value>
   </data>
   <data name="Cards" xml:space="preserve">
     <value>Kartlar</value>
@@ -1329,7 +1334,7 @@
     <value>Girişlər</value>
   </data>
   <data name="SecureNotes" xml:space="preserve">
-    <value>Təhlükəsizlik qeydləri</value>
+    <value>Güvənli qeydlər</value>
   </data>
   <data name="AllItems" xml:space="preserve">
     <value>Bütün elementlər</value>
@@ -1372,11 +1377,15 @@
   <data name="SearchCollection" xml:space="preserve">
     <value>Kolleksiya axtar</value>
   </data>
-  <data name="SearchFolder" xml:space="preserve">
-    <value>Qovluq axtar</value>
+  <data name="SearchFileSends" xml:space="preserve">
+    <value>Fayl "Send"lərini axtar</value>
   </data>
-  <data name="SearchType" xml:space="preserve">
-    <value>Axtarış növü</value>
+  <data name="SearchTextSends" xml:space="preserve">
+    <value>Mətn "Send"lərini axtar</value>
+  </data>
+  <data name="SearchGroup" xml:space="preserve">
+    <value>Axtar: {0}</value>
+    <comment>ex: Search Logins</comment>
   </data>
   <data name="Type" xml:space="preserve">
     <value>Növ</value>
@@ -1456,7 +1465,7 @@
     <value>Bitwarden, bir təşkilat hesabı istifadə edərək anbar elementlərinizi başqaları ilə paylaşmağınıza icazə verər. Daha ətraflı məlumat üçün bitwarden.com saytını ziyarət etmək istəyirsiniz?</value>
   </data>
   <data name="ExportVault" xml:space="preserve">
-    <value>Anbarı ixrac et</value>
+    <value>Anbarı xaricə köçür</value>
   </data>
   <data name="LockNow" xml:space="preserve">
     <value>İndi kilidlə</value>
@@ -1474,20 +1483,20 @@
     <value>30 dəqiqə</value>
   </data>
   <data name="SetPINDescription" xml:space="preserve">
-    <value>Bitwarden-in kilidini açmaq üçün PIN kod tənzimləyin. Hər tətbiqdən tam çıxış edəndə PIN tənzimləmələriniz sıfırlanacaq.</value>
+    <value>Bitwarden-in kilidini açmaq üçün PIN kodunuzu ayarlayın. Tətbiqdən tam çıxış etdikdə PIN ayarlarınız sıfırlanacaq.</value>
   </data>
   <data name="LoggedInAsOn" xml:space="preserve">
     <value>{1} saytında {0} kimi giriş edildi.</value>
     <comment>ex: Logged in as user@example.com on bitwarden.com.</comment>
   </data>
   <data name="VaultLockedMasterPassword" xml:space="preserve">
-    <value>Anbarınız kilidlənib. Davam etmək üçün ana parolunuzu təsdiqləyin.</value>
+    <value>Anbarınız kilidlənib. Davam etmək üçün ana parolunuzu doğrulayın.</value>
   </data>
   <data name="VaultLockedPIN" xml:space="preserve">
-    <value>Anbarınız kilidlənib. Davam etmək üçün PIN kodunuzu təsdiqləyin.</value>
+    <value>Anbarınız kilidlənib. Davam etmək üçün PIN kodunuzu doğrulayın.</value>
   </data>
   <data name="VaultLockedIdentity" xml:space="preserve">
-    <value>Anbarınız kilidlənib. Davam etmək üçün kimliyinizi təsdiqləyin.</value>
+    <value>Anbarınız kilidlənib. Davam etmək üçün kimliyinizi doğrulayın.</value>
   </data>
   <data name="Dark" xml:space="preserve">
     <value>Tünd</value>
@@ -1537,6 +1546,9 @@
   <data name="ThemeDefault" xml:space="preserve">
     <value>İlkin (Sistem)</value>
   </data>
+  <data name="DefaultDarkTheme" xml:space="preserve">
+    <value>İlkin tünd tema</value>
+  </data>
   <data name="CopyNotes" xml:space="preserve">
     <value>Qeydləri kopyala</value>
   </data>
@@ -1553,23 +1565,28 @@
     <value>Qara</value>
     <comment>The color black</comment>
   </data>
-  <data name="BlacklistedUris" xml:space="preserve">
-    <value>Qara siyahıdakı URI-lər</value>
+  <data name="Nord" xml:space="preserve">
+    <value>Nord</value>
+    <comment>'Nord' is the name of a specific color scheme. It should not be translated.</comment>
   </data>
-  <data name="BlacklistedUrisDescription" xml:space="preserve">
-    <value>Qara siyahıdakı URI-lərə avto-doldurma təklif edilməyəcək. Siyahı vergüllə ayrılmalıdır. Məs. "https://twitter.com, androidapp://com.twitter.android".</value>
+  <data name="SolarizedDark" xml:space="preserve">
+    <value>Günəşli tünd</value>
+    <comment>'Solarized Dark' is the name of a specific color scheme. It should not be translated.</comment>
   </data>
-  <data name="DisableSavePrompt" xml:space="preserve">
-    <value>Saxlama istəyini sıradan çıxart</value>
+  <data name="AutofillBlockedUris" xml:space="preserve">
+    <value>Əngəllənən URI-lərin avto-doldurulması</value>
   </data>
-  <data name="DisableSavePromptDescription" xml:space="preserve">
-    <value>"Saxlama istəyi", ilk dəfə istifadə etdiyiniz məlumatları anbarda saxlamaq istəyib-istəmədiyinizi avtomatik olaraq soruşur.</value>
+  <data name="AskToAddLogin" xml:space="preserve">
+    <value>Giriş əlavə etmək üçün soruş</value>
+  </data>
+  <data name="AskToAddLoginDescription" xml:space="preserve">
+    <value>Anbarınızda yoxdursa, bir element əlavə etməyi soruşun.</value>
   </data>
   <data name="OnRestart" xml:space="preserve">
     <value>Tətbiq yenidən başladılanda</value>
   </data>
   <data name="AutofillServiceNotEnabled" xml:space="preserve">
-    <value>Avto-doldurma, veb sayt və tətbiqlərdən Bitwarden anbarınıza təhlükəsiz şəkildə müraciət etməyinizi asanlaşdırır. Deyəsən, Bitwarden üçün avto-doldurma xidmətini fəallaşdırmamısınız. "Tənzimləmələr" ekranında Bitwarden üçün avto-doldurma xidmətini fəallaşdırın.</value>
+    <value>Avto-doldurma, veb sayt və tətbiqlərdən Bitwarden anbarınıza güvənli şəkildə müraciət etməyinizi asanlaşdırır. Deyəsən, Bitwarden üçün avto-doldurma xidmətini qurmamısınız. "Ayarlar" ekranında Bitwarden üçün avto-doldurma xidmətini qurun.</value>
   </data>
   <data name="ThemeAppliedOnRestart" xml:space="preserve">
     <value>Tema dəyişiklikləriniz tətbiq yenidən başladılanda tətbiq ediləcək.</value>
@@ -1594,7 +1611,7 @@
     <value>Seansın müddəti bitdi.</value>
   </data>
   <data name="BiometricsDirection" xml:space="preserve">
-    <value>Biometrik təsdiqləmə</value>
+    <value>Biometrik doğrulama</value>
   </data>
   <data name="Biometrics" xml:space="preserve">
     <value>Biometrik</value>
@@ -1603,19 +1620,19 @@
     <value>Kilidi biometriklə aç</value>
   </data>
   <data name="AccessibilityOverlayPermissionAlert" xml:space="preserve">
-    <value>Bitwarden diqqətinizi tələb edir - Bitwarden Tənzimləmələrində "Avto-doldurma əlçatımlılıq xidməti"nə baxın</value>
+    <value>Bitwarden diqqətinizi tələb edir - Bitwarden ayarlarında "Avto-doldurma əlçatımlılıq xidməti"nə baxın</value>
   </data>
   <data name="BitwardenAutofillServiceOverlayPermission" xml:space="preserve">
-    <value>3. Android tətbiq tənzimləmələrində Bitwarden-i tapın və "Digər tətbiqlərin üzərində göstər" seçini açın ("Qabaqcıl" seçimin altında ola bilər).</value>
+    <value>3. Android tətbiq ayarlarında Bitwarden-i tapın və "Digər tətbiqlərin üzərində göstər" seçiminə ("Qabaqcıl" seçimin altında ola bilər) gedin və örtük dəstəyinə icazə vermək üçün açara toxunun.</value>
   </data>
   <data name="OverlayPermission" xml:space="preserve">
     <value>İcazə</value>
   </data>
   <data name="BitwardenAutofillServiceOpenOverlayPermissionSettings" xml:space="preserve">
-    <value>Üzərində göstərmə icazə tənzimləmələrini açın</value>
+    <value>Üzərində göstərmə icazə ayarlarını açın</value>
   </data>
   <data name="BitwardenAutofillServiceStep3" xml:space="preserve">
-    <value>3. Android tətbiq tənzimləmələrində Bitwarden-i tapın və "Digər tətbiqlərin üzərində göstər" seçini açın ("Qabaqcıl" seçimin altında ola bilər).</value>
+    <value>3. Android tətbiq ayarlarında Bitwarden-i tapın və "Digər tətbiqlərin üzərində göstər" seçin ("Qabaqcıl" seçimin altında ola bilər) və örtüyə icazə vermək üçün açarı açın.</value>
   </data>
   <data name="Denied" xml:space="preserve">
     <value>Rədd edildi</value>
@@ -1627,38 +1644,38 @@
     <value>Fayl formatı</value>
   </data>
   <data name="ExportVaultMasterPasswordDescription" xml:space="preserve">
-    <value>Anbar verilənlərinizi ixrac etmək üçün ana parolunuzu daxil edin.</value>
+    <value>Anbar datanızı xaricə köçürmək üçün ana parolunuzu daxil edin.</value>
   </data>
   <data name="SendVerificationCodeToEmail" xml:space="preserve">
-    <value>E-poçtunuza bir təsdiqləmə kodu göndərin</value>
+    <value>Doğrulama kodunu e-poçtunuza göndərin</value>
   </data>
   <data name="CodeSent" xml:space="preserve">
     <value>Kod göndərildi!</value>
   </data>
   <data name="ConfirmYourIdentity" xml:space="preserve">
-    <value>Davam etmək üçün kimliyinizi təsdiqləyin.</value>
+    <value>Davam etmək üçün kimliyinizi doğrulayın.</value>
   </data>
   <data name="ExportVaultWarning" xml:space="preserve">
-    <value>Bu ixrac faylındakı anbar verilənləriniz şifrələnməmiş formatdadır. İxrac edilən faylı saxlamamalı və etibarsız yollarla (e-poçt kimi) göndərməməlisiniz. Bu faylı işiniz bitdikdən sonra dərhal silin.</value>
+    <value>Xaricə köçürdüyünüz bu fayldakı datanız şifrələnməmiş formatdadır. Bu faylı güvənli olmayan kanallar (e-poçt kimi) üzərində saxlamamalı və ya göndərməməlisiniz. İşiniz bitdikdən sonra faylı dərhal silin.</value>
   </data>
   <data name="EncExportKeyWarning" xml:space="preserve">
-    <value>Bu ixrac faylı, hesabınızın şifrələmə açarını istifadə edərək verilənlərinizi şifrələyir. Hesabınızın şifrələmə açarını döndərsəniz, bu ixrac faylının şifrəsini aça bilməyəcəyiniz üçün yenidən ixrac etməli olacaqsınız.</value>
+    <value>Xaricə köçürdüyünüz bu fayldakı data, hesabınızın şifrələmə açarı istifadə edilərək şifrələnir. Hesabınızın şifrələmə açarını dəyişdirsəniz, bu faylın şifrəsini aça bilməyəcəksiniz və onu yenidən xaricə köçürməli olacaqsınız.</value>
   </data>
   <data name="EncExportAccountWarning" xml:space="preserve">
-    <value>Hesab şifrələmə açarları, hər Bitwarden istifadəçi hesabı üçün unikaldır, buna görə də şifrələnmiş bir ixracı, fərqli bir hesaba idxal edə bilməzsiniz.</value>
+    <value>Hesab şifrələmə açarları, hər Bitwarden istifadəçi hesabı üçün unikaldır, buna görə də şifrələnmiş bir xaricə köçürməni, fərqli bir hesaba köçürə bilməzsiniz.</value>
   </data>
   <data name="ExportVaultConfirmationTitle" xml:space="preserve">
-    <value>Anbarın ixracını təsdiqləyin</value>
+    <value>Anbarın xaricə köçürülməsini təsdiqlə</value>
     <comment>Title for the alert to confirm vault exports.</comment>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Xəbərdarlıq</value>
   </data>
   <data name="ExportVaultFailure" xml:space="preserve">
-    <value>Anbarınızın ixracında problem yarandı. Əgər problem davam edərsə, veb anbarından ixrac etməli olacaqsınız.</value>
+    <value>Anbarınızın xaricə köçürülməsi zamanı problem yarandı. Əgər problem davam edərsə, veb anbarından xaricə köçürməli olacaqsınız.</value>
   </data>
   <data name="ExportVaultSuccess" xml:space="preserve">
-    <value>Anbar uğurla ixrac edildi</value>
+    <value>Anbar uğurla xaricə köçürüldü</value>
   </data>
   <data name="Clone" xml:space="preserve">
     <value>Klonla</value>
@@ -1678,7 +1695,7 @@
     <value>Qoşma uğurla saxlanıldı</value>
   </data>
   <data name="AutofillTileAccessibilityRequired" xml:space="preserve">
-    <value>Avto-doldurma qutusunu istifadə etmək üçün zəhmət olmasa "Bitwarden" tənzimləmələrində "Avto-doldurma əlçatımlılıq xidməti"ni fəallaşdırın.</value>
+    <value>Avto-doldurma qutusunu istifadə etmək üçün lütfən "Bitwarden" ayarlarında "Avto-doldurma əlçatımlılıq xidməti"ni fəallaşdırın.</value>
   </data>
   <data name="AutofillTileUriNotFound" xml:space="preserve">
     <value>Heç bir parol sahəsi aşkarlanmadı</value>
@@ -1723,11 +1740,11 @@
     <value>Həqiqətən tullantı qutusuna göndərmək istəyirsiniz?</value>
     <comment>Confirmation alert message when soft-deleting a cipher.</comment>
   </data>
-  <data name="BiometricInvalidated" xml:space="preserve">
-    <value>Ana parolun təsdiqlənməsi gözlənildiyi üçün biometrik kilid açma sıradan çıxarıldı.</value>
+  <data name="AccountBiometricInvalidated" xml:space="preserve">
+    <value>Ana parolun doğrulanması gözlənildiyi üçün bu hesab üzrə biometrik kilid açma sıradan çıxarıldı.</value>
   </data>
-  <data name="BiometricInvalidatedExtension" xml:space="preserve">
-    <value>Ana parolun təsdiqlənməsi gözlənildiyi üçün avto-doldurma üzrə biometrik kilid açma sıradan çıxarıldı.</value>
+  <data name="AccountBiometricInvalidatedExtension" xml:space="preserve">
+    <value>Ana parolun doğrulanması gözlənildiyi üçün bu hesab üzrə avto-doldurma biometrik kilid açma sıradan çıxarıldı.</value>
   </data>
   <data name="EnableSyncOnRefresh" xml:space="preserve">
     <value>Təzələmə əsnasında eyniləşdirməni fəallaşdır</value>
@@ -1739,7 +1756,7 @@
     <value>Müəssisə üçün tək daxil olma</value>
   </data>
   <data name="LogInSsoSummary" xml:space="preserve">
-    <value>Təşkilatınızın tək daxil olma portalını istifadə edərək daha tez giriş edə bilərsiniz. Başlatmaq üçün zəhmət olmasa təşkilatınızın identifikatorunu daxil edin.</value>
+    <value>Təşkilatınızın tək daxil olma portalını istifadə edərək daha tez giriş edə bilərsiniz. Başlatmaq üçün lütfən təşkilatınızın identifikatorunu daxil edin.</value>
   </data>
   <data name="OrgIdentifier" xml:space="preserve">
     <value>Təşkilat identifikatoru</value>
@@ -1748,10 +1765,10 @@
     <value>Hazırda SSO ilə giriş edilə bilmir</value>
   </data>
   <data name="SetMasterPassword" xml:space="preserve">
-    <value>Ana parolu tənzimlə</value>
+    <value>Ana parolu ayarla</value>
   </data>
   <data name="SetMasterPasswordSummary" xml:space="preserve">
-    <value>SSO ilə giriş prosesini tamamlamaq üçün zəhmət olmasa anbarınıza müraciət etmək və onu qorumaq üçün bir ana şifrə tənzimləyin.</value>
+    <value>SSO ilə giriş prosesini tamamlamaq üçün lütfən anbarınıza müraciət etmək və onu qorumaq üçün bir ana parol ayarlayın.</value>
   </data>
   <data name="MasterPasswordPolicyInEffect" xml:space="preserve">
     <value>Bir və ya daha çox təşkilat siyasəti, aşağıdakı tələbləri qarşılamaq üçün ana parolunuzu tələb edir:</value>
@@ -1775,10 +1792,10 @@
     <value>Bu özəl simvollardan biri və ya daha çoxunu ehtiva etməlidir: {0}</value>
   </data>
   <data name="MasterPasswordPolicyValidationTitle" xml:space="preserve">
-    <value>Etibarsız parol</value>
+    <value>Yararsız parol</value>
   </data>
   <data name="MasterPasswordPolicyValidationMessage" xml:space="preserve">
-    <value>Parol, şirkət tələblərini qarşılamır. Zəhmət olmasa siyasət məlumatlarını yoxlayıb yenidən sınayın.</value>
+    <value>Parol, şirkət tələblərini qarşılamır. Lütfən siyasət məlumatlarını yoxlayıb yenidən sınayın.</value>
   </data>
   <data name="Loading" xml:space="preserve">
     <value>Yüklənir</value>
@@ -1796,7 +1813,7 @@
     <value>Gizlilik Siyasəti</value>
   </data>
   <data name="AccessibilityDrawOverPermissionAlert" xml:space="preserve">
-    <value>Bitwarden diqqətinizi tələb edir - Bitwarden Tənzimləmələrində "Avto-doldurma xidməti"ndə "Üzərindən göstər"i fəallaşdırın</value>
+    <value>Bitwarden diqqətinizi tələb edir - Bitwarden Ayarlarında "Avto-doldurma xidməti"ndə "Üzərindən göstər"i işə salın</value>
   </data>
   <data name="AutofillServices" xml:space="preserve">
     <value>Avto-doldurma xidmətləri</value>
@@ -1856,6 +1873,9 @@
     <value>Bu "Send"i açıqlayan bir ad.</value>
     <comment>'Send' is a noun and the name of a feature called 'Bitwarden Send'. It should not be translated.</comment>
   </data>
+  <data name="Text" xml:space="preserve">
+    <value>Mətn</value>
+  </data>
   <data name="TypeText" xml:space="preserve">
     <value>Mətn</value>
   </data>
@@ -1871,6 +1891,18 @@
   </data>
   <data name="TypeFileInfo" xml:space="preserve">
     <value>Göndərmək istədiyiniz fayl.</value>
+  </data>
+  <data name="FileTypeIsSelected" xml:space="preserve">
+    <value>Fayl növü seçildi.</value>
+  </data>
+  <data name="FileTypeIsNotSelected" xml:space="preserve">
+    <value>Fayl növü seçilmədi, seçmək üçün toxunun.</value>
+  </data>
+  <data name="TextTypeIsSelected" xml:space="preserve">
+    <value>Mətn növü seçildi.</value>
+  </data>
+  <data name="TextTypeIsNotSelected" xml:space="preserve">
+    <value>Mətn növü seçilmədi, seçmək üçün toxunun.</value>
   </data>
   <data name="DeletionDate" xml:space="preserve">
     <value>Silinmə tarixi</value>
@@ -1892,7 +1924,7 @@
     <value>Bitmə vaxtı</value>
   </data>
   <data name="ExpirationDateInfo" xml:space="preserve">
-    <value>Əgər tənzimlənsə, göstərilən tarix və vaxtda "Send"ə müraciət başa çatacaq.</value>
+    <value>Əgər ayarlanıbsa, göstərilən tarix və vaxtda "Send"ə müraciət başa çatacaq.</value>
     <comment>'Send' is a noun and the name of a feature called 'Bitwarden Send'. It should not be translated.</comment>
   </data>
   <data name="Expired" xml:space="preserve">
@@ -1902,7 +1934,7 @@
     <value>Maksimal müraciət sayı</value>
   </data>
   <data name="MaximumAccessCountInfo" xml:space="preserve">
-    <value>Əgər tənzimlənsə, istifadəçilər maksimal müraciət sayına çatdıqdan sonra bu "Send"ə müraciət edə bilməyəcək.</value>
+    <value>Əgər ayarlanıbsa, istifadəçilər maksimal müraciət sayına çatdıqdan sonra bu "Send"ə müraciət edə bilməyəcək.</value>
     <comment>'Send' is a noun and the name of a feature called 'Bitwarden Send'. It should not be translated.</comment>
   </data>
   <data name="MaximumAccessCountReached" xml:space="preserve">
@@ -1977,7 +2009,7 @@
     <comment>'Send' is a noun and the name of a feature called 'Bitwarden Send'. It should not be translated.</comment>
   </data>
   <data name="SendUpdated" xml:space="preserve">
-    <value>"Send" yeniləndi.</value>
+    <value>"Send" güncəlləndi.</value>
     <comment>'Send' is a noun and the name of a feature called 'Bitwarden Send'. It should not be translated.</comment>
   </data>
   <data name="NewSendCreated" xml:space="preserve">
@@ -2026,7 +2058,7 @@
     <comment>'Send' is a noun and the name of a feature called 'Bitwarden Send'. It should not be translated.</comment>
   </data>
   <data name="SendFileEmailVerificationRequired" xml:space="preserve">
-    <value>"Send" ilə faylları istifadə etmək üçün e-poçtunuzu təsdiqləməlisiniz. E-poçtunuzu veb anbarında təsdiqləyə bilərsiniz.</value>
+    <value>Faylları "Send" ilə istifadə etmək üçün e-poçtunuzu doğrulamalısınız. E-poçtunuzu veb anbarında doğrulaya bilərsiniz.</value>
     <comment>'Send' is a noun and the name of a feature called 'Bitwarden Send'. It should not be translated.</comment>
   </data>
   <data name="PasswordPrompt" xml:space="preserve">
@@ -2036,28 +2068,28 @@
     <value>Ana parol təsdiqi</value>
   </data>
   <data name="PasswordConfirmationDesc" xml:space="preserve">
-    <value>Bu əməliyyat qorumalıdır, davam etmək üçün zəhmət olmasa kimliyinizi təsdiqləmək üçün ana parolunuzu təkrar daxil edin.</value>
+    <value>Bu əməliyyat qorumalıdır, davam etmək üçün lütfən kimliyinizi doğrulamaq üçün ana parolunuzu təkrar daxil edin.</value>
   </data>
   <data name="CaptchaRequired" xml:space="preserve">
     <value>Captcha tələb olunur</value>
   </data>
   <data name="CaptchaFailed" xml:space="preserve">
-    <value>Captcha uğursuz oldu. Zəhmət olmasa yenidən sınayın.</value>
+    <value>Captcha uğursuz oldu. Lütfən yenidən sınayın.</value>
   </data>
   <data name="UpdatedMasterPassword" xml:space="preserve">
-    <value>Yenilənmiş ana parol</value>
+    <value>Güncəllənmiş ana parol</value>
   </data>
   <data name="UpdateMasterPassword" xml:space="preserve">
-    <value>Ana parolu yenilə</value>
+    <value>Ana parolu güncəllə</value>
   </data>
   <data name="UpdateMasterPasswordWarning" xml:space="preserve">
-    <value>Ana parolunuz təzəlikcə təşkilatınızdakı bir administrator tərəfindən dəyişdirildi. Anbara müraciət üçün Ana parolunuzu indi yeniləməlisiniz. Davam etsəniz, hazırkı seansdan çıxış etmiş və təkrar giriş etməli olacaqsınız. Digər cihazlardakı aktiv seanslar bir saata qədər aktiv qalmağa davam edə bilər.</value>
+    <value>Ana parolunuz təzəlikcə təşkilatınızdakı bir administrator tərəfindən dəyişdirildi. Anbara müraciət üçün Ana parolunuzu indi güncəlləməlisiniz. Davam etsəniz, hazırkı seansdan çıxış etmiş və təkrar giriş etməli olacaqsınız. Digər cihazlardakı aktiv seanslar bir saata qədər aktiv qalmağa davam edə bilər.</value>
   </data>
   <data name="UpdatingPassword" xml:space="preserve">
     <value>Parol yenilənir</value>
   </data>
   <data name="UpdatePasswordError" xml:space="preserve">
-    <value>Hazırda parol yenilənə bilmir</value>
+    <value>Hazırda parol güncəllənə bilmir</value>
   </data>
   <data name="RemoveMasterPassword" xml:space="preserve">
     <value>Ana parolu sil</value>
@@ -2078,31 +2110,37 @@
     <value>FIDO2 WebAuthn</value>
   </data>
   <data name="Fido2Instruction" xml:space="preserve">
-    <value>Davam etmək üçün FIDO2 WebAuthn fəal güvənlik açarınızı hazır saxlayın, daha sonra növbəti ekranda "WebAuthn-u təsdiqlə"yə kliklədikdən sonra təlimatları izləyin.</value>
+    <value>Davam etmək üçün FIDO2 WebAuthn üçün fəal olan güvənlik açarınızı hazır saxlayın, daha sonra növbəti ekranda "WebAuthn-u doğrula"ya kliklədikdən sonra təlimatları izləyin.</value>
   </data>
   <data name="Fido2Desc" xml:space="preserve">
-    <value>Kimlik təsdiqləmə, FIDO2 WebAuthn istifadə edir, xarici güvənlik açarı istifadə edərək kimliyi təsdiqləyə bilərsiniz.</value>
+    <value>Kimlik doğrulama, FIDO2 WebAuthn istifadə edir, xarici güvənlik açarı istifadə edərək kimliyi doğrulaya bilərsiniz.</value>
   </data>
   <data name="Fido2AuthenticateWebAuthn" xml:space="preserve">
-    <value>WebAuthn-u təsdiqlə</value>
+    <value>WebAuthn kimlik doğrulama</value>
   </data>
   <data name="Fido2ReturnToApp" xml:space="preserve">
     <value>Tətbiqə qayıt</value>
   </data>
   <data name="Fido2CheckBrowser" xml:space="preserve">
-    <value>Zəhmət olmasa ilkin səyyahınızın WebAuthn-u təsdiqlədiyinə əmin olub yenidən sınayın.</value>
+    <value>Lütfən ilkin brauzerinizin WebAuthn-u dəstəklədiyinə əmin olub yenidən sınayın.</value>
   </data>
   <data name="ResetPasswordAutoEnrollInviteWarning" xml:space="preserve">
     <value>Bu təşkilat, sizi "parol sıfırlama"da avtomatik olaraq qeydiyyata alan müəssisə siyasətinə sahibdir. Qeydiyyat, təşkilat administratorlarına ana parolunuzu dəyişdirmə icazəsi verəcək.</value>
   </data>
   <data name="VaultTimeoutPolicyInEffect" xml:space="preserve">
-    <value>Təşkilatınızın siyasətləri, anbarınızın vaxt bitişinə təsir edir. Anbar vaxt bitişi üçün icazə verilən maksimum vaxt $HOURS$ saat $MINUTES$ dəqiqədir</value>
+    <value>Təşkilatınızın siyasətləri, anbarınızın vaxt bitişinə təsir edir. Anbar vaxt bitişi üçün icazə verilən maksimum vaxt {0} saat {1} dəqiqədir</value>
+  </data>
+  <data name="VaultTimeoutPolicyWithActionInEffect" xml:space="preserve">
+    <value>Təşkilatınızın siyasətləri, anbarınızın vaxt bitişinə təsir edir. Anbar vaxt bitişi üçün icazə verilən maksimum vaxt {0} saat {1} dəqiqədir. Anbar vaxt bitişi əməliyyatı {2} olaraq ayarlandı.</value>
+  </data>
+  <data name="VaultTimeoutActionPolicyInEffect" xml:space="preserve">
+    <value>Təşkilatınızın siyasətləri, anbar vaxt bitişi əməliyyatınızı {0} olaraq ayarladı.</value>
   </data>
   <data name="VaultTimeoutToLarge" xml:space="preserve">
-    <value>Anbar vaxt bitişi, təşkilatınız tərəfindən tənzimlənən məhdudiyyətləri aşır.</value>
+    <value>Anbar vaxt bitişi, təşkilatınız tərəfindən ayarlanan məhdudiyyətləri aşır.</value>
   </data>
-  <data name="DisablePersonalVaultExportPolicyInEffect">
-    <value>Bir və ya daha çox təşkilat siyasəti, fərdi anbarınızı ixrac etməyinizin qarşısını alır.</value>
+  <data name="DisablePersonalVaultExportPolicyInEffect" xml:space="preserve">
+    <value>Bir və ya daha çox təşkilat siyasəti, fərdi anbarınızı xaricə köçürməyinizi əngəlləyir.</value>
   </data>
   <data name="AddAccount" xml:space="preserve">
     <value>Hesab əlavə et</value>
@@ -2135,7 +2173,7 @@
     <value>Hesabınız birdəfəlik silinəcək</value>
   </data>
   <data name="DeleteAccountExplanation" xml:space="preserve">
-    <value>Hesabınız və əlaqəli bütün verilənlər silinəcək və bərpa oluna bilməyəcək. Davam etmək istədiyinizə əminsiniz?</value>
+    <value>Hesabınız və əlaqəli bütün datalar silinəcək və bərpa oluna bilməyəcək. Davam etmək istədiyinizə əminsiniz?</value>
   </data>
   <data name="DeletingYourAccount" xml:space="preserve">
     <value>Hesabınız silinir</value>
@@ -2144,7 +2182,7 @@
     <value>Hesabınız birdəfəlik silindi</value>
   </data>
   <data name="InvalidVerificationCode" xml:space="preserve">
-    <value>Etibarsız təsdiqləmə kodu</value>
+    <value>Yararsız doğrulama kodu</value>
   </data>
   <data name="RequestOTP" xml:space="preserve">
     <value>Tək istifadəlik parol tələb et</value>
@@ -2162,18 +2200,673 @@
     <value>Kod göndərilir</value>
   </data>
   <data name="Verifying" xml:space="preserve">
-    <value>Təsdiqlənir</value>
+    <value>Doğrulanır</value>
   </data>
   <data name="ResendCode" xml:space="preserve">
     <value>Kodu təkrar göndər</value>
   </data>
   <data name="AVerificationCodeWasSentToYourEmail" xml:space="preserve">
-    <value>Təsdiqləmə kodu e-poçtunuza göndərildi</value>
+    <value>Doğrulama kodu e-poçtunuza göndərildi</value>
   </data>
   <data name="AnErrorOccurredWhileSendingAVerificationCodeToYourEmailPleaseTryAgain" xml:space="preserve">
-    <value>E-poçtunuza təsdiqləmə kodu göndərilərkən bir xəta baş verdi. Zəhmət olmasa yenidən sınayın</value>
+    <value>E-poçtunuza doğrulama kodu göndərilərkən bir xəta baş verdi. Lütfən yenidən sınayın</value>
   </data>
   <data name="EnterTheVerificationCodeThatWasSentToYourEmail" xml:space="preserve">
-    <value>E-poçtunuza göndərilmiş təsdiqləmə kodunu daxil edin</value>
+    <value>E-poçtunuza göndərilmiş doğrulama kodunu daxil edin</value>
+  </data>
+  <data name="SubmitCrashLogs" xml:space="preserve">
+    <value>Çökmə jurnallarını göndər</value>
+  </data>
+  <data name="SubmitCrashLogsDescription" xml:space="preserve">
+    <value>Çökmə hesabatlarını göndərərək Bitwarden-in tətbiq stabilliyini yaxşılaşdırmasına kömək edin.</value>
+  </data>
+  <data name="OptionsExpanded" xml:space="preserve">
+    <value>Seçimlər genişləndirildi, yığcamlaşdırmaq üçün toxunun.</value>
+  </data>
+  <data name="OptionsCollapsed" xml:space="preserve">
+    <value>Seçimlər yığcamlaşdırıldı, genişləndirmək üçün toxunun.</value>
+  </data>
+  <data name="UppercaseAtoZ" xml:space="preserve">
+    <value>Böyük hərf (A-Z)</value>
+  </data>
+  <data name="LowercaseAtoZ" xml:space="preserve">
+    <value>Kiçik hərf (Z-A)</value>
+  </data>
+  <data name="NumbersZeroToNine" xml:space="preserve">
+    <value>Rəqəmlər (0-9)</value>
+  </data>
+  <data name="SpecialCharacters" xml:space="preserve">
+    <value>Xüsusi simvollar (!@#$%^&amp;*)</value>
+  </data>
+  <data name="TapToGoBack" xml:space="preserve">
+    <value>Geriyə getmək üçün toxun</value>
+  </data>
+  <data name="PasswordIsVisibleTapToHide" xml:space="preserve">
+    <value>Parol görünür, gizlətmək üçün toxunun.</value>
+  </data>
+  <data name="PasswordIsNotVisibleTapToShow" xml:space="preserve">
+    <value>Parol görünmür, göstərmək üçün toxunun.</value>
+  </data>
+  <data name="FilterByVault" xml:space="preserve">
+    <value>Elementləri anbara görə filtrlə</value>
+  </data>
+  <data name="AllVaults" xml:space="preserve">
+    <value>Bütün anbarlar</value>
+  </data>
+  <data name="Vaults" xml:space="preserve">
+    <value>Anbarlar</value>
+  </data>
+  <data name="VaultFilterDescription" xml:space="preserve">
+    <value>Anbar: {0}</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Hamısı</value>
+  </data>
+  <data name="Totp" xml:space="preserve">
+    <value>TOTP</value>
+  </data>
+  <data name="VerificationCodes" xml:space="preserve">
+    <value>Doğrulama kodları</value>
+  </data>
+  <data name="PremiumSubscriptionRequired" xml:space="preserve">
+    <value>Premium abunəlik tələb olunur</value>
+  </data>
+  <data name="CannotAddAuthenticatorKey" xml:space="preserve">
+    <value>Kimlik doğrulayıcı açarı oxuna bilmir? </value>
+  </data>
+  <data name="ScanQRCode" xml:space="preserve">
+    <value>QR kodu skan edin</value>
+  </data>
+  <data name="CannotScanQRCode" xml:space="preserve">
+    <value>QR kodunu skan edə bilmədiniz? </value>
+  </data>
+  <data name="AuthenticatorKeyScanner" xml:space="preserve">
+    <value>Kimlik doğrulayıcı açarı</value>
+  </data>
+  <data name="EnterKeyManually" xml:space="preserve">
+    <value>Kodu əllə daxil et</value>
+  </data>
+  <data name="AddTotp" xml:space="preserve">
+    <value>TOTP əlavə et</value>
+  </data>
+  <data name="SetupTotp" xml:space="preserve">
+    <value>TOTP quraşdır</value>
+  </data>
+  <data name="OnceTheKeyIsSuccessfullyEntered" xml:space="preserve">
+    <value>Açar uğurla daxil edildikdən sonra, açarı güvənli şəkildə saxlamaq üçün "TOTP əlavə et"i seçin</value>
+  </data>
+  <data name="NeverLockWarning" xml:space="preserve">
+    <value>Kilid seçimlərini "Heç vaxt" olaraq ayarlamaq, anbarınızı cihazınıza müraciəti olan hər kəsə əlçatan edir. Bu seçimi istifadə etsəniz, cihazınızı düzgün qoruduğunuza əmin olmalısınız.</value>
+  </data>
+  <data name="EnvironmentPageUrlsError" xml:space="preserve">
+    <value>Daxil edilən bir və ya daha çox URL yararsızdır. Lütfən nəzər salın və yenidən saxlamağa çalışın.</value>
+  </data>
+  <data name="GenericErrorMessage" xml:space="preserve">
+    <value>Tələbinizi emal edə bilmədik. Lütfən yenidən sınayın və ya bizimlə əlaqə saxlayın.</value>
+  </data>
+  <data name="AllowScreenCapture" xml:space="preserve">
+    <value>Ekranı çəkməyə icazə ver</value>
+  </data>
+  <data name="AreYouSureYouWantToEnableScreenCapture" xml:space="preserve">
+    <value>Ekranın çəkilməsini fəallaşdırmaq istədiyinizə əminsiniz?</value>
+  </data>
+  <data name="LogInRequested" xml:space="preserve">
+    <value>Giriş tələb olundu</value>
+  </data>
+  <data name="AreYouTryingToLogIn" xml:space="preserve">
+    <value>Giriş etməyə çalışırsınız?</value>
+  </data>
+  <data name="LogInAttemptByXOnY" xml:space="preserve">
+    <value>{0} tərəfindən {1} tarixində giriş cəhdi</value>
+  </data>
+  <data name="DeviceType" xml:space="preserve">
+    <value>Cihaz növü</value>
+  </data>
+  <data name="IpAddress" xml:space="preserve">
+    <value>IP ünvan</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Vaxt</value>
+  </data>
+  <data name="Near" xml:space="preserve">
+    <value>Yaxın</value>
+  </data>
+  <data name="ConfirmLogIn" xml:space="preserve">
+    <value>Girişi təsdiqlə</value>
+  </data>
+  <data name="DenyLogIn" xml:space="preserve">
+    <value>Girişi rədd et</value>
+  </data>
+  <data name="JustNow" xml:space="preserve">
+    <value>İndicə</value>
+  </data>
+  <data name="XMinutesAgo" xml:space="preserve">
+    <value>{0} dəqiqə əvvəl</value>
+  </data>
+  <data name="LogInAccepted" xml:space="preserve">
+    <value>Giriş təsdiqləndi</value>
+  </data>
+  <data name="LogInDenied" xml:space="preserve">
+    <value>Giriş rədd edildi</value>
+  </data>
+  <data name="ApproveLoginRequests" xml:space="preserve">
+    <value>Giriş tələblərini təsdiqlə</value>
+  </data>
+  <data name="UseThisDeviceToApproveLoginRequestsMadeFromOtherDevices" xml:space="preserve">
+    <value>Digər cihazlardan edilən giriş tələblərini təsdiqləmək üçün bu cihazı istifadə edin</value>
+  </data>
+  <data name="AllowNotifications" xml:space="preserve">
+    <value>Bildirişlərə icazə ver</value>
+  </data>
+  <data name="ReceivePushNotificationsForNewLoginRequests" xml:space="preserve">
+    <value>Yeni giriş tələbləri üçün ani bildirişlər alın</value>
+  </data>
+  <data name="NoThanks" xml:space="preserve">
+    <value>Xeyr təşəkkürlər</value>
+  </data>
+  <data name="ConfimLogInAttempForX" xml:space="preserve">
+    <value>{0} üçün giriş cəhdini təsdiqlə</value>
+  </data>
+  <data name="AllNotifications" xml:space="preserve">
+    <value>Bütün bildirişlər</value>
+  </data>
+  <data name="PasswordType" xml:space="preserve">
+    <value>Parol növü</value>
+  </data>
+  <data name="WhatWouldYouLikeToGenerate" xml:space="preserve">
+    <value>Nə yaratmaq istəyirsiniz?</value>
+  </data>
+  <data name="UsernameType" xml:space="preserve">
+    <value>İstifadəçi adı növü</value>
+  </data>
+  <data name="PlusAddressedEmail" xml:space="preserve">
+    <value>Plyus ünvanlı e-poçt</value>
+  </data>
+  <data name="CatchAllEmail" xml:space="preserve">
+    <value>Catch-all E-poçt</value>
+  </data>
+  <data name="ForwardedEmailAlias" xml:space="preserve">
+    <value>Yönləndirilən e-poçt ləqəbi</value>
+  </data>
+  <data name="RandomWord" xml:space="preserve">
+    <value>Təsadüfi söz</value>
+  </data>
+  <data name="EmailRequiredParenthesis" xml:space="preserve">
+    <value>E-poçt (tələb olunur)</value>
+  </data>
+  <data name="DomainNameRequiredParenthesis" xml:space="preserve">
+    <value>Domen adı (tələb olunur)</value>
+  </data>
+  <data name="APIKeyRequiredParenthesis" xml:space="preserve">
+    <value>API açarı (tələb olunur)</value>
+  </data>
+  <data name="Service" xml:space="preserve">
+    <value>Xidmət</value>
+  </data>
+  <data name="AddyIo" xml:space="preserve">
+    <value>addy.io</value>
+    <comment>"addy.io" is the product name and should not be translated.</comment>
+  </data>
+  <data name="FirefoxRelay" xml:space="preserve">
+    <value>Firefox Relay</value>
+    <comment>"Firefox Relay" is the product name and should not be translated.</comment>
+  </data>
+  <data name="SimpleLogin" xml:space="preserve">
+    <value>SimpleLogin</value>
+    <comment>"SimpleLogin" is the product name and should not be translated.</comment>
+  </data>
+  <data name="DuckDuckGo" xml:space="preserve">
+    <value>DuckDuckGo</value>
+    <comment>"DuckDuckGo" is the product name and should not be translated.</comment>
+  </data>
+  <data name="Fastmail" xml:space="preserve">
+    <value>Fastmail</value>
+    <comment>"Fastmail" is the product name and should not be translated.</comment>
+  </data>
+  <data name="ForwardEmail" xml:space="preserve">
+    <value>ForwardEmail</value>
+    <comment>"ForwardEmail" is the product name and should not be translated.</comment>
+  </data>
+  <data name="APIAccessToken" xml:space="preserve">
+    <value>API müraciət tokeni</value>
+  </data>
+  <data name="AreYouSureYouWantToOverwriteTheCurrentUsername" xml:space="preserve">
+    <value>Hazırkı istifadəçi adının üzərinə yazmaq istədiyinizə əminsiniz?</value>
+  </data>
+  <data name="GenerateUsername" xml:space="preserve">
+    <value>İstifadəçi adı yarat</value>
+  </data>
+  <data name="EmailType" xml:space="preserve">
+    <value>E-poçt növü</value>
+  </data>
+  <data name="WebsiteRequired" xml:space="preserve">
+    <value>Veb sayt (tələb olunur)</value>
+  </data>
+  <data name="UnknownXErrorMessage" xml:space="preserve">
+    <value>Bilinməyən {0} xəta baş verdi.</value>
+  </data>
+  <data name="PlusAddressedEmailDescription" xml:space="preserve">
+    <value>E-poçt provayderinizin alt ünvan özəlliklərini istifadə edin</value>
+  </data>
+  <data name="CatchAllEmailDescription" xml:space="preserve">
+    <value>Domeninizin konfiqurasiya edilmiş hamısını yaxalama gələn qutusunu istifadə edin.</value>
+  </data>
+  <data name="ForwardedEmailDescription" xml:space="preserve">
+    <value>Xarici yönləndirmə xidməti ilə e-poçt ləqəbi yaradın.</value>
+  </data>
+  <data name="Random" xml:space="preserve">
+    <value>Təsadüfi</value>
+  </data>
+  <data name="ConnectToWatch" xml:space="preserve">
+    <value>"Watch"a bağlan</value>
+  </data>
+  <data name="AccessibilityServiceDisclosure" xml:space="preserve">
+    <value>Əlçatımlılıq Xidməti açıqlaması</value>
+  </data>
+  <data name="AccessibilityDisclosureText" xml:space="preserve">
+    <value>Bitwarden, tətbiqlərdə və veb saytlarda giriş sahələrini axtarmaq üçün Əlçatımlılıq Xidmətini istifadə edir, daha sonra tətbiq və ya sayt üçün uyğunluq aşkar etdikdə istifadəçi adı və parolun daxil edilməsi üçün müvafiq sahə kimliklərini yaradır. Xidmət tərəfindən bizə təqdim edilən məlumatların heç birini saxlamırıq, kimlik məlumatlarının daxil edilməsindən kənar ekrandakı hər hansısa elementə nəzarət etməyə cəhd etmirik.</value>
+  </data>
+  <data name="Accept" xml:space="preserve">
+    <value>Qəbul et</value>
+  </data>
+  <data name="Decline" xml:space="preserve">
+    <value>Rədd et</value>
+  </data>
+  <data name="LoginRequestHasAlreadyExpired" xml:space="preserve">
+    <value>Giriş tələbinin müddəti artıq bitib.</value>
+  </data>
+  <data name="LoginAttemptFromXDoYouWantToSwitchToThisAccount" xml:space="preserve">
+    <value>Giriş cəhdi:
+{0}
+Bu hesaba keçmək istəyirsiniz?</value>
+  </data>
+  <data name="NewAroundHere" xml:space="preserve">
+    <value>Burada yenisiniz?</value>
+  </data>
+  <data name="GetMasterPasswordwordHint" xml:space="preserve">
+    <value>Ana parol üçün məsləhət alın</value>
+  </data>
+  <data name="LoggingInAsXOnY" xml:space="preserve">
+    <value>{1} üzərində {0} olaraq giriş edildi</value>
+  </data>
+  <data name="NotYou" xml:space="preserve">
+    <value>Siz deyilsiniz?</value>
+  </data>
+  <data name="LogInWithMasterPassword" xml:space="preserve">
+    <value>Ana parolla giriş et</value>
+  </data>
+  <data name="LogInWithAnotherDevice" xml:space="preserve">
+    <value>Başqa cihazla giriş et</value>
+  </data>
+  <data name="LogInInitiated" xml:space="preserve">
+    <value>Giriş etmə başladıldı</value>
+  </data>
+  <data name="ANotificationHasBeenSentToYourDevice" xml:space="preserve">
+    <value>Cihazınıza bir bildiriş göndərildi.</value>
+  </data>
+  <data name="PleaseMakeSureYourVaultIsUnlockedAndTheFingerprintPhraseMatchesOnTheOtherDevice" xml:space="preserve">
+    <value>Lütfən anbarınızın kilidinin açıq olduğuna və Barmaq izi ifadəsinin digər cihazda uyğun gəldiyinə əmin olun.</value>
+  </data>
+  <data name="ResendNotification" xml:space="preserve">
+    <value>Bildirişi təkrar göndər</value>
+  </data>
+  <data name="NeedAnotherOption" xml:space="preserve">
+    <value>Başqa bir seçimə ehtiyacınız var?</value>
+  </data>
+  <data name="ViewAllLoginOptions" xml:space="preserve">
+    <value>Bütün giriş etmə seçimlərinə bax</value>
+  </data>
+  <data name="ThisRequestIsNoLongerValid" xml:space="preserve">
+    <value>Bu tələb artıq yararsızdır</value>
+  </data>
+  <data name="PendingLogInRequests" xml:space="preserve">
+    <value>Giriş tələbləri gözlənilir</value>
+  </data>
+  <data name="DeclineAllRequests" xml:space="preserve">
+    <value>Bütün tələbləri rədd et</value>
+  </data>
+  <data name="AreYouSureYouWantToDeclineAllPendingLogInRequests" xml:space="preserve">
+    <value>Gözləyən bütün giriş tələblərini rədd etmək istədiyinizə əminsiniz?</value>
+  </data>
+  <data name="RequestsDeclined" xml:space="preserve">
+    <value>Tələblər rədd edildi</value>
+  </data>
+  <data name="NoPendingRequests" xml:space="preserve">
+    <value>Gözləyən heç bir tələb yoxdur</value>  
+  </data>
+  <data name="EnableCamerPermissionToUseTheScanner" xml:space="preserve">
+    <value>Skaneri istifadə etmək üçün kamera icazəsini fəallaşdırın</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Dil</value>
+  </data>
+  <data name="LanguageChangeXDescription" xml:space="preserve">
+    <value>Dil, {0} olaraq dəyişdirildi. Dəyişiklikləri görmək üçün lütfən tətbiqi yenidən başladın</value>
+  </data>
+  <data name="LanguageChangeRequiresAppRestart" xml:space="preserve">
+    <value>Dil dəyişikliyi, tətbiqin yenidən başladılmasını tələb edir</value>
+  </data>
+  <data name="DefaultSystem" xml:space="preserve">
+    <value>İlkin (Sistem)</value>
+  </data>
+  <data name="Important" xml:space="preserve">
+    <value>Vacib</value>
+  </data>
+  <data name="YourMasterPasswordCannotBeRecoveredIfYouForgetItXCharactersMinimum" xml:space="preserve">
+    <value>Ana parolunuzu unutsanız bərpa edə bilməzsiniz! Ən az {0} simvol.</value>
+  </data>
+  <data name="WeakMasterPassword" xml:space="preserve">
+    <value>Zəif ana parol</value>
+  </data>
+  <data name="WeakPasswordIdentifiedUseAStrongPasswordToProtectYourAccount" xml:space="preserve">
+    <value>Zəif parol aşkarlandı. Hesabınızı qorumaq üçün güclü bir parol istifadə edin. Zəif bir parol istifadə etmək istədiyinizə əminsiniz?</value>
+  </data>
+  <data name="Weak" xml:space="preserve">
+    <value>Zəif</value>
+  </data>
+  <data name="Good" xml:space="preserve">
+    <value>Yaxşı</value>
+  </data>
+  <data name="Strong" xml:space="preserve">
+    <value>Güclü</value>
+  </data>
+  <data name="CheckKnownDataBreachesForThisPassword" xml:space="preserve">
+    <value>Bu parol üçün bilinən məlumat pozuntularını yoxlayın</value>
+  </data>
+  <data name="ExposedMasterPassword" xml:space="preserve">
+    <value>İfşa olunmuş ana parol</value>
+  </data>
+  <data name="PasswordFoundInADataBreachAlertDescription" xml:space="preserve">
+    <value>Parol, məlumat pozuntusunda tapıldı. Hesabınızı qorumaq üçün unikal bir parol istifadə edin. İfşa olunmuş bir parol istifadə etmək istədiyinizə əminsiniz?</value>
+  </data>
+  <data name="WeakAndExposedMasterPassword" xml:space="preserve">
+    <value>Zəif və ifşa olunmuş ana parol</value>
+  </data>
+  <data name="WeakPasswordIdentifiedAndFoundInADataBreachAlertDescription" xml:space="preserve">
+    <value>Zəif parol məlumat pozuntusunda aşkarlandı və tapıldı. Hesabınızı qorumaq üçün güclü və unikal bir parol istifadə edin. Bu parolu istifadə etmək istədiyinizə əminsiniz?</value>
+  </data>
+  <data name="OrganizationSsoIdentifierRequired" xml:space="preserve">
+    <value>Təşkilat SSO identifikatoru tələb olundu.</value>
+  </data>
+  <data name="AddTheKeyToAnExistingOrNewItem" xml:space="preserve">
+    <value>Açarı, mövcud və ya yeni bir elementə əlavə edin</value>
+  </data>
+  <data name="ThereAreNoItemsInYourVaultThatMatchX" xml:space="preserve">
+    <value>Anbarınızda {0} ilə uyğunlaşan heç bir element yoxdur</value>
+  </data>
+  <data name="SearchForAnItemOrAddANewItem" xml:space="preserve">
+    <value>Bir element axtarın və ya yenisini əlavə edin</value>
+  </data>
+  <data name="ThereAreNoItemsThatMatchTheSearch" xml:space="preserve">
+    <value>Axtarışa uyğun gələn heç bir element yoxdur</value>
+  </data>
+  <data name="US" xml:space="preserve">
+    <value>ABŞ</value>
+  </data>
+  <data name="EU" xml:space="preserve">
+    <value>AB</value>
+  </data>
+  <data name="SelfHosted" xml:space="preserve">
+    <value>Öz-özünə sahiblik edən</value>
+  </data>
+  <data name="DataRegion" xml:space="preserve">
+    <value>Data bölgəsi</value>
+  </data>
+  <data name="Region" xml:space="preserve">
+    <value>Bölgə</value>
+  </data>
+  <data name="UpdateWeakMasterPasswordWarning" xml:space="preserve">
+    <value>Ana parolunuz təşkilatınızdakı siyasətlərdən birinə və ya bir neçəsinə uyğun gəlmir. Anbara müraciət üçün ana parolunuzu indi güncəlləməlisiniz. Davam etsəniz, hazırkı seansdan çıxış etmiş və təkrar giriş etməli olacaqsınız. Digər cihazlardakı aktiv seanslar bir saata qədər aktiv qalmağa davam edə bilər.</value>
+  </data>
+  <data name="CurrentMasterPassword" xml:space="preserve">
+    <value>Hazırkı ana parol</value>
+  </data>
+  <data name="LoggedIn" xml:space="preserve">
+    <value>Giriş edildi!</value>
+  </data>
+  <data name="ApproveWithMyOtherDevice" xml:space="preserve">
+    <value>Digər cihazımla təsdiqlə</value>
+  </data>
+  <data name="RequestAdminApproval" xml:space="preserve">
+    <value>Admin təsdiqini tələb et</value>
+  </data>
+  <data name="ApproveWithMasterPassword" xml:space="preserve">
+    <value>Ana parolla təsdiqlə</value>
+  </data>
+  <data name="TurnOffUsingPublicDevice" xml:space="preserve">
+    <value>Hər kəsə açıq bir cihaz istifadə edərək söndür</value>
+  </data>
+  <data name="RememberThisDevice" xml:space="preserve">
+    <value>Bu cihazı xatırla</value>
+  </data>
+  <data name="Passkey" xml:space="preserve">
+    <value>Keçid açarı</value>
+  </data>
+  <data name="Passkeys" xml:space="preserve">
+    <value>Keçid açarı</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>Tətbiq</value>
+  </data>
+  <data name="YouCannotEditPasskeyApplicationBecauseItWouldInvalidateThePasskey" xml:space="preserve">
+    <value>Keçid açarı tətbiqinə düzəliş edə bilməzsiniz, çünki bu, keçid açarını yararsız edəcək</value>
+  </data>
+  <data name="PasskeyWillNotBeCopied" xml:space="preserve">
+    <value>Keçid açarı kopyalanmır</value>
+  </data>
+  <data name="ThePasskeyWillNotBeCopiedToTheClonedItemDoYouWantToContinueCloningThisItem" xml:space="preserve">
+    <value>Keçid açarı, klonlanmış elementə kopyalanmayacaq. Bu elementi klonlamağa davam etmək istəyirsiniz?</value>
+  </data>
+  <data name="CopyApplication" xml:space="preserve">
+    <value>Tətbiqi kopyala</value>
+  </data>
+  <data name="AvailableForTwoStepLogin" xml:space="preserve">
+    <value>İki addımlı giriş üçün əlçatandır</value>
+  </data>
+  <data name="MasterPasswordRePromptHelp" xml:space="preserve">
+    <value>Ana parolu təkrar soruş köməyi</value>
+  </data>
+  <data name="UnlockingMayFailDueToInsufficientMemoryDecreaseYourKDFMemorySettingsToResolve" xml:space="preserve">
+    <value>Yetərsiz yaddaşa görə kilid açma uğursuz ola bilər. Həll etmək üçün KDF yaddaş ayarlarınızı azaldın və ya biometrik kilid açmanı quraşdırın.</value>
+  </data>
+  <data name="InvalidAPIKey" xml:space="preserve">
+    <value>Yararsız API açarı</value>
+  </data>
+  <data name="InvalidAPIToken" xml:space="preserve">
+    <value>Yararsız API tokeni</value>
+  </data>
+  <data name="AdminApprovalRequested" xml:space="preserve">
+    <value>Admin təsdiqi tələb olunur</value>
+  </data>
+  <data name="YourRequestHasBeenSentToYourAdmin" xml:space="preserve">
+    <value>Tələbiniz admininizə göndərildi.</value>
+  </data>
+  <data name="YouWillBeNotifiedOnceApproved" xml:space="preserve">
+    <value>Təsdiqləndikdən sonra məlumatlandırılacaqsınız. </value>
+  </data>
+  <data name="TroubleLoggingIn" xml:space="preserve">
+    <value>Girişdə problem var?</value>
+  </data>
+  <data name="LoggingInAsX" xml:space="preserve">
+    <value>{0} olaraq giriş edilir</value>
+  </data>
+  <data name="VaultTimeoutActionChangedToLogOut" xml:space="preserve">
+    <value>Anbar vaxt bitməsi əməliyyatı "çıxış et" olaraq dəyişdirildi</value>
+  </data>
+  <data name="BlockAutoFill" xml:space="preserve">
+    <value>Avto-doldurmanı əngəllə</value>
+  </data>
+  <data name="AutoFillWillNotBeOfferedForTheseURIs" xml:space="preserve">
+    <value>Bu URI-lər üçün avto-doldurma təklif olunmayacaq.</value>
+  </data>
+  <data name="NewBlockedURI" xml:space="preserve">
+    <value>Yeni əngəllənən URI</value>
+  </data>
+  <data name="URISaved" xml:space="preserve">
+    <value>URI saxlanıldı</value>
+  </data>
+  <data name="InvalidFormatUseHttpsHttpOrAndroidApp" xml:space="preserve">
+    <value>Yararsız format. https://, http:// və ya androidapp:// istifadə edin</value>
+    <comment>https://, http://, androidapp:// should not be translated</comment>
+  </data>
+  <data name="EditURI" xml:space="preserve">
+    <value>URI-ə düzəliş et</value>
+  </data>
+  <data name="EnterURI" xml:space="preserve">
+    <value>URI-ni daxil et</value>
+  </data>
+  <data name="FormatXSeparateMultipleURIsWithAComma" xml:space="preserve">
+    <value>Format: {0}. Bir neçə URI-ı vergüllə ayırın.</value>
+  </data>
+  <data name="FormatX" xml:space="preserve">
+    <value>Format: {0}</value>
+  </data>
+  <data name="InvalidURI" xml:space="preserve">
+    <value>Yararsız URI</value>
+  </data>
+  <data name="URIRemoved" xml:space="preserve">
+    <value>URI silindi</value>
+  </data>
+  <data name="ThereAreNoBlockedURIs" xml:space="preserve">
+    <value>Əngəllənən URI yoxdur</value>
+  </data>
+  <data name="TheURIXIsAlreadyBlocked" xml:space="preserve">
+    <value>URI {0} artıq əngəllənib</value>
+  </data>
+  <data name="CannotEditMultipleURIsAtOnce" xml:space="preserve">
+    <value>Bir dəfəyə bir neçə URI-a düzəliş etmək mümkün deyil</value>
+  </data>
+  <data name="LoginApproved" xml:space="preserve">
+    <value>Giriş təsdiqləndi</value>
+  </data>
+  <data name="LogInWithDeviceMustBeSetUpInTheSettingsOfTheBitwardenAppNeedAnotherOption" xml:space="preserve">
+    <value>Cihazla giriş etmə, Bitwarden tətbiqinin ayarlarında qurulmalıdır. Başqa bir seçimə ehtiyacınız var?</value>
+  </data>
+  <data name="LogInWithDevice" xml:space="preserve">
+    <value>Cihazla giriş et</value>
+  </data>
+  <data name="LoggingInOn" xml:space="preserve">
+    <value>Giriş edilir</value>
+  </data>
+  <data name="Vault" xml:space="preserve">
+    <value>Anbar</value>
+  </data>
+  <data name="Appearance" xml:space="preserve">
+    <value>Görünüş</value>
+  </data>
+  <data name="AccountSecurity" xml:space="preserve">
+    <value>Hesab güvənliyi</value>
+  </data>
+  <data name="BitwardenHelpCenter" xml:space="preserve">
+    <value>Bitwarden Kömək Mərkəzi</value>
+  </data>
+  <data name="ContactBitwardenSupport" xml:space="preserve">
+    <value>Bitwarden dəstəyi ilə əlaqə saxla</value>
+  </data>
+  <data name="CopyAppInformation" xml:space="preserve">
+    <value>Tətbiq məlumatlarını kopyala</value>
+  </data>
+  <data name="SyncNow" xml:space="preserve">
+    <value>İndi sinxr.</value>
+  </data>
+  <data name="UnlockOptions" xml:space="preserve">
+    <value>Kilid açma seçimləri</value>
+  </data>
+  <data name="SessionTimeout" xml:space="preserve">
+    <value>Seans vaxt bitməsi</value>
+  </data>
+  <data name="SessionTimeoutAction" xml:space="preserve">
+    <value>Seans vaxt bitmə əməliyyatı</value>
+  </data>
+  <data name="AccountFingerprintPhrase" xml:space="preserve">
+    <value>Hesab barmaq izi ifadəsi</value>
+    <comment>A 'fingerprint phrase' is a unique word phrase (similar to a passphrase) that a user can use to authenticate their public key with another user, for the purposes of sharing.</comment>
+  </data>
+  <data name="OneHourAndOneMinute" xml:space="preserve">
+    <value>Bir saat bir dəqiqə</value>
+  </data>
+  <data name="OneHourAndXMinute" xml:space="preserve">
+    <value>Bir saat {0} dəqiqə</value>
+  </data>
+  <data name="XHoursAndOneMinute" xml:space="preserve">
+    <value>{0} saat bir dəqiqə</value>
+  </data>
+  <data name="XHoursAndYMinutes" xml:space="preserve">
+    <value>{0} saat {1} dəqiqə</value>
+  </data>
+  <data name="XHours" xml:space="preserve">
+    <value>{0} saat</value>
+  </data>
+  <data name="AutofillServicesExplanationLong" xml:space="preserve">
+    <value>Android Avto-doldurma Çərçivəsi, giriş məlumatlarını cihazınızdakı digər tətbiqlərə doldurmağa kömək etmək üçün istifadə olunur.</value>
+  </data>
+  <data name="UseInlineAutofillExplanationLong" xml:space="preserve">
+    <value>Seçdiyiniz klaviatura dəstəkləyirsə sətir daxili avto-doldurmani istifadə edin. Əks halda, ilkin örtük istifadə edin.</value>
+  </data>
+  <data name="AdditionalOptions" xml:space="preserve">
+    <value>Əlavə seçimlər</value>
+  </data>
+  <data name="ContinueToWebApp" xml:space="preserve">
+    <value>Veb tətbiqlə davam edilsin?</value>
+  </data>
+  <data name="ContinueToX" xml:space="preserve">
+    <value>{0} ilə davam edilsin?</value>
+    <comment>The parameter is an URL, like bitwarden.com.</comment>
+  </data>
+  <data name="ContinueToHelpCenter" xml:space="preserve">
+    <value>Kömək mərkəzi ilə davam edilsin?</value>
+  </data>
+  <data name="ContinueToContactSupport" xml:space="preserve">
+    <value>Dəstək komandası ilə əlaqə qurmağa davam edilsin?</value>
+  </data>
+  <data name="ContinueToAppStore" xml:space="preserve">
+    <value>Tətbiq mağazası ilə davam edilsin?</value>
+  </data>
+  <data name="TwoStepLoginDescriptionLong" xml:space="preserve">
+    <value>Bitwarden veb tətbiqində iki addımlı girişi quraraq hesabınızı daha güvənli edin.</value>
+  </data>
+  <data name="ChangeMasterPasswordDescriptionLong" xml:space="preserve">
+    <value>Ana parolunuzu Bitwarden veb tətbiqində dəyişdirə bilərsiniz.</value>
+  </data>
+  <data name="YouCanImportDataToYourVaultOnX" xml:space="preserve">
+    <value>Datanı {0} üzərindən anbarınıza köçürə bilərsiniz.</value>
+    <comment>The parameter is an URL, like vault.bitwarden.com.</comment>
+  </data>
+  <data name="LearnMoreAboutHowToUseBitwardenOnTheHelpCenter" xml:space="preserve">
+    <value>Kömək mərkəzində Bitwarden-in necə istifadə ediləcəyi ilə bağlı ətraflı öyrənin.</value>
+  </data>
+  <data name="ContactSupportDescriptionLong" xml:space="preserve">
+    <value>Axtardığınızı tapa bilmirsiniz? bitwarden.com üzərindən Bitwarden dəstəyinə müraciət edin.</value>
+  </data>
+  <data name="ExploreMoreFeaturesOfYourBitwardenAccountOnTheWebApp" xml:space="preserve">
+    <value>Veb tətbiqində Bitwarden hesabınızın daha çox özəlliyini kəşf edin.</value>
+  </data>
+  <data name="LearnAboutOrganizationsDescriptionLong" xml:space="preserve">
+    <value>Bitwarden, bir təşkilat hesabı istifadə edərək anbar elementlərinizi başqaları ilə paylaşmağınıza icazə verər. bitwarden.com veb saytında ətraflı öyrənin.</value>
+  </data>
+  <data name="RateAppDescriptionLong" xml:space="preserve">
+    <value>Başqalarının Bitwarden-in onlar üçün uyğun olub-olmadığını öyrənməkdə kömək edin. Tətbiq mağazasını ziyarət edin və tətbiqimizi qiymətləndirin.</value>
+  </data>
+  <data name="DefaultDarkThemeDescriptionLong" xml:space="preserve">
+    <value>Cihazınızda qaranlıq rejim açıq olduqda istifadə ediləcək qaranlıq temanı seçin</value>
+  </data>
+  <data name="CreatedXY" xml:space="preserve">
+    <value>Yaradıldı: {0}, {1}</value>
+    <comment>To state the date/time in which the cipher was created: Created 03/21/2023, 09:25 AM. First parameter is the date and the second parameter is the time.</comment>
+  </data>
+  <data name="TooManyAttempts" xml:space="preserve">
+    <value>Həddən artıq cəhd</value>
+  </data>
+  <data name="AccountLoggedOutBiometricExceeded" xml:space="preserve">
+    <value>Hesabdan çıxış edildi.</value>
+  </data>
+  <data name="YourOrganizationPermissionsWereUpdatedRequeringYouToSetAMasterPassword" xml:space="preserve">
+    <value>Təşkilatınızın icazələri güncəlləndi və bir ana parol ayarlamağınızı tələb edir.</value>
+  </data>
+  <data name="YourOrganizationRequiresYouToSetAMasterPassword" xml:space="preserve">
+    <value>Təşkilatınız bir ana parol ayarlamağı tələb edir.</value> 
+  </data>
+  <data name="SetUpAnUnlockOptionToChangeYourVaultTimeoutAction" xml:space="preserve">
+    <value>Anbar vaxt bitməsi əməliyyatınızı dəyişdirmək üçün bir kilid açma seçimi qurun.</value>
   </data>
 </root>

@@ -12,18 +12,26 @@ namespace Bit.App.Utilities
 {
     public static class ThemeManager
     {
+        public const string UPDATED_THEME_MESSAGE_KEY = "updatedTheme";
+
         public static bool UsingLightTheme = true;
         public static Func<ResourceDictionary> Resources = () => null;
 
         public static bool IsThemeDirty = false;
 
-        public static void SetThemeStyle(string name, ResourceDictionary resources)
+        public const string Light = "light";
+        public const string Dark = "dark";
+        public const string Black = "black";
+        public const string Nord = "nord";
+        public const string SolarizedDark = "solarizeddark";
+
+        public static void SetThemeStyle(string name, string autoDarkName, ResourceDictionary resources)
         {
             try
             {
                 Resources = () => resources;
 
-                var newTheme = NeedsThemeUpdate(name, resources);
+                var newTheme = NeedsThemeUpdate(name, autoDarkName, resources);
                 if (newTheme is null)
                 {
                     return;
@@ -52,11 +60,12 @@ namespace Bit.App.Utilities
 
                 // Base styles
                 resources.MergedDictionaries.Add(new Base());
+                resources.MergedDictionaries.Add(new ControlTemplates());
 
                 // Platform styles
                 if (Device.RuntimePlatform == Device.Android)
                 {
-                    resources.MergedDictionaries.Add(new Android());
+                    resources.MergedDictionaries.Add(new Styles.Android());
                 }
                 else if (Device.RuntimePlatform == Device.iOS)
                 {
@@ -85,22 +94,34 @@ namespace Bit.App.Utilities
                 : Activator.CreateInstance(themeType) as ResourceDictionary;
         }
 
-        static ResourceDictionary NeedsThemeUpdate(string themeName, ResourceDictionary resources)
+        static ResourceDictionary NeedsThemeUpdate(string themeName, string autoDarkThemeName, ResourceDictionary resources)
         {
             switch (themeName)
             {
-                case "dark":
+                case Dark:
                     return CheckAndGetThemeForMergedDictionaries(typeof(Dark), resources);
-                case "black":
+                case Black:
                     return CheckAndGetThemeForMergedDictionaries(typeof(Black), resources);
-                case "nord":
+                case Nord:
                     return CheckAndGetThemeForMergedDictionaries(typeof(Nord), resources);
-                case "light":
+                case Light:
                     return CheckAndGetThemeForMergedDictionaries(typeof(Light), resources);
+                case SolarizedDark:
+                    return CheckAndGetThemeForMergedDictionaries(typeof(SolarizedDark), resources);
                 default:
                     if (OsDarkModeEnabled())
                     {
-                        return CheckAndGetThemeForMergedDictionaries(typeof(Dark), resources);
+                        switch (autoDarkThemeName)
+                        {
+                            case Black:
+                                return CheckAndGetThemeForMergedDictionaries(typeof(Black), resources);
+                            case Nord:
+                                return CheckAndGetThemeForMergedDictionaries(typeof(Nord), resources);
+                            case SolarizedDark:
+                                return CheckAndGetThemeForMergedDictionaries(typeof(SolarizedDark), resources);
+                            default:
+                                return CheckAndGetThemeForMergedDictionaries(typeof(Dark), resources);
+                        }
                     }
                     return CheckAndGetThemeForMergedDictionaries(typeof(Light), resources);
             }
@@ -108,13 +129,19 @@ namespace Bit.App.Utilities
 
         public static void SetTheme(ResourceDictionary resources)
         {
-            SetThemeStyle(GetTheme(), resources);
+            SetThemeStyle(GetTheme(), GetAutoDarkTheme(), resources);
         }
 
         public static string GetTheme()
         {
             var stateService = ServiceContainer.Resolve<IStateService>("stateService");
             return stateService.GetThemeAsync().GetAwaiter().GetResult();
+        }
+
+        public static string GetAutoDarkTheme()
+        {
+            var stateService = ServiceContainer.Resolve<IStateService>("stateService");
+            return stateService.GetAutoDarkThemeAsync().GetAwaiter().GetResult();
         }
 
         public static bool OsDarkModeEnabled()
@@ -128,11 +155,11 @@ namespace Bit.App.Utilities
             return Application.Current.RequestedTheme == OSAppTheme.Dark;
         }
 
-        public static void ApplyResourcesToPage(ContentPage page)
+        public static void ApplyResourcesTo(VisualElement element)
         {
             foreach (var resourceDict in Resources().MergedDictionaries)
             {
-                page.Resources.Add(resourceDict);
+                element.Resources.Add(resourceDict);
             }
         }
 

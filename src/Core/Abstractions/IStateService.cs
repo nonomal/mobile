@@ -4,16 +4,29 @@ using System.Threading.Tasks;
 using Bit.Core.Enums;
 using Bit.Core.Models.Data;
 using Bit.Core.Models.Domain;
+using Bit.Core.Models.Response;
 using Bit.Core.Models.View;
+using Bit.Core.Services;
 
 namespace Bit.Core.Abstractions
 {
     public interface IStateService
     {
         List<AccountView> AccountViews { get; }
+        Task<UserKey> GetUserKeyAsync(string userId = null);
+        Task SetUserKeyAsync(UserKey value, string userId = null);
+        Task<MasterKey> GetMasterKeyAsync(string userId = null);
+        Task SetMasterKeyAsync(MasterKey value, string userId = null);
+        Task<string> GetMasterKeyEncryptedUserKeyAsync(string userId = null);
+        Task SetMasterKeyEncryptedUserKeyAsync(string value, string userId = null);
+        Task<UserKey> GetUserKeyAutoUnlockAsync(string userId = null);
+        Task SetUserKeyAutoUnlockAsync(UserKey value, string userId = null);
         Task<string> GetActiveUserIdAsync();
+        Task<string> GetActiveUserEmailAsync();
+        Task<T> GetActiveUserCustomDataAsync<T>(Func<Account, T> dataMapper);
         Task<bool> IsActiveAccountAsync(string userId = null);
         Task SetActiveUserAsync(string userId);
+        Task CheckExtensionActiveUserAndSwitchIfNeededAsync();
         Task<bool> IsAuthenticatedAsync(string userId = null);
         Task<string> GetUserIdAsync(string email);
         Task RefreshAccountViewsAsync(bool allowAddAccountRow);
@@ -22,33 +35,33 @@ namespace Bit.Core.Abstractions
         Task<EnvironmentUrlData> GetPreAuthEnvironmentUrlsAsync();
         Task SetPreAuthEnvironmentUrlsAsync(EnvironmentUrlData value);
         Task<EnvironmentUrlData> GetEnvironmentUrlsAsync(string userId = null);
+        Task<UserKey> GetUserKeyBiometricUnlockAsync(string userId = null);
+        Task SetUserKeyBiometricUnlockAsync(UserKey value, string userId = null);
         Task<bool?> GetBiometricUnlockAsync(string userId = null);
         Task SetBiometricUnlockAsync(bool? value, string userId = null);
         Task<bool> GetBiometricLockedAsync(string userId = null);
         Task SetBiometricLockedAsync(bool value, string userId = null);
+        Task<string> GetSystemBiometricIntegrityState(string bioIntegritySrcKey);
+        Task SetSystemBiometricIntegrityState(string bioIntegritySrcKey, string systemBioIntegrityState);
+        Task<bool> IsAccountBiometricIntegrityValidAsync(string bioIntegritySrcKey, string userId = null);
+        Task SetAccountBiometricIntegrityValidAsync(string bioIntegritySrcKey, string userId = null);
         Task<bool> CanAccessPremiumAsync(string userId = null);
         Task<string> GetProtectedPinAsync(string userId = null);
+        Task SetPersonalPremiumAsync(bool value, string userId = null);
+        Task<EncString> GetPinKeyEncryptedUserKeyAsync(string userId = null);
+        Task SetPinKeyEncryptedUserKeyAsync(EncString value, string userId = null);
+        Task<EncString> GetPinKeyEncryptedUserKeyEphemeralAsync(string userId = null);
+        Task SetPinKeyEncryptedUserKeyEphemeralAsync(EncString value, string userId = null);
         Task SetProtectedPinAsync(string value, string userId = null);
-        Task<string> GetPinProtectedAsync(string userId = null);
-        Task SetPinProtectedAsync(string value, string userId = null);
-        Task<EncString> GetPinProtectedKeyAsync(string userId = null);
-        Task SetPinProtectedKeyAsync(EncString value, string userId = null);
-        Task<KdfType?> GetKdfTypeAsync(string userId = null);
-        Task SetKdfTypeAsync(KdfType? value, string userId = null);
-        Task<int?> GetKdfIterationsAsync(string userId = null);
-        Task SetKdfIterationsAsync(int? value, string userId = null);
-        Task<string> GetKeyEncryptedAsync(string userId = null);
-        Task SetKeyEncryptedAsync(string value, string userId = null);
-        Task<SymmetricCryptoKey> GetKeyDecryptedAsync(string userId = null);
-        Task SetKeyDecryptedAsync(SymmetricCryptoKey value, string userId = null);
+        Task SetKdfConfigurationAsync(KdfConfig config, string userId = null);
         Task<string> GetKeyHashAsync(string userId = null);
         Task SetKeyHashAsync(string value, string userId = null);
-        Task<string> GetEncKeyEncryptedAsync(string userId = null);
-        Task SetEncKeyEncryptedAsync(string value, string userId = null);
         Task<Dictionary<string, string>> GetOrgKeysEncryptedAsync(string userId = null);
         Task SetOrgKeysEncryptedAsync(Dictionary<string, string> value, string userId = null);
         Task<string> GetPrivateKeyEncryptedAsync(string userId = null);
         Task SetPrivateKeyEncryptedAsync(string value, string userId = null);
+        Task<SymmetricCryptoKey> GetDeviceKeyAsync(string userId = null);
+        Task SetDeviceKeyAsync(SymmetricCryptoKey value, string userId = null);
         Task<List<string>> GetAutofillBlacklistedUrisAsync(string userId = null);
         Task SetAutofillBlacklistedUrisAsync(List<string> value, string userId = null);
         Task<bool?> GetAutofillTileAddedAsync();
@@ -71,22 +84,20 @@ namespace Bit.Core.Abstractions
         Task SetInvalidUnlockAttemptsAsync(int? value, string userId = null);
         Task<string> GetLastBuildAsync();
         Task SetLastBuildAsync(string value);
-        Task<bool?> GetDisableFaviconAsync(string userId = null);
-        Task SetDisableFaviconAsync(bool? value, string userId = null);
+        Task<bool?> GetDisableFaviconAsync();
+        Task SetDisableFaviconAsync(bool? value);
         Task<bool?> GetDisableAutoTotpCopyAsync(string userId = null);
         Task SetDisableAutoTotpCopyAsync(bool? value, string userId = null);
         Task<bool?> GetInlineAutofillEnabledAsync(string userId = null);
         Task SetInlineAutofillEnabledAsync(bool? value, string userId = null);
         Task<bool?> GetAutofillDisableSavePromptAsync(string userId = null);
         Task SetAutofillDisableSavePromptAsync(bool? value, string userId = null);
-        Task<Dictionary<string, Dictionary<string, object>>> GetLocalDataAsync(string userId = null);
-        Task SetLocalDataAsync(Dictionary<string, Dictionary<string, object>> value, string userId = null);
+        Task<Dictionary<string, Dictionary<string, object>>> GetCiphersLocalDataAsync(string userId = null);
+        Task SetCiphersLocalDataAsync(Dictionary<string, Dictionary<string, object>> value, string userId = null);
         Task<Dictionary<string, CipherData>> GetEncryptedCiphersAsync(string userId = null);
         Task SetEncryptedCiphersAsync(Dictionary<string, CipherData> value, string userId = null);
         Task<int?> GetDefaultUriMatchAsync(string userId = null);
         Task SetDefaultUriMatchAsync(int? value, string userId = null);
-        Task<HashSet<string>> GetNeverDomainsAsync(string userId = null);
-        Task SetNeverDomainsAsync(HashSet<string> value, string userId = null);
         Task<int?> GetClearClipboardAsync(string userId = null);
         Task SetClearClipboardAsync(int? value, string userId = null);
         Task<Dictionary<string, CollectionData>> GetEncryptedCollectionsAsync(string userId = null);
@@ -107,18 +118,20 @@ namespace Bit.Core.Abstractions
         Task SetRememberedEmailAsync(string value);
         Task<string> GetRememberedOrgIdentifierAsync();
         Task SetRememberedOrgIdentifierAsync(string value);
-        Task<string> GetThemeAsync(string userId = null);
-        Task SetThemeAsync(string value, string userId = null);
+        Task<string> GetThemeAsync();
+        Task SetThemeAsync(string value);
+        Task<string> GetAutoDarkThemeAsync();
+        Task SetAutoDarkThemeAsync(string value);
         Task<bool?> GetAddSitePromptShownAsync(string userId = null);
         Task SetAddSitePromptShownAsync(bool? value, string userId = null);
         Task<bool?> GetPushInitialPromptShownAsync();
         Task SetPushInitialPromptShownAsync(bool? value);
-        Task<DateTime?> GetPushLastRegistrationDateAsync();
-        Task SetPushLastRegistrationDateAsync(DateTime? value);
+        Task<DateTime?> GetPushLastRegistrationDateAsync(string userId = null);
+        Task SetPushLastRegistrationDateAsync(DateTime? value, string userId = null);
         Task<string> GetPushInstallationRegistrationErrorAsync();
         Task SetPushInstallationRegistrationErrorAsync(string value);
-        Task<string> GetPushCurrentTokenAsync();
-        Task SetPushCurrentTokenAsync(string value);
+        Task<string> GetPushCurrentTokenAsync(string userId = null);
+        Task SetPushCurrentTokenAsync(string value, string userId = null);
         Task<List<EventData>> GetEventCollectionAsync();
         Task SetEventCollectionAsync(List<EventData> value);
         Task<Dictionary<string, FolderData>> GetEncryptedFoldersAsync(string userId = null);
@@ -129,6 +142,8 @@ namespace Bit.Core.Abstractions
         Task SetPushRegisteredTokenAsync(string value);
         Task<bool> GetUsesKeyConnectorAsync(string userId = null);
         Task SetUsesKeyConnectorAsync(bool? value, string userId = null);
+        Task<ForcePasswordResetReason?> GetForcePasswordResetReasonAsync(string userId = null);
+        Task SetForcePasswordResetReasonAsync(ForcePasswordResetReason? value, string userId = null);
         Task<Dictionary<string, OrganizationData>> GetOrganizationsAsync(string userId = null);
         Task SetOrganizationsAsync(Dictionary<string, OrganizationData> organizations, string userId = null);
         Task<PasswordGenerationOptions> GetPasswordGenerationOptionsAsync(string userId = null);
@@ -145,5 +160,53 @@ namespace Bit.Core.Abstractions
         Task SetRefreshTokenAsync(string value, bool skipTokenStorage, string userId = null);
         Task<string> GetTwoFactorTokenAsync(string email = null);
         Task SetTwoFactorTokenAsync(string value, string email = null);
+        Task<bool> GetScreenCaptureAllowedAsync(string userId = null);
+        Task SetScreenCaptureAllowedAsync(bool value, string userId = null);
+        Task SaveExtensionActiveUserIdToStorageAsync(string userId);
+        Task<bool> GetApprovePasswordlessLoginsAsync(string userId = null);
+        Task SetApprovePasswordlessLoginsAsync(bool? value, string userId = null);
+        Task<PasswordlessRequestNotification> GetPasswordlessLoginNotificationAsync();
+        Task SetPasswordlessLoginNotificationAsync(PasswordlessRequestNotification value);
+        Task<UsernameGenerationOptions> GetUsernameGenerationOptionsAsync(string userId = null);
+        Task SetUsernameGenerationOptionsAsync(UsernameGenerationOptions value, string userId = null);
+        Task<bool> GetShouldConnectToWatchAsync(string userId = null);
+        Task SetShouldConnectToWatchAsync(bool shouldConnect, string userId = null);
+        Task<bool> GetLastUserShouldConnectToWatchAsync();
+        Task SetAvatarColorAsync(string value, string userId = null);
+        Task<string> GetAvatarColorAsync(string userId = null);
+        Task<string> GetPreLoginEmailAsync();
+        Task SetPreLoginEmailAsync(string value);
+        Task<AccountDecryptionOptions> GetAccountDecryptionOptions(string userId = null);
+        Task<PendingAdminAuthRequest> GetPendingAdminAuthRequestAsync(string userId = null);
+        Task SetPendingAdminAuthRequestAsync(PendingAdminAuthRequest value, string userId = null);
+        string GetLocale();
+        void SetLocale(string locale);
+        ConfigResponse GetConfigs();
+        void SetConfigs(ConfigResponse value);
+        Task<bool> GetShouldTrustDeviceAsync();
+        Task SetShouldTrustDeviceAsync(bool value);
+        Task SetUserHasMasterPasswordAsync(bool value, string userId = null);
+        Task<Region?> GetActiveUserRegionAsync();
+        Task<Region?> GetPreAuthRegionAsync();
+        Task SetPreAuthRegionAsync(Region value);
+        [Obsolete("Use GetPinKeyEncryptedUserKeyAsync instead, left for migration purposes")]
+        Task<string> GetPinProtectedAsync(string userId = null);
+        [Obsolete("Use SetPinKeyEncryptedUserKeyAsync instead, left for migration purposes")]
+        Task SetPinProtectedAsync(string value, string userId = null);
+        [Obsolete("Use GetPinKeyEncryptedUserKeyEphemeralAsync instead, left for migration purposes")]
+        Task<EncString> GetPinProtectedKeyAsync(string userId = null);
+        [Obsolete("Use SetPinKeyEncryptedUserKeyEphemeralAsync instead, left for migration purposes")]
+        Task SetPinProtectedKeyAsync(EncString value, string userId = null);
+        [Obsolete("Use GetMasterKeyEncryptedUserKeyAsync instead, left for migration purposes")]
+        Task<string> GetEncKeyEncryptedAsync(string userId = null);
+        [Obsolete("Use SetMasterKeyEncryptedUserKeyAsync instead, left for migration purposes")]
+        Task SetEncKeyEncryptedAsync(string value, string userId = null);
+        [Obsolete("Left for migration purposes")]
+        Task SetKeyEncryptedAsync(string value, string userId = null);
+
+        [Obsolete("Use GetUserKeyAutoUnlock instead, left for migration purposes")]
+        Task<string> GetKeyEncryptedAsync(string userId = null);
+        [Obsolete("Use GetMasterKeyAsync instead, left for migration purposes")]
+        Task<SymmetricCryptoKey> GetKeyDecryptedAsync(string userId = null);
     }
 }

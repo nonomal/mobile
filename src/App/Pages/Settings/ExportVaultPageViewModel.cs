@@ -16,11 +16,11 @@ namespace Bit.App.Pages
     public class ExportVaultPageViewModel : BaseViewModel
     {
         private readonly IDeviceActionService _deviceActionService;
+        private readonly IFileService _fileService;
         private readonly IPlatformUtilsService _platformUtilsService;
         private readonly II18nService _i18nService;
         private readonly IExportService _exportService;
         private readonly IPolicyService _policyService;
-        private readonly IKeyConnectorService _keyConnectorService;
         private readonly IUserVerificationService _userVerificationService;
         private readonly IApiService _apiService;
         private readonly ILogger _logger;
@@ -39,12 +39,12 @@ namespace Bit.App.Pages
         public ExportVaultPageViewModel()
         {
             _deviceActionService = ServiceContainer.Resolve<IDeviceActionService>("deviceActionService");
+            _fileService = ServiceContainer.Resolve<IFileService>();
             _platformUtilsService = ServiceContainer.Resolve<IPlatformUtilsService>("platformUtilsService");
             _i18nService = ServiceContainer.Resolve<II18nService>("i18nService");
             _exportService = ServiceContainer.Resolve<IExportService>("exportService");
             _policyService = ServiceContainer.Resolve<IPolicyService>("policyService");
-            _keyConnectorService = ServiceContainer.Resolve<IKeyConnectorService>("keyConnectorService");
-            _userVerificationService = ServiceContainer.Resolve<IUserVerificationService>("userVerificationService");
+            _userVerificationService = ServiceContainer.Resolve<IUserVerificationService>();
             _apiService = ServiceContainer.Resolve<IApiService>("apiService");
             _logger = ServiceContainer.Resolve<ILogger>("logger");
 
@@ -65,7 +65,7 @@ namespace Bit.App.Pages
             _initialized = true;
             FileFormatSelectedIndex = FileFormatOptions.FindIndex(k => k.Key == "json");
             DisablePrivateVaultPolicyEnabled = await _policyService.PolicyAppliesToUser(PolicyType.DisablePersonalVaultExport);
-            UseOTPVerification = await _keyConnectorService.GetUsesKeyConnector();
+            UseOTPVerification = !await _userVerificationService.HasMasterPasswordAsync(true);
 
             if (UseOTPVerification)
             {
@@ -109,7 +109,11 @@ namespace Bit.App.Pages
         {
             get => _showPassword;
             set => SetProperty(ref _showPassword, value,
-                additionalPropertyNames: new string[] { nameof(ShowPasswordIcon) });
+                additionalPropertyNames: new string[]
+                {
+                    nameof(ShowPasswordIcon),
+                    nameof(PasswordVisibilityAccessibilityText),
+                });
         }
 
         public bool UseOTPVerification
@@ -139,6 +143,7 @@ namespace Bit.App.Pages
         public Command TogglePasswordCommand { get; }
 
         public string ShowPasswordIcon => ShowPassword ? BitwardenIcons.EyeSlash : BitwardenIcons.Eye;
+        public string PasswordVisibilityAccessibilityText => ShowPassword ? AppResources.PasswordIsVisibleTapToHide : AppResources.PasswordIsNotVisibleTapToShow;
 
         public void TogglePassword()
         {
@@ -158,9 +163,9 @@ namespace Bit.App.Pages
                 return;
             }
 
-            var verificationType = await _keyConnectorService.GetUsesKeyConnector()
-                ? VerificationType.OTP
-                : VerificationType.MasterPassword;
+            var verificationType = await _userVerificationService.HasMasterPasswordAsync(true)
+                ? VerificationType.MasterPassword
+                : VerificationType.OTP;
             if (!await _userVerificationService.VerifyUser(Secret, verificationType))
             {
                 return;
@@ -177,7 +182,7 @@ namespace Bit.App.Pages
                 _defaultFilename = _exportService.GetFileName(null, fileFormat);
                 _exportResult = Encoding.UTF8.GetBytes(data);
 
-                if (!_deviceActionService.SaveFile(_exportResult, null, _defaultFilename, null))
+                if (!_fileService.SaveFile(_exportResult, null, _defaultFilename, null))
                 {
                     ClearResult();
                     await _platformUtilsService.ShowDialogAsync(_i18nService.T("ExportVaultFailure"));
@@ -215,7 +220,7 @@ namespace Bit.App.Pages
 
         public async void SaveFileSelected(string contentUri, string filename)
         {
-            if (_deviceActionService.SaveFile(_exportResult, null, filename ?? _defaultFilename, contentUri))
+            if (_fileService.SaveFile(_exportResult, null, filename ?? _defaultFilename, contentUri))
             {
                 ClearResult();
                 _platformUtilsService.ShowToast("success", null, _i18nService.T("ExportVaultSuccess"));

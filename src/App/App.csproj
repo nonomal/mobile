@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <RootNamespace>Bit.App</RootNamespace>
     <AssemblyName>BitwardenApp</AssemblyName>
     <Configurations>Debug;Release;FDroid</Configurations>
@@ -13,15 +13,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="4.4.0" />
-    <PackageReference Include="Plugin.Fingerprint" Version="2.1.4" />
-    <PackageReference Include="SkiaSharp.Views.Forms" Version="2.80.3" />
-    <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.1" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.7.2" />
+    <PackageReference Include="Plugin.Fingerprint" Version="2.1.5" />
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="2.88.3" />
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.6" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.8.0" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2401" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2612" />
     <PackageReference Include="ZXing.Net.Mobile" Version="2.4.1" />
     <PackageReference Include="ZXing.Net.Mobile.Forms" Version="2.4.1" />
+    <PackageReference Include="MessagePack" Version="2.4.59" />
   </ItemGroup>
 
   <ItemGroup>
@@ -59,9 +59,6 @@
     <Compile Update="Pages\Settings\ExtensionPage.xaml.cs">
       <DependentUpon>ExtensionPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Pages\Settings\AutofillServicesPage.xaml.cs">
-      <DependentUpon>AutofillServicesPage.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Pages\Settings\FolderAddEditPage.xaml.cs">
       <DependentUpon>FolderAddEditPage.xaml</DependentUpon>
     </Compile>
@@ -70,12 +67,6 @@
     </Compile>
     <Compile Update="Pages\Settings\ExportVaultPage.xaml.cs">
       <DependentUpon>ExportVaultPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Pages\Settings\OptionsPage.xaml.cs">
-      <DependentUpon>OptionsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Pages\Settings\SyncPage.xaml.cs">
-      <DependentUpon>SyncPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\Vault\AttachmentsPage.xaml.cs">
       <DependentUpon>AttachmentsPage.xaml</DependentUpon>
@@ -98,11 +89,11 @@
     <Compile Update="Pages\Vault\PasswordHistoryPage.xaml.cs">
       <DependentUpon>PasswordHistoryPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Pages\Vault\AddEditPage.xaml.cs">
-      <DependentUpon>AddEditPage.xaml</DependentUpon>
+    <Compile Update="Pages\Vault\CipherDetailsPage.xaml.cs">
+      <DependentUpon>CipherDetailsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Pages\Vault\ViewPage.xaml.cs">
-      <DependentUpon>ViewPage.xaml</DependentUpon>
+    <Compile Update="Pages\Vault\CipherAddEditPage.xaml.cs">
+      <DependentUpon>CipherAddEditPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\Settings\SettingsPage\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
@@ -123,18 +114,34 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Remove="Pages\Accounts\AccountsPopupPage.xaml.cs" />
+    <Compile Update="Pages\Accounts\LoginPasswordlessPage.xaml.cs">
+      <DependentUpon>LoginPasswordlessPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Accounts\LoginPasswordlessRequestPage.xaml.cs">
+      <DependentUpon>LoginPasswordlessRequestPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="Behaviors\" />
+    <Folder Include="Lists\" />
+    <Folder Include="Lists\ItemLayouts\" />
+    <Folder Include="Lists\DataTemplateSelectors\" />
+    <Folder Include="Lists\ItemLayouts\CustomFields\" />
+    <Folder Include="Lists\ItemViewModels\" />
+    <Folder Include="Lists\ItemViewModels\CustomFields\" />
     <Folder Include="Controls\AccountSwitchingOverlay\" />
+    <Folder Include="Utilities\AccountManagement\" />
+    <Folder Include="Controls\DateTime\" />
+    <Folder Include="Controls\IconLabelButton\" />
+    <Folder Include="Controls\PasswordStrengthProgressBar\" />
+    <Folder Include="Utilities\Automation\" />
+    <Folder Include="Utilities\Prompts\" />
+    <Folder Include="Controls\Settings\" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Controls\CipherViewCell\CipherViewCell.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Remove="Pages\Accounts\AccountsPopupPage.xaml" />
   </ItemGroup>
 
@@ -160,12 +167,6 @@
     <Compile Update="Styles\Android.xaml.cs">
       <DependentUpon>Android.xaml</DependentUpon>
     </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="Styles\Base.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
@@ -420,6 +421,21 @@
   <ItemGroup>
     <None Remove="Behaviors\" />
     <None Remove="Xamarin.CommunityToolkit" />
+    <None Remove="Lists\" />
+    <None Remove="Lists\DataTemplates\" />
+    <None Remove="Lists\DataTemplateSelectors\" />
+    <None Remove="Lists\DataTemplates\CustomFields\" />
+    <None Remove="Lists\ItemViewModels\" />
+    <None Remove="Lists\ItemViewModels\CustomFields\" />
     <None Remove="Controls\AccountSwitchingOverlay\" />
+    <None Remove="Utilities\AccountManagement\" />
+    <None Remove="Controls\DateTime\" />
+    <None Remove="Controls\IconLabelButton\" />
+    <None Remove="MessagePack" />
+    <None Remove="MessagePack.MSBuild.Tasks" />
+    <None Remove="Controls\PasswordStrengthProgressBar\" />
+    <None Remove="Utilities\Automation\" />
+    <None Remove="Utilities\Prompts\" />
+    <None Remove="Controls\Settings\" />
   </ItemGroup>
 </Project>

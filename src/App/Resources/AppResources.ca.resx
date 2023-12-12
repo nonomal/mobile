@@ -203,7 +203,7 @@
     <comment>Title for your favorite items in the vault.</comment>
   </data>
   <data name="FileBugReport" xml:space="preserve">
-    <value>Presenta un informe d'error</value>
+    <value>Envieu un informe d'error</value>
   </data>
   <data name="FileBugReportDescription" xml:space="preserve">
     <value>Obri una incidéncia al nostre dipòsit de GitHub.</value>
@@ -229,7 +229,7 @@
     <value>Carpetes</value>
   </data>
   <data name="FolderUpdated" xml:space="preserve">
-    <value>Carpeta actualitzada.</value>
+    <value>Carpeta guardada</value>
   </data>
   <data name="GoToWebsite" xml:space="preserve">
     <value>Vés al lloc web</value>
@@ -296,8 +296,12 @@
     <comment>Text to define that there are more options things to see.</comment>
   </data>
   <data name="MyVault" xml:space="preserve">
-    <value>La meua caixa forta</value>
+    <value>Caixa forta</value>
     <comment>The title for the vault page.</comment>
+  </data>
+  <data name="Authenticator" xml:space="preserve">
+    <value>Autenticador</value>
+    <comment>Authenticator TOTP feature</comment>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Nom</value>
@@ -372,7 +376,7 @@
   </data>
   <data name="ValueHasBeenCopied" xml:space="preserve">
     <value>S'ha copiat '{0}'.</value>
-    <comment>Confirmation message after suceessfully copying a value to the clipboard.</comment>
+    <comment>Confirmation message after successfully copying a value to the clipboard.</comment>
   </data>
   <data name="VerifyFingerprint" xml:space="preserve">
     <value>Verifica empremta digital</value>
@@ -391,9 +395,6 @@
   </data>
   <data name="VisitOurWebsite" xml:space="preserve">
     <value>Visiteu el nostre lloc web</value>
-  </data>
-  <data name="VisitOurWebsiteDescription" xml:space="preserve">
-    <value>Visiteu el nostre lloc web per obtenir ajuda, notícies, enviar-nos un correu electrònic i obtenir més informació sobre com utilitzar Bitwarden.</value>
   </data>
   <data name="Website" xml:space="preserve">
     <value>Lloc web</value>
@@ -446,9 +447,6 @@
   </data>
   <data name="ChangeMasterPassword" xml:space="preserve">
     <value>Canvia la contrasenya mestra</value>
-  </data>
-  <data name="ChangePasswordConfirmation" xml:space="preserve">
-    <value>Podeu canviar la contrasenya mestra a la caixa forta web de bitwarden.com. Voleu visitar el lloc web ara?</value>
   </data>
   <data name="Close" xml:space="preserve">
     <value>Tanca</value>
@@ -552,7 +550,7 @@
     <value>Temps d'espera de la caixa forta</value>
   </data>
   <data name="VaultTimeoutAction" xml:space="preserve">
-    <value>Acció del temps d'espera de la caixa forta</value>
+    <value>Acció quan acabe el temps d'espera de la caixa forta</value>
   </data>
   <data name="VaultTimeoutLogOutConfirmation" xml:space="preserve">
     <value>En tancar la sessió s'eliminarà tot l'accés a la vostra caixa forta i es requerirà una autenticació en línia després del període de temps d'espera. Esteu segur que voleu utilitzar aquesta configuració?</value>
@@ -579,11 +577,11 @@
   <data name="MasterPasswordHintDescription" xml:space="preserve">
     <value>Una pista de contrasenya mestra pot ajudar-vos a recordar-la si la oblideu.</value>
   </data>
-  <data name="MasterPasswordLengthValMessage" xml:space="preserve">
-    <value>La contrasenya ha de contenir almenys 8 caràcters.</value>
+  <data name="MasterPasswordLengthValMessageX" xml:space="preserve">
+    <value>La contrasenya mestra ha de contenir almenys {0} caràcters.</value>
   </data>
   <data name="MinNumbers" xml:space="preserve">
-    <value>Mínim de caràcters númerics</value>
+    <value>Mínim de caràcters numèrics</value>
     <comment>Minimum numeric characters for password generator settings</comment>
   </data>
   <data name="MinSpecial" xml:space="preserve">
@@ -600,7 +598,7 @@
     <value>Mai</value>
   </data>
   <data name="NewItemCreated" xml:space="preserve">
-    <value>S'ha creat un element nou.</value>
+    <value>S'ha afegit un element</value>
   </data>
   <data name="NoFavorites" xml:space="preserve">
     <value>No hi ha cap preferit a la vostra caixa forta.</value>
@@ -677,7 +675,7 @@
     <value>Informació de l'element</value>
   </data>
   <data name="ItemUpdated" xml:space="preserve">
-    <value>Element actualitzat.</value>
+    <value>Element guardat</value>
   </data>
   <data name="Submitting" xml:space="preserve">
     <value>S'està enviant...</value>
@@ -702,9 +700,6 @@
   </data>
   <data name="TwoStepLogin" xml:space="preserve">
     <value>Inici de sessió en dues passes</value>
-  </data>
-  <data name="TwoStepLoginConfirmation" xml:space="preserve">
-    <value>L'inici de sessió en dues passes fa que el vostre compte siga més segur, ja que obliga a verificar el vostre inici de sessió amb un altre dispositiu, com ara una clau de seguretat, una aplicació autenticadora, un SMS, una trucada telefònica o un correu electrònic. Es pot habilitar l'inici de sessió en dues passes a la caixa forta web de bitwarden.com. Voleu visitar el lloc web ara?</value>
   </data>
   <data name="UnlockWith" xml:space="preserve">
     <value>Desbloqueja amb {0}</value>
@@ -765,10 +760,16 @@
     <value>2. Activeu el commutador i premeu d'acord per acceptar.</value>
   </data>
   <data name="Disabled" xml:space="preserve">
-    <value>Deshabilitat</value>
+    <value>No</value>
   </data>
   <data name="Enabled" xml:space="preserve">
-    <value>Habilitat</value>
+    <value>Sí</value>
+  </data>
+  <data name="Off" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>Sí</value>
   </data>
   <data name="Status" xml:space="preserve">
     <value>Estat</value>
@@ -846,7 +847,7 @@
     <comment>For 2FA</comment>
   </data>
   <data name="VerificationEmailSent" xml:space="preserve">
-    <value>Correu de verificació enviat.</value>
+    <value>Correu de verificació enviat</value>
     <comment>For 2FA</comment>
   </data>
   <data name="YubiKeyInstruction" xml:space="preserve">
@@ -889,11 +890,9 @@
   <data name="AuthenticatorKeyReadError" xml:space="preserve">
     <value>No es pot llegir la clau d'autenticació.</value>
   </data>
-  <data name="CameraInstructionBottom" xml:space="preserve">
-    <value>L'escaneig serà automàtic.</value>
-  </data>
-  <data name="CameraInstructionTop" xml:space="preserve">
-    <value>Dirigiu la càmera al codi QR.</value>
+  <data name="PointYourCameraAtTheQRCode" xml:space="preserve">
+    <value>Apunteu la càmera cap al codi QR.
+L'escaneig es farà automàticament.</value>
   </data>
   <data name="ScanQrTitle" xml:space="preserve">
     <value>Escaneja el codi QR</value>
@@ -907,11 +906,11 @@
   <data name="CopyTotp" xml:space="preserve">
     <value>Copia TOTP</value>
   </data>
-  <data name="DisableAutoTotpCopyDescription" xml:space="preserve">
+  <data name="CopyTotpAutomaticallyDescription" xml:space="preserve">
     <value>Si el vostre inici de sessió té una clau d'autenticació associada, el codi de verificació TOTP es copiarà al vostre porta-retalls quan s'òmpliga automàticament l'inici de sessió.</value>
   </data>
-  <data name="DisableAutoTotpCopy" xml:space="preserve">
-    <value>Deshabilita la còpia TOTP automàtica</value>
+  <data name="CopyTotpAutomatically" xml:space="preserve">
+    <value>Copia TOTP automaticament</value>
   </data>
   <data name="PremiumRequired" xml:space="preserve">
     <value>Cal una subscripció premium per utilitzar aquesta característica.</value>
@@ -945,6 +944,9 @@
   </data>
   <data name="UpdateKey" xml:space="preserve">
     <value>No podeu utilitzar aquesta característica fins que no actualitzeu la vostra clau de xifratge.</value>
+  </data>
+  <data name="EncryptionKeyMigrationRequiredDescriptionLong" xml:space="preserve">
+    <value>Cal migrar la clau de xifratge. Inicieu la sessió a la caixa forta web per actualitzar la clau de xifratge.</value>
   </data>
   <data name="LearnMore" xml:space="preserve">
     <value>Més informació</value>
@@ -1095,6 +1097,9 @@
   <data name="Ms" xml:space="preserve">
     <value>Srta.</value>
   </data>
+  <data name="Mx" xml:space="preserve">
+    <value>Mx</value>
+  </data>
   <data name="November" xml:space="preserve">
     <value>Novembre</value>
   </data>
@@ -1128,11 +1133,11 @@
   <data name="Expiration" xml:space="preserve">
     <value>Caducitat</value>
   </data>
-  <data name="DisableWebsiteIcons" xml:space="preserve">
-    <value>Deshabilita icones del lloc web</value>
+  <data name="ShowWebsiteIcons" xml:space="preserve">
+    <value>Mostra les icones del lloc web</value>
   </data>
-  <data name="DisableWebsiteIconsDescription" xml:space="preserve">
-    <value>Les icones del lloc web proporcionen una imatge que es pot reconèixer al costat de cada element d'inici de sessió a la vostra caixa forta.</value>
+  <data name="ShowWebsiteIconsDescription" xml:space="preserve">
+    <value>Mostra una imatge reconeixible al costat de cada inici de sessió.</value>
   </data>
   <data name="IconsUrl" xml:space="preserve">
     <value>URL del servidor d'icones</value>
@@ -1248,7 +1253,7 @@
     <comment>URI match detection for auto-fill.</comment>
   </data>
   <data name="YesAndSave" xml:space="preserve">
-    <value>Si, i guarda</value>
+    <value>Sí, i guarda</value>
   </data>
   <data name="AutofillAndSave" xml:space="preserve">
     <value>Ompli automàticament i guarda</value>
@@ -1299,7 +1304,7 @@
     <value>1. Aneu a l'aplicació "Configuració" de l'iOS</value>
   </data>
   <data name="AutofillTurnOn2" xml:space="preserve">
-    <value>2. Toqueu "Contrasenyes i comptes"</value>
+    <value>2. Toqueu "Contrasenyes"</value>
   </data>
   <data name="AutofillTurnOn3" xml:space="preserve">
     <value>3. Toqueu "Emplenament automàtic de contrasenyes"</value>
@@ -1372,11 +1377,15 @@
   <data name="SearchCollection" xml:space="preserve">
     <value>Cerca a la col·lecció</value>
   </data>
-  <data name="SearchFolder" xml:space="preserve">
-    <value>Cerca a la carpeta</value>
+  <data name="SearchFileSends" xml:space="preserve">
+    <value>Cerca fitxers Sends</value>
   </data>
-  <data name="SearchType" xml:space="preserve">
-    <value>Tipus de cerca</value>
+  <data name="SearchTextSends" xml:space="preserve">
+    <value>Cerca Sends de text</value>
+  </data>
+  <data name="SearchGroup" xml:space="preserve">
+    <value>Cerca {0}</value>
+    <comment>ex: Search Logins</comment>
   </data>
   <data name="Type" xml:space="preserve">
     <value>Tipus</value>
@@ -1513,7 +1522,7 @@
     <value>2 minuts</value>
   </data>
   <data name="ClearClipboard" xml:space="preserve">
-    <value>Neteja el porta-retalls</value>
+    <value>Buida el porta-retalls</value>
     <comment>Clipboard is the operating system thing where you copy/paste data to on your device.</comment>
   </data>
   <data name="ClearClipboardDescription" xml:space="preserve">
@@ -1537,8 +1546,11 @@
   <data name="ThemeDefault" xml:space="preserve">
     <value>Per defecte (Sistema)</value>
   </data>
+  <data name="DefaultDarkTheme" xml:space="preserve">
+    <value>Tema fosc per defecte</value>
+  </data>
   <data name="CopyNotes" xml:space="preserve">
-    <value>Copia notes</value>
+    <value>Copia nota</value>
   </data>
   <data name="Exit" xml:space="preserve">
     <value>Tanca</value>
@@ -1553,17 +1565,22 @@
     <value>Negre</value>
     <comment>The color black</comment>
   </data>
-  <data name="BlacklistedUris" xml:space="preserve">
-    <value>URl a la llista negra</value>
+  <data name="Nord" xml:space="preserve">
+    <value>Nord</value>
+    <comment>'Nord' is the name of a specific color scheme. It should not be translated.</comment>
   </data>
-  <data name="BlacklistedUrisDescription" xml:space="preserve">
-    <value>Els URI que es mostren a la llista negra no oferiran l’emplenament automàtic. La llista ha de estar separada per comes. Ex: "https://twitter.com, androidapp: //com.twitter.android".</value>
+  <data name="SolarizedDark" xml:space="preserve">
+    <value>Solaritzat fosc</value>
+    <comment>'Solarized Dark' is the name of a specific color scheme. It should not be translated.</comment>
   </data>
-  <data name="DisableSavePrompt" xml:space="preserve">
-    <value>Desactiva Guarda elements nous</value>
+  <data name="AutofillBlockedUris" xml:space="preserve">
+    <value>Emplena automàticament els URI bloquejats</value>
   </data>
-  <data name="DisableSavePromptDescription" xml:space="preserve">
-    <value>"Guarda elements nous" demanarà automàticament que guardeu elements nous al magatzem cada volta que els introduïu per primera vegada.</value>
+  <data name="AskToAddLogin" xml:space="preserve">
+    <value>Sol·licita afegir els inicis de sessió</value>
+  </data>
+  <data name="AskToAddLoginDescription" xml:space="preserve">
+    <value>Sol·licita afegir un element si no se'n troba cap a la caixa forta.</value>
   </data>
   <data name="OnRestart" xml:space="preserve">
     <value>En reiniciar l'aplicació</value>
@@ -1594,13 +1611,13 @@
     <value>La vostra sessió ha caducat.</value>
   </data>
   <data name="BiometricsDirection" xml:space="preserve">
-    <value>Utilitzeu dades biomètriques per verificar.</value>
+    <value>Desbloqueja amb biometria</value>
   </data>
   <data name="Biometrics" xml:space="preserve">
     <value>Dades biomètriques</value>
   </data>
   <data name="UseBiometricsToUnlock" xml:space="preserve">
-    <value>Utilitzeu dades biomètriques per desbloquejar</value>
+    <value>Desbloqueja amb biometria</value>
   </data>
   <data name="AccessibilityOverlayPermissionAlert" xml:space="preserve">
     <value>Bitwarden necessita atenció: vegeu "Servei d'accessibilitat d'emplenament automàtic" de la configuració de Bitwarden</value>
@@ -1700,7 +1717,7 @@
     <comment>Message shown when interacting with the server</comment>
   </data>
   <data name="ItemRestored" xml:space="preserve">
-    <value>L'element s'ha restaurat.</value>
+    <value>L'element s'ha restaurat</value>
     <comment>Confirmation message after successfully restoring a soft-deleted item</comment>
   </data>
   <data name="Trash" xml:space="preserve">
@@ -1723,11 +1740,11 @@
     <value>Esteu segur que voleu enviar-ho a la paperera?</value>
     <comment>Confirmation alert message when soft-deleting a cipher.</comment>
   </data>
-  <data name="BiometricInvalidated" xml:space="preserve">
-    <value>S'ha detectat un canvi biomètric. Inicieu la sessió mitjançant la contrasenya principal per tornar a activar-la.</value>
+  <data name="AccountBiometricInvalidated" xml:space="preserve">
+    <value>El desbloqueig biomètric d'aquest compte està deshabilitat mentre es verifica la contrasenya mestra.</value>
   </data>
-  <data name="BiometricInvalidatedExtension" xml:space="preserve">
-    <value>Desbloqueig biomètric d'emplenament automàtic deshabilitat. Està pendent de verificació de la contrasenya mestra.</value>
+  <data name="AccountBiometricInvalidatedExtension" xml:space="preserve">
+    <value>El desbloqueig biomètric d'emplenament automàtic d'aquest compte està deshabilitat mentre es verifica la contrasenya mestra.</value>
   </data>
   <data name="EnableSyncOnRefresh" xml:space="preserve">
     <value>Activa la sincronització en actualitzar-se</value>
@@ -1802,7 +1819,7 @@
     <value>Serveis d'emplenament automàtic</value>
   </data>
   <data name="InlineAutofill" xml:space="preserve">
-    <value>Utilitza l'emplenament automàtic en línia</value>
+    <value>Utilitza l'emplenament automàtic integrat</value>
   </data>
   <data name="InlineAutofillDescription" xml:space="preserve">
     <value>Utilitzeu l'emplenament automàtic en línia si l'IME (teclat) seleccionat l'admet. Si la vostra configuració no és compatible (o aquesta opció està desactivada), s'utilitzarà la superposició d'emplenament automàtic per defecte.</value>
@@ -1814,7 +1831,7 @@
     <value>Utilitzeu el servei d’accessibilitat Bitwarden per omplir els vostres inicis de sessió automàticament a través d’aplicacions i del web. Quan estiga activat, mostrarem una finestra emergent quan se seleccionen els camps d'inici de sessió.</value>
   </data>
   <data name="AccessibilityDescription2" xml:space="preserve">
-    <value>Utilitzeu el servei d’accessibilitat Bitwarden per omplir els vostres inicis de sessió automàticament a través d’aplicacions i del web. (Cal que també estigui habilitat el Dibuixa-sobre)</value>
+    <value>Utilitzeu el servei d’accessibilitat Bitwarden per omplir els vostres inicis de sessió automàticament a través d’aplicacions i del web. (Cal que també estiga habilitat el Dibuixa-sobre)</value>
   </data>
   <data name="AccessibilityDescription3" xml:space="preserve">
     <value>Utilitzeu el servei d’accessibilitat Bitwarden per utilitzar el mosaic d’acció ràpida d’emplenament automàtic o mostrar una finestra emergent mitjançant Dibuixa-sobre (si està activat).</value>
@@ -1856,6 +1873,9 @@
     <value>Un nom apropiat per descriure aquest Send.</value>
     <comment>'Send' is a noun and the name of a feature called 'Bitwarden Send'. It should not be translated.</comment>
   </data>
+  <data name="Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
   <data name="TypeText" xml:space="preserve">
     <value>Text</value>
   </data>
@@ -1871,6 +1891,18 @@
   </data>
   <data name="TypeFileInfo" xml:space="preserve">
     <value>El fitxer que voleu enviar.</value>
+  </data>
+  <data name="FileTypeIsSelected" xml:space="preserve">
+    <value>El tipus de fitxer està seleccionat.</value>
+  </data>
+  <data name="FileTypeIsNotSelected" xml:space="preserve">
+    <value>El tipus de fitxer no està seleccionat, toqueu per a seleccionar-lo.</value>
+  </data>
+  <data name="TextTypeIsSelected" xml:space="preserve">
+    <value>El tipus de text està seleccionat.</value>
+  </data>
+  <data name="TextTypeIsNotSelected" xml:space="preserve">
+    <value>El tipus de text no està seleccionat, toqueu per a seleccionar-lo.</value>
   </data>
   <data name="DeletionDate" xml:space="preserve">
     <value>Data de supressió</value>
@@ -1935,7 +1967,7 @@
     <comment>'Send' is a noun and the name of a feature called 'Bitwarden Send'. It should not be translated.</comment>
   </data>
   <data name="DisableSend" xml:space="preserve">
-    <value>Deshabiliteu aquest Send perquè ningú no hi puga accedir.</value>
+    <value>Deshabiliteu aquest Send perquè ningú no hi puga accedir</value>
     <comment>'Send' is a noun and the name of a feature called 'Bitwarden Send'. It should not be translated.</comment>
   </data>
   <data name="NoSends" xml:space="preserve">
@@ -1977,11 +2009,11 @@
     <comment>'Send' is a noun and the name of a feature called 'Bitwarden Send'. It should not be translated.</comment>
   </data>
   <data name="SendUpdated" xml:space="preserve">
-    <value>S'ha actualitzat el Send</value>
+    <value>S'ha guardat el Send</value>
     <comment>'Send' is a noun and the name of a feature called 'Bitwarden Send'. It should not be translated.</comment>
   </data>
   <data name="NewSendCreated" xml:space="preserve">
-    <value>S'ha creat un enviament nou.</value>
+    <value>S'ha creat un Send nou</value>
     <comment>'Send' is a noun and the name of a feature called 'Bitwarden Send'. It should not be translated.</comment>
   </data>
   <data name="OneDay" xml:space="preserve">
@@ -2087,7 +2119,7 @@
     <value>Autentica WebAuthn</value>
   </data>
   <data name="Fido2ReturnToApp" xml:space="preserve">
-    <value>Tornar a l'aplicació</value>
+    <value>Torna a l'aplicació</value>
   </data>
   <data name="Fido2CheckBrowser" xml:space="preserve">
     <value>Assegureu-vos que el vostre navegador predeterminat admeta WebAuthn i torneu-ho a provar.</value>
@@ -2096,12 +2128,18 @@
     <value>Aquesta organització té una política empresarial que us inscriurà automàticament al restabliment de la contrasenya. La inscripció permetrà als administradors de l’organització canviar la vostra contrasenya mestra.</value>
   </data>
   <data name="VaultTimeoutPolicyInEffect" xml:space="preserve">
-    <value>Les polítiques de l'organització afecten el temps d'espera de la caixa forta. El temps d'espera màxim permès d'aquesta és de $HOURS$ hores i $MINUTES$ minuts</value>
+    <value>Les polítiques de l'organització afecten el temps d'espera de la caixa forta. El temps d'espera màxim permès de la caixa forta és de {0} hores i {1} minuts</value>
+  </data>
+  <data name="VaultTimeoutPolicyWithActionInEffect" xml:space="preserve">
+    <value>Les polítiques de l'organització afecten el temps d'espera de la vostra caixa forta. El temps d'espera màxim permès és de {0} hores i {1} minuts. L'acció de temps d'espera de la caixa forta està definida en {2}.</value>
+  </data>
+  <data name="VaultTimeoutActionPolicyInEffect" xml:space="preserve">
+    <value>Les polítiques de l'organització han establert l'acció de temps d'espera de la caixa forta a {0}.</value>
   </data>
   <data name="VaultTimeoutToLarge" xml:space="preserve">
     <value>El temps d'espera de la caixa forta supera les restriccions establertes per la vostra organització.</value>
   </data>
-  <data name="DisablePersonalVaultExportPolicyInEffect">
+  <data name="DisablePersonalVaultExportPolicyInEffect" xml:space="preserve">
     <value>Una o més polítiques d'organització us impedeixen exportar la vostra caixa forta.</value>
   </data>
   <data name="AddAccount" xml:space="preserve">
@@ -2114,7 +2152,7 @@
     <value>Bloquejat</value>
   </data>
   <data name="AccountLoggedOut" xml:space="preserve">
-    <value>Sessió tancada</value>
+    <value>S'ha tancat sessió</value>
   </data>
   <data name="AccountSwitchedAutomatically" xml:space="preserve">
     <value>S'ha canviat al següent compte disponible</value>
@@ -2175,5 +2213,661 @@
   </data>
   <data name="EnterTheVerificationCodeThatWasSentToYourEmail" xml:space="preserve">
     <value>Introduïu el codi de verificació que s’ha enviat al vostre correu</value>
+  </data>
+  <data name="SubmitCrashLogs" xml:space="preserve">
+    <value>Envieu registres d'error</value>
+  </data>
+  <data name="SubmitCrashLogsDescription" xml:space="preserve">
+    <value>Ajudeu Bitwarden a millorar l'estabilitat de l'aplicació enviant els registres d'error</value>
+  </data>
+  <data name="OptionsExpanded" xml:space="preserve">
+    <value>Les opcions estan ampliades, toqueu per contraure.</value>
+  </data>
+  <data name="OptionsCollapsed" xml:space="preserve">
+    <value>Les opcions estan reduïdes, toqueu per ampliar.</value>
+  </data>
+  <data name="UppercaseAtoZ" xml:space="preserve">
+    <value>Majúscules (A a la Z)</value>
+  </data>
+  <data name="LowercaseAtoZ" xml:space="preserve">
+    <value>Minúscules (A a la Z)</value>
+  </data>
+  <data name="NumbersZeroToNine" xml:space="preserve">
+    <value>Números (0 al 9)</value>
+  </data>
+  <data name="SpecialCharacters" xml:space="preserve">
+    <value>Caràcters especials (!@#$%^&amp;*)</value>
+  </data>
+  <data name="TapToGoBack" xml:space="preserve">
+    <value>Toca per a tornar arrere</value>
+  </data>
+  <data name="PasswordIsVisibleTapToHide" xml:space="preserve">
+    <value>La contrasenya és visible, toqueu per amagar-la.</value>
+  </data>
+  <data name="PasswordIsNotVisibleTapToShow" xml:space="preserve">
+    <value>La contrasenya no és visible, toqueu per mostrar-la.</value>
+  </data>
+  <data name="FilterByVault" xml:space="preserve">
+    <value>Filtra artícless per caixa forta</value>
+  </data>
+  <data name="AllVaults" xml:space="preserve">
+    <value>Totes les caixes fortes</value>
+  </data>
+  <data name="Vaults" xml:space="preserve">
+    <value>Caixes fortes</value>
+  </data>
+  <data name="VaultFilterDescription" xml:space="preserve">
+    <value>Caixa forta: {0}</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Totes</value>
+  </data>
+  <data name="Totp" xml:space="preserve">
+    <value>TOTP</value>
+  </data>
+  <data name="VerificationCodes" xml:space="preserve">
+    <value>Codis de verificació</value>
+  </data>
+  <data name="PremiumSubscriptionRequired" xml:space="preserve">
+    <value>Cal una subscripció premium</value>
+  </data>
+  <data name="CannotAddAuthenticatorKey" xml:space="preserve">
+    <value>No es pot afegir la clau d'autenticació? </value>
+  </data>
+  <data name="ScanQRCode" xml:space="preserve">
+    <value>Escaneja el codi QR</value>
+  </data>
+  <data name="CannotScanQRCode" xml:space="preserve">
+    <value>No podeu escanejar el codi QR? </value>
+  </data>
+  <data name="AuthenticatorKeyScanner" xml:space="preserve">
+    <value>Clau autenticadora</value>
+  </data>
+  <data name="EnterKeyManually" xml:space="preserve">
+    <value>Introdueix la clau manualment</value>
+  </data>
+  <data name="AddTotp" xml:space="preserve">
+    <value>Afegeix TOTP</value>
+  </data>
+  <data name="SetupTotp" xml:space="preserve">
+    <value>Configura TOTP</value>
+  </data>
+  <data name="OnceTheKeyIsSuccessfullyEntered" xml:space="preserve">
+    <value>Una vegada introduïda la clau correctament,
+seleccioneu Afegeix TOTP per emmagatzemar la clau de manera segura</value>
+  </data>
+  <data name="NeverLockWarning" xml:space="preserve">
+    <value>Si configureu les opcions de bloqueig a "Mai", la vostra caixa forta està disponible per a qualsevol persona amb accés al vostre dispositiu. Si utilitzeu aquesta opció, hauríeu d'assegurar-vos de mantenir el vostre dispositiu correctament protegit.</value>
+  </data>
+  <data name="EnvironmentPageUrlsError" xml:space="preserve">
+    <value>Un o més dels URL introduïts no són vàlids. Reviseu-ho i torneu a provar de guardar-ho.</value>
+  </data>
+  <data name="GenericErrorMessage" xml:space="preserve">
+    <value>No hem pogut processar la vostra sol·licitud. Torneu-ho a provar o contacteu amb nosaltres.</value>
+  </data>
+  <data name="AllowScreenCapture" xml:space="preserve">
+    <value>Permet capturar la pantalla</value>
+  </data>
+  <data name="AreYouSureYouWantToEnableScreenCapture" xml:space="preserve">
+    <value>Segur que voleu activar la captura de pantalla?</value>
+  </data>
+  <data name="LogInRequested" xml:space="preserve">
+    <value>S'ha sol·licitat inici de sessió</value>
+  </data>
+  <data name="AreYouTryingToLogIn" xml:space="preserve">
+    <value>Esteu intentant iniciar sessió?</value>
+  </data>
+  <data name="LogInAttemptByXOnY" xml:space="preserve">
+    <value>Intent d'inici de sessió de {0} en {1}</value>
+  </data>
+  <data name="DeviceType" xml:space="preserve">
+    <value>Tipus de dispositiu</value>
+  </data>
+  <data name="IpAddress" xml:space="preserve">
+    <value>Adreça IP</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Hora</value>
+  </data>
+  <data name="Near" xml:space="preserve">
+    <value>A prop</value>
+  </data>
+  <data name="ConfirmLogIn" xml:space="preserve">
+    <value>Confirmeu l'inici de sessió</value>
+  </data>
+  <data name="DenyLogIn" xml:space="preserve">
+    <value>Denegueu l'inici de sessió</value>
+  </data>
+  <data name="JustNow" xml:space="preserve">
+    <value>Ara mateix</value>
+  </data>
+  <data name="XMinutesAgo" xml:space="preserve">
+    <value>Fa {0} minuts</value>
+  </data>
+  <data name="LogInAccepted" xml:space="preserve">
+    <value>S'ha confirmat l'inici de sessió</value>
+  </data>
+  <data name="LogInDenied" xml:space="preserve">
+    <value>S'ha denegat l'inici de sessió</value>
+  </data>
+  <data name="ApproveLoginRequests" xml:space="preserve">
+    <value>Aprova les sol·licituds d'inici de sessió</value>
+  </data>
+  <data name="UseThisDeviceToApproveLoginRequestsMadeFromOtherDevices" xml:space="preserve">
+    <value>Utilitzeu aquest dispositiu per aprovar les sol·licituds d'inici de sessió fetes des d'altres dispositius.</value>
+  </data>
+  <data name="AllowNotifications" xml:space="preserve">
+    <value>Permet notificacions</value>
+  </data>
+  <data name="ReceivePushNotificationsForNewLoginRequests" xml:space="preserve">
+    <value>Rebeu notificacions push per a noves sol·licituds d'inici de sessió</value>
+  </data>
+  <data name="NoThanks" xml:space="preserve">
+    <value>No, gràcies</value>
+  </data>
+  <data name="ConfimLogInAttempForX" xml:space="preserve">
+    <value>Confirmeu l'intent d'inici de sessió per a {0}</value>
+  </data>
+  <data name="AllNotifications" xml:space="preserve">
+    <value>Totes les notificacions</value>
+  </data>
+  <data name="PasswordType" xml:space="preserve">
+    <value>Tipus de contrasenya</value>
+  </data>
+  <data name="WhatWouldYouLikeToGenerate" xml:space="preserve">
+    <value>Què voleu generar?</value>
+  </data>
+  <data name="UsernameType" xml:space="preserve">
+    <value>Tipus de nom d'usuari</value>
+  </data>
+  <data name="PlusAddressedEmail" xml:space="preserve">
+    <value>Adreça amb sufix</value>
+  </data>
+  <data name="CatchAllEmail" xml:space="preserve">
+    <value>Captura tot el correu electrònic</value>
+  </data>
+  <data name="ForwardedEmailAlias" xml:space="preserve">
+    <value>Àlies de correu electrònic reenviat</value>
+  </data>
+  <data name="RandomWord" xml:space="preserve">
+    <value>Paraula aleatòria</value>
+  </data>
+  <data name="EmailRequiredParenthesis" xml:space="preserve">
+    <value>Correu electrònic (obligatori)</value>
+  </data>
+  <data name="DomainNameRequiredParenthesis" xml:space="preserve">
+    <value>Nom de domini (obligatori)</value>
+  </data>
+  <data name="APIKeyRequiredParenthesis" xml:space="preserve">
+    <value>Clau API (obligatòria)</value>
+  </data>
+  <data name="Service" xml:space="preserve">
+    <value>Servei</value>
+  </data>
+  <data name="AddyIo" xml:space="preserve">
+    <value>addy.io</value>
+    <comment>"addy.io" is the product name and should not be translated.</comment>
+  </data>
+  <data name="FirefoxRelay" xml:space="preserve">
+    <value>Firefox Relay</value>
+    <comment>"Firefox Relay" is the product name and should not be translated.</comment>
+  </data>
+  <data name="SimpleLogin" xml:space="preserve">
+    <value>SimpleLogin</value>
+    <comment>"SimpleLogin" is the product name and should not be translated.</comment>
+  </data>
+  <data name="DuckDuckGo" xml:space="preserve">
+    <value>DuckDuckGo</value>
+    <comment>"DuckDuckGo" is the product name and should not be translated.</comment>
+  </data>
+  <data name="Fastmail" xml:space="preserve">
+    <value>Fastmail</value>
+    <comment>"Fastmail" is the product name and should not be translated.</comment>
+  </data>
+  <data name="ForwardEmail" xml:space="preserve">
+    <value>ForwardEmail</value>
+    <comment>"ForwardEmail" is the product name and should not be translated.</comment>
+  </data>
+  <data name="APIAccessToken" xml:space="preserve">
+    <value>Token d'accés a l'API</value>
+  </data>
+  <data name="AreYouSureYouWantToOverwriteTheCurrentUsername" xml:space="preserve">
+    <value>Segur que voleu sobreescriure el nom d'usuari actual?</value>
+  </data>
+  <data name="GenerateUsername" xml:space="preserve">
+    <value>Genera un nom d'usuari</value>
+  </data>
+  <data name="EmailType" xml:space="preserve">
+    <value>Tipus de correu electrònic</value>
+  </data>
+  <data name="WebsiteRequired" xml:space="preserve">
+    <value>Pàgina web (obligatòria)</value>
+  </data>
+  <data name="UnknownXErrorMessage" xml:space="preserve">
+    <value>S'ha produït un error {0} desconegut.</value>
+  </data>
+  <data name="PlusAddressedEmailDescription" xml:space="preserve">
+    <value>Utilitzeu les capacitats de subadreçament del vostre proveïdor de correu electrònic</value>
+  </data>
+  <data name="CatchAllEmailDescription" xml:space="preserve">
+    <value>Utilitzeu la safata d'entrada global configurada del vostre domini.</value>
+  </data>
+  <data name="ForwardedEmailDescription" xml:space="preserve">
+    <value>Genera un àlies de correu electrònic amb un servei de reenviament extern.</value>
+  </data>
+  <data name="Random" xml:space="preserve">
+    <value>Aleatori</value>
+  </data>
+  <data name="ConnectToWatch" xml:space="preserve">
+    <value>Connecta't a Watch</value>
+  </data>
+  <data name="AccessibilityServiceDisclosure" xml:space="preserve">
+    <value>Divulgació del servei d'accessibilitat</value>
+  </data>
+  <data name="AccessibilityDisclosureText" xml:space="preserve">
+    <value>Bitwarden utilitza el Servei d'Accessibilitat per cercar camps d'inici de sessió en aplicacions i llocs web i, a continuació, establir els ID de camp adequats per introduir un nom d'usuari i una contrasenya quan es trobe una coincidència per a l'aplicació o el lloc. No emmagatzemem cap de la informació que ens presenta el servei, ni intentem controlar cap element de la pantalla més enllà de l'entrada de text de les credencials.</value>
+  </data>
+  <data name="Accept" xml:space="preserve">
+    <value>Accepta</value>
+  </data>
+  <data name="Decline" xml:space="preserve">
+    <value>Rebutja</value>
+  </data>
+  <data name="LoginRequestHasAlreadyExpired" xml:space="preserve">
+    <value>La sol·licitud d'inici de sessió ja ha caducat.</value>
+  </data>
+  <data name="LoginAttemptFromXDoYouWantToSwitchToThisAccount" xml:space="preserve">
+    <value>Intent d'inici de sessió des de:
+{0}
+Voleu canviar a aquest compte?</value>
+  </data>
+  <data name="NewAroundHere" xml:space="preserve">
+    <value>Nou per ací?</value>
+  </data>
+  <data name="GetMasterPasswordwordHint" xml:space="preserve">
+    <value>Obteniu la pista de la contrasenya mestra</value>
+  </data>
+  <data name="LoggingInAsXOnY" xml:space="preserve">
+    <value>Inici de sessió com a {0} a {1}</value>
+  </data>
+  <data name="NotYou" xml:space="preserve">
+    <value>No sou vosaltres?</value>
+  </data>
+  <data name="LogInWithMasterPassword" xml:space="preserve">
+    <value>Inicia sessió amb la contrasenya mestra</value>
+  </data>
+  <data name="LogInWithAnotherDevice" xml:space="preserve">
+    <value>Inici de sessió amb un altre dispositiu</value>
+  </data>
+  <data name="LogInInitiated" xml:space="preserve">
+    <value>S'ha iniciat la sessió</value>
+  </data>
+  <data name="ANotificationHasBeenSentToYourDevice" xml:space="preserve">
+    <value>S'ha enviat una notificació al vostre dispositiu.</value>
+  </data>
+  <data name="PleaseMakeSureYourVaultIsUnlockedAndTheFingerprintPhraseMatchesOnTheOtherDevice" xml:space="preserve">
+    <value>Assegureu-vos que la vostra caixa forta estiga desbloquejada i que la frase d'empremta digital coincidisca amb l'altre dispositiu.</value>
+  </data>
+  <data name="ResendNotification" xml:space="preserve">
+    <value>Torna a enviar la notificació</value>
+  </data>
+  <data name="NeedAnotherOption" xml:space="preserve">
+    <value>Necessiteu una altra opció?</value>
+  </data>
+  <data name="ViewAllLoginOptions" xml:space="preserve">
+    <value>Veure totes les opcions d'inici de sessió</value>
+  </data>
+  <data name="ThisRequestIsNoLongerValid" xml:space="preserve">
+    <value>Aquesta sol·licitud ja no és vàlida</value>
+  </data>
+  <data name="PendingLogInRequests" xml:space="preserve">
+    <value>Sol·licituds d'inici de sessió pendents</value>
+  </data>
+  <data name="DeclineAllRequests" xml:space="preserve">
+    <value>Rebutja totes les sol·licituds</value>
+  </data>
+  <data name="AreYouSureYouWantToDeclineAllPendingLogInRequests" xml:space="preserve">
+    <value>Esteu segur que voleu rebutjar totes les sol·licituds d'inici de sessió pendents?</value>
+  </data>
+  <data name="RequestsDeclined" xml:space="preserve">
+    <value>Sol·licituds rebutjades</value>
+  </data>
+  <data name="NoPendingRequests" xml:space="preserve">
+    <value>Cap sol·licitud pendent</value>  
+  </data>
+  <data name="EnableCamerPermissionToUseTheScanner" xml:space="preserve">
+    <value>Habilita el permís de la càmera per utilitzar l'escàner</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+  <data name="LanguageChangeXDescription" xml:space="preserve">
+    <value>L'idioma s'ha canviat a {0}. Reinicieu l'aplicació per veure el canvi</value>
+  </data>
+  <data name="LanguageChangeRequiresAppRestart" xml:space="preserve">
+    <value>El canvi d'idioma requereix un reinici de l'aplicació</value>
+  </data>
+  <data name="DefaultSystem" xml:space="preserve">
+    <value>Per defecte (Sistema)</value>
+  </data>
+  <data name="Important" xml:space="preserve">
+    <value>Important</value>
+  </data>
+  <data name="YourMasterPasswordCannotBeRecoveredIfYouForgetItXCharactersMinimum" xml:space="preserve">
+    <value>La vostra contrasenya mestra no es pot recuperar si l'oblideu! {0} caràcters com a mínim.</value>
+  </data>
+  <data name="WeakMasterPassword" xml:space="preserve">
+    <value>Contrasenya mestra poc segura</value>
+  </data>
+  <data name="WeakPasswordIdentifiedUseAStrongPasswordToProtectYourAccount" xml:space="preserve">
+    <value>S'ha identificat una contrasenya feble. Utilitzeu una contrasenya segura per protegir el vostre compte. Esteu segur que voleu utilitzar una contrasenya feble?</value>
+  </data>
+  <data name="Weak" xml:space="preserve">
+    <value>Poc segura</value>
+  </data>
+  <data name="Good" xml:space="preserve">
+    <value>Bona</value>
+  </data>
+  <data name="Strong" xml:space="preserve">
+    <value>Forta</value>
+  </data>
+  <data name="CheckKnownDataBreachesForThisPassword" xml:space="preserve">
+    <value>Comproveu les infraccions de dades conegudes per a aquesta contrasenya</value>
+  </data>
+  <data name="ExposedMasterPassword" xml:space="preserve">
+    <value>Contrasenya mestra exposada</value>
+  </data>
+  <data name="PasswordFoundInADataBreachAlertDescription" xml:space="preserve">
+    <value>S'ha trobat la contrasenya en una filtració de dades. Utilitzeu una contrasenya única per protegir el vostre compte. Esteu segur que voleu utilitzar una contrasenya exposada?</value>
+  </data>
+  <data name="WeakAndExposedMasterPassword" xml:space="preserve">
+    <value>Contrasenya mestra exposada i poc segura</value>
+  </data>
+  <data name="WeakPasswordIdentifiedAndFoundInADataBreachAlertDescription" xml:space="preserve">
+    <value>Contrasenya feble identificada i trobada en una filtració de dades. Utilitzeu una contrasenya única i segura per protegir el vostre compte. Esteu segur que voleu utilitzar aquesta contrasenya?</value>
+  </data>
+  <data name="OrganizationSsoIdentifierRequired" xml:space="preserve">
+    <value>L’identificador SSO de l’organització és obligatori.</value>
+  </data>
+  <data name="AddTheKeyToAnExistingOrNewItem" xml:space="preserve">
+    <value>Afig la clau a un element existent o nou</value>
+  </data>
+  <data name="ThereAreNoItemsInYourVaultThatMatchX" xml:space="preserve">
+    <value>No hi ha cap element a la caixa forta que coincidisca amb "{0}"</value>
+  </data>
+  <data name="SearchForAnItemOrAddANewItem" xml:space="preserve">
+    <value>Cerca un element o n'afig un nou</value>
+  </data>
+  <data name="ThereAreNoItemsThatMatchTheSearch" xml:space="preserve">
+    <value>No hi ha elements que coincidisquen amb la cerca</value>
+  </data>
+  <data name="US" xml:space="preserve">
+    <value>EUA</value>
+  </data>
+  <data name="EU" xml:space="preserve">
+    <value>UE</value>
+  </data>
+  <data name="SelfHosted" xml:space="preserve">
+    <value>Autoallotjat</value>
+  </data>
+  <data name="DataRegion" xml:space="preserve">
+    <value>Regió de dades</value>
+  </data>
+  <data name="Region" xml:space="preserve">
+    <value>Regió</value>
+  </data>
+  <data name="UpdateWeakMasterPasswordWarning" xml:space="preserve">
+    <value>La vostra contrasenya mestra no compleix una o més de les polítiques de l'organització. Per accedir a la caixa forta, heu d'actualitzar-la ara. Si continueu, es tancarà la sessió actual i us demanarà que torneu a iniciar-la. Les sessions en altres dispositius poden continuar romanent actives fins a una hora.</value>
+  </data>
+  <data name="CurrentMasterPassword" xml:space="preserve">
+    <value>Contrasenya mestra actual</value>
+  </data>
+  <data name="LoggedIn" xml:space="preserve">
+    <value>Connectat!</value>
+  </data>
+  <data name="ApproveWithMyOtherDevice" xml:space="preserve">
+    <value>Aproveu des d'un altre dispositiu vostre</value>
+  </data>
+  <data name="RequestAdminApproval" xml:space="preserve">
+    <value>Sol·liciteu l'aprovació de l'administrador</value>
+  </data>
+  <data name="ApproveWithMasterPassword" xml:space="preserve">
+    <value>Aprova amb contrasenya mestra</value>
+  </data>
+  <data name="TurnOffUsingPublicDevice" xml:space="preserve">
+    <value>Apagueu amb un dispositiu públic</value>
+  </data>
+  <data name="RememberThisDevice" xml:space="preserve">
+    <value>Recorda aquest dispositiu</value>
+  </data>
+  <data name="Passkey" xml:space="preserve">
+    <value>Clau de pas</value>
+  </data>
+  <data name="Passkeys" xml:space="preserve">
+    <value>Claus de pas</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>Aplicació</value>
+  </data>
+  <data name="YouCannotEditPasskeyApplicationBecauseItWouldInvalidateThePasskey" xml:space="preserve">
+    <value>No podeu editar l'aplicació de clau de pas perquè invalidaria la clau de pas</value>
+  </data>
+  <data name="PasskeyWillNotBeCopied" xml:space="preserve">
+    <value>La clau de pas no es copiarà</value>
+  </data>
+  <data name="ThePasskeyWillNotBeCopiedToTheClonedItemDoYouWantToContinueCloningThisItem" xml:space="preserve">
+    <value>La clau de pas no es copiarà a l'element clonat. Voleu continuar clonant aquest element?</value>
+  </data>
+  <data name="CopyApplication" xml:space="preserve">
+    <value>Copia la aplicació</value>
+  </data>
+  <data name="AvailableForTwoStepLogin" xml:space="preserve">
+    <value>Disponible per iniciar sessió en dos passos</value>
+  </data>
+  <data name="MasterPasswordRePromptHelp" xml:space="preserve">
+    <value>Ajuda per tornar a demanar la contrasenya mestra</value>
+  </data>
+  <data name="UnlockingMayFailDueToInsufficientMemoryDecreaseYourKDFMemorySettingsToResolve" xml:space="preserve">
+    <value>El desbloqueig pot fallar a causa de memòria insuficient. Disminueix la configuració de memòria KDF per resoldre-ho.</value>
+  </data>
+  <data name="InvalidAPIKey" xml:space="preserve">
+    <value>Clau API no vàlida</value>
+  </data>
+  <data name="InvalidAPIToken" xml:space="preserve">
+    <value>Token API no vàlid</value>
+  </data>
+  <data name="AdminApprovalRequested" xml:space="preserve">
+    <value>S'ha sol·licitat l'aprovació de l'administrador</value>
+  </data>
+  <data name="YourRequestHasBeenSentToYourAdmin" xml:space="preserve">
+    <value>La vostra sol·licitud s'ha enviat a l'administrador.</value>
+  </data>
+  <data name="YouWillBeNotifiedOnceApproved" xml:space="preserve">
+    <value>Se us notificarà una vegada aprovat. </value>
+  </data>
+  <data name="TroubleLoggingIn" xml:space="preserve">
+    <value>Teniu problemes per iniciar la sessió?</value>
+  </data>
+  <data name="LoggingInAsX" xml:space="preserve">
+    <value>Connectat com {0}</value>
+  </data>
+  <data name="VaultTimeoutActionChangedToLogOut" xml:space="preserve">
+    <value>L'acció de temps d'espera de la caixa forta ha canviat per tancar la sessió</value>
+  </data>
+  <data name="BlockAutoFill" xml:space="preserve">
+    <value>Bloqueja l'emplenament automàtic</value>
+  </data>
+  <data name="AutoFillWillNotBeOfferedForTheseURIs" xml:space="preserve">
+    <value>L'emplenament automàtic no s'oferirà per a aquests URI.</value>
+  </data>
+  <data name="NewBlockedURI" xml:space="preserve">
+    <value>Nou URI bloquejat</value>
+  </data>
+  <data name="URISaved" xml:space="preserve">
+    <value>URI guardat</value>
+  </data>
+  <data name="InvalidFormatUseHttpsHttpOrAndroidApp" xml:space="preserve">
+    <value>Format no vàlid. Utilitzeu https://, http:// o androidapp://</value>
+    <comment>https://, http://, androidapp:// should not be translated</comment>
+  </data>
+  <data name="EditURI" xml:space="preserve">
+    <value>Edita URI</value>
+  </data>
+  <data name="EnterURI" xml:space="preserve">
+    <value>Introduex URI</value>
+  </data>
+  <data name="FormatXSeparateMultipleURIsWithAComma" xml:space="preserve">
+    <value>Format: {0}. Separa diversos URI amb una coma.</value>
+  </data>
+  <data name="FormatX" xml:space="preserve">
+    <value>Format: {0}</value>
+  </data>
+  <data name="InvalidURI" xml:space="preserve">
+    <value>URI no vàlid</value>
+  </data>
+  <data name="URIRemoved" xml:space="preserve">
+    <value>URI suprimit</value>
+  </data>
+  <data name="ThereAreNoBlockedURIs" xml:space="preserve">
+    <value>No hi ha cap URI bloquejat</value>
+  </data>
+  <data name="TheURIXIsAlreadyBlocked" xml:space="preserve">
+    <value>L'URI {0} ja està bloquejat</value>
+  </data>
+  <data name="CannotEditMultipleURIsAtOnce" xml:space="preserve">
+    <value>No es poden editar diversos URI alhora</value>
+  </data>
+  <data name="LoginApproved" xml:space="preserve">
+    <value>S'ha aprovat l'inici de sessió</value>
+  </data>
+  <data name="LogInWithDeviceMustBeSetUpInTheSettingsOfTheBitwardenAppNeedAnotherOption" xml:space="preserve">
+    <value>L'inici de sessió amb el dispositiu ha d'estar activat a la configuració de l'aplicació Bitwarden. Necessiteu una altra opció?</value>
+  </data>
+  <data name="LogInWithDevice" xml:space="preserve">
+    <value>Inici de sessió amb dispositiu</value>
+  </data>
+  <data name="LoggingInOn" xml:space="preserve">
+    <value>Inici de sessió en</value>
+  </data>
+  <data name="Vault" xml:space="preserve">
+    <value>Caixa forta</value>
+  </data>
+  <data name="Appearance" xml:space="preserve">
+    <value>Aparença</value>
+  </data>
+  <data name="AccountSecurity" xml:space="preserve">
+    <value>Seguretat del compte</value>
+  </data>
+  <data name="BitwardenHelpCenter" xml:space="preserve">
+    <value>Centre d'ajuda de Bitwarden</value>
+  </data>
+  <data name="ContactBitwardenSupport" xml:space="preserve">
+    <value>Contacta amb l'assistència de Bitwarden</value>
+  </data>
+  <data name="CopyAppInformation" xml:space="preserve">
+    <value>Copia la informació de l'aplicació</value>
+  </data>
+  <data name="SyncNow" xml:space="preserve">
+    <value>Sincronitza ara</value>
+  </data>
+  <data name="UnlockOptions" xml:space="preserve">
+    <value>Opcions de desbloqueig</value>
+  </data>
+  <data name="SessionTimeout" xml:space="preserve">
+    <value>Temps de sessió</value>
+  </data>
+  <data name="SessionTimeoutAction" xml:space="preserve">
+    <value>Acció de temps d'espera de la sessió</value>
+  </data>
+  <data name="AccountFingerprintPhrase" xml:space="preserve">
+    <value>Frase d'empremta digital</value>
+    <comment>A 'fingerprint phrase' is a unique word phrase (similar to a passphrase) that a user can use to authenticate their public key with another user, for the purposes of sharing.</comment>
+  </data>
+  <data name="OneHourAndOneMinute" xml:space="preserve">
+    <value>Una hora i un minut</value>
+  </data>
+  <data name="OneHourAndXMinute" xml:space="preserve">
+    <value>Una hora i {0} minuts</value>
+  </data>
+  <data name="XHoursAndOneMinute" xml:space="preserve">
+    <value>{0} hores i un minut</value>
+  </data>
+  <data name="XHoursAndYMinutes" xml:space="preserve">
+    <value>{0} hores i {1} minuts</value>
+  </data>
+  <data name="XHours" xml:space="preserve">
+    <value>{0} hores</value>
+  </data>
+  <data name="AutofillServicesExplanationLong" xml:space="preserve">
+    <value>El marc d'emplenament automàtic d'Android s'utilitza per ajudar a omplir la informació d'inici de sessió a altres aplicacions del vostre dispositiu.</value>
+  </data>
+  <data name="UseInlineAutofillExplanationLong" xml:space="preserve">
+    <value>Utilitzeu l'emplenament automàtic en línia si el vostre teclat seleccionat ho admet. En cas contrari, utilitzeu la superposició predeterminada.</value>
+  </data>
+  <data name="AdditionalOptions" xml:space="preserve">
+    <value>Opcions addicionals</value>
+  </data>
+  <data name="ContinueToWebApp" xml:space="preserve">
+    <value>Continua cap a l'aplicació web?</value>
+  </data>
+  <data name="ContinueToX" xml:space="preserve">
+    <value>Voleu continuar cap a {0}?</value>
+    <comment>The parameter is an URL, like bitwarden.com.</comment>
+  </data>
+  <data name="ContinueToHelpCenter" xml:space="preserve">
+    <value>Voleu continuar cap al Centre d'ajuda?</value>
+  </data>
+  <data name="ContinueToContactSupport" xml:space="preserve">
+    <value>Voleu continuar per contactar amb l'assistència?</value>
+  </data>
+  <data name="ContinueToAppStore" xml:space="preserve">
+    <value>Voleu continuar cap a l'app store?</value>
+  </data>
+  <data name="TwoStepLoginDescriptionLong" xml:space="preserve">
+    <value>Fes que el vostre compte siga més segur configurant l'inici de sessió en dos passos a l'aplicació web de Bitwarden.</value>
+  </data>
+  <data name="ChangeMasterPasswordDescriptionLong" xml:space="preserve">
+    <value>Podeu canviar la vostra contrasenya mestra a l'aplicació web de Bitwarden.</value>
+  </data>
+  <data name="YouCanImportDataToYourVaultOnX" xml:space="preserve">
+    <value>Podeu importar dades a la vostra caixa forta a {0}.</value>
+    <comment>The parameter is an URL, like vault.bitwarden.com.</comment>
+  </data>
+  <data name="LearnMoreAboutHowToUseBitwardenOnTheHelpCenter" xml:space="preserve">
+    <value>Obteniu més informació sobre com utilitzar Bitwarden al Centre d'ajuda.</value>
+  </data>
+  <data name="ContactSupportDescriptionLong" xml:space="preserve">
+    <value>No trobeu el que esteu buscant? Poseu-vos en contacte amb l'assistència de Bitwarden a bitwarden.com.</value>
+  </data>
+  <data name="ExploreMoreFeaturesOfYourBitwardenAccountOnTheWebApp" xml:space="preserve">
+    <value>Exploreu més característiques del vostre compte Bitwarden a l'aplicació web.</value>
+  </data>
+  <data name="LearnAboutOrganizationsDescriptionLong" xml:space="preserve">
+    <value>Bitwarden us permet compartir els elements de la vostra caixa forta amb altres usuaris mitjançant una organització. Més informació al lloc web bitwarden.com.</value>
+  </data>
+  <data name="RateAppDescriptionLong" xml:space="preserve">
+    <value>Ajudeu els altres a descobrir si Bitwarden és adequat per a ells. Visiteu la botiga d'aplicacions i deixeu-nos una valoració.</value>
+  </data>
+  <data name="DefaultDarkThemeDescriptionLong" xml:space="preserve">
+    <value>Tria el tema fosc quan el mode fosc del vostre dispositiu estiga en ús</value>
+  </data>
+  <data name="CreatedXY" xml:space="preserve">
+    <value>Creat {0}, {1}</value>
+    <comment>To state the date/time in which the cipher was created: Created 03/21/2023, 09:25 AM. First parameter is the date and the second parameter is the time.</comment>
+  </data>
+  <data name="TooManyAttempts" xml:space="preserve">
+    <value>Ha hagut massa intents</value>
+  </data>
+  <data name="AccountLoggedOutBiometricExceeded" xml:space="preserve">
+    <value>S'ha tancat la sessió del compte.</value>
+  </data>
+  <data name="YourOrganizationPermissionsWereUpdatedRequeringYouToSetAMasterPassword" xml:space="preserve">
+    <value>Els permisos de la vostra organització s'han actualitzat, cal que establiu una contrasenya mestra.</value>
+  </data>
+  <data name="YourOrganizationRequiresYouToSetAMasterPassword" xml:space="preserve">
+    <value>La vostra organització requereix que establiu una contrasenya mestra.</value> 
+  </data>
+  <data name="SetUpAnUnlockOptionToChangeYourVaultTimeoutAction" xml:space="preserve">
+    <value>Configura una opció de desbloqueig per canviar l'acció de temps d'espera de la caixa forta.</value>
   </data>
 </root>

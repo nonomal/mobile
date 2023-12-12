@@ -11,11 +11,12 @@ using Android.Widget;
 using Bit.Core;
 using Bit.Core.Abstractions;
 using Bit.Core.Enums;
+using Bit.Core.Services;
 using Bit.Core.Utilities;
 
 namespace Bit.Droid.Autofill
 {
-    [Service(Permission = Manifest.Permission.BindAutofillService, Label = "Bitwarden")]
+    [Service(Permission = Manifest.Permission.BindAutofillService, Label = "Bitwarden", Exported = true)]
     [IntentFilter(new string[] { "android.service.autofill.AutofillService" })]
     [MetaData("android.autofill", Resource = "@xml/autofillservice")]
     [Register("com.x8bit.bitwarden.Autofill.AutofillService")]
@@ -26,6 +27,7 @@ namespace Bit.Droid.Autofill
         private IPolicyService _policyService;
         private IStateService _stateService;
         private LazyResolve<ILogger> _logger = new LazyResolve<ILogger>("logger");
+        private IUserVerificationService _userVerificationService;
 
         public async override void OnFillRequest(FillRequest request, CancellationSignal cancellationSignal,
             FillCallback callback)
@@ -64,11 +66,9 @@ namespace Bit.Droid.Autofill
                 var locked = await _vaultTimeoutService.IsLockedAsync();
                 if (!locked)
                 {
-                    if (_cipherService == null)
-                    {
-                        _cipherService = ServiceContainer.Resolve<ICipherService>("cipherService");
-                    }
-                    items = await AutofillHelpers.GetFillItemsAsync(parser, _cipherService);
+                    _cipherService ??= ServiceContainer.Resolve<ICipherService>();
+                    _userVerificationService ??=  ServiceContainer.Resolve<IUserVerificationService>();
+                    items = await AutofillHelpers.GetFillItemsAsync(parser, _cipherService, _userVerificationService);
                 }
 
                 // build response
@@ -134,7 +134,7 @@ namespace Bit.Droid.Autofill
                 {
                     case CipherType.Login:
                         intent.PutExtra("autofillFrameworkName", parser.Uri
-                            .Replace(Constants.AndroidAppProtocol, string.Empty)
+                            .Replace(Core.Constants.AndroidAppProtocol, string.Empty)
                             .Replace("https://", string.Empty)
                             .Replace("http://", string.Empty));
                         intent.PutExtra("autofillFrameworkUri", parser.Uri);

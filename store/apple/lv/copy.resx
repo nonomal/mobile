@@ -122,15 +122,31 @@
     <comment>Max 30 characters</comment>
   </data>
   <data name="Description" xml:space="preserve">
-    <value>Bitwarden ir vieglākais un drošākais veids, kā glabāt visus pierakstīšanās vienumus un paroles, vienlaicīgi ērti uzturot tās sinhronizētas visās ierīcēs. Bitwarden lietotnes paplašinājums ļauj ātri pierakstīties jebkurā tīmekļā vietnē ar Safari vai Chrome un ir atbalstīts simtiem citās izplatītās lietotnēs.
+    <value>Bitwarden, Inc. ir 8bit Solutions LLC mātesuzņēmums.
 
-Paroļu zagšana ir nopietna nebūšana. Tīmekļa vietnēm un lietotnēm uzbrūk katru dienu. Datu drošības pārkāpumos tiek nozagtas paroles. Kad viena un tā pati parole tiek izmantota lietotnēs un tīmekļa vietnēs, urķi var viegli piekļūt e-pasta, banku un citiem būtiskiem kontiem.
+THE VERGE, U.S. NEWS &amp; WORLD REPORT, CNET UN CITI ATZINA PAR LABĀKO PAROĻU PĀRVALDNIEKU.
 
-Drošības lietpratēji iesaka katram izveidotajam kontam izmantot dažādas, nejauši veidotas paroles. Kā tās visas pārvaldīt? Bitwarden atvieglo paroļu izveidošanu, glabāšanu un piekļūšanu tām.
+Pārvaldi, uzglabā, aizsargā un kopīgo neierobežotu skaitu paroļu neierobežotā skaitā ierīču no jebkuras vietas! Bitwarden piedāvā atvērtā koda paroļu pārvaldības risinājumus ikvienam gan mājās, gan darbā, gan ceļā.
 
-Bitwarden uzglabā visus pierakstīšanās vienumus šifrētā glabātavā, kas tiek sinhronizēta visās izmantotajās ierīcēs. Tā kā tā dati tiek pilnībā šifrēti, pirms tie tiek izsūtīti no izmantotās ierīces, piekļuve tiem ir tikai glabātavas īpašniekam. Pat Bitwarden izstrādātāji nevar lasīt datus, pat ja to gribētu. Informācija tiek aizsargāta ar AES-256 bitu šifrēšanu, "sālīto" jaukšanu un PBKDF2 SHA-256.
+Veido spēcīgas, neatkārtojamas un nejaušas paroles atbilstoši drošības prasībām ikkatrai bieži apmeklētai vietnei.
 
-Bitwarden ir vērsts uz atvērtā pirmkoda programmatūru. Bitwarden atvērtais pirmkods ir izvietots GitHub, un ikkatram ir iespēja pārskatīt, pārbaudīt un sniegt ieguldījumu Bitwarden pirmkodā.
+Bitwarden Send ātri pārsūta šifrētu informāciju - datnes un vienkāršu tekstu - ikvienam.
+
+Bitwarden piedāvā Teams un Enterprise plānus uzņēmumiem, lai Tu varētu droši kopīgot paroles ar darbabiedriem.
+
+Kāpēc izvēlēties Bitwarden:
+
+Pasaules mēroga šifrēšana
+Paroles tiek aizsargātas ar mūsdienīgu un nepārtrauktu šifrēšanu (AES-256 bitu, "sāls" jaucējalgoritms un PBKDF2 SHA-256), lai Tavi dati būtu droši un neatklāti.
+
+Iebūvēts paroļu veidotājs
+Veido spēcīgas, neatkārtojamas un nejaušas paroles atbilstoši drošības prasībām ikkatrai bieži apmeklētai vietnei.
+
+Vispasaules tulkojumi
+Bitwarden tulkojumi ir pieejami 40 valodās, un to skaits turpina pieaugt, pateicoties mūsu vispasaules kopienai.
+
+Starpplatformu lietotnes
+Nodrošini un kopīgo sensitīvus datus savā Bitwarden glabātavā no jebkura pārlūka, mobilās ierīces vai darbvirsmas operētājsistēmas un daudz ko citu!
 </value>
   <comment>Max 4000 characters</comment>
   </data>
@@ -139,13 +155,13 @@ Bitwarden ir vērsts uz atvērtā pirmkoda programmatūru. Bitwarden atvērtais 
     <comment>Max 100 characters</comment>
   </data>
   <data name="Screenshot1" xml:space="preserve">
-    <value>Pārvaldi visus savus pierakstīšanās vienumus un paroles no drošas glabātavas</value>
+    <value>Pārvaldiet visus savus pieteikumvārdus un paroles no drošas glabātuves</value>
   </data>
   <data name="Screenshot2" xml:space="preserve">
-    <value>Automātiski veido spēcīgas, sarežģītas un drošas paroles</value>
+    <value>Automātiski ģenerējiet spēcīgas, nejaušas un drošas paroles</value>
   </data>
   <data name="Screenshot3" xml:space="preserve">
-    <value>Aizsargā savu seifu ar Touch ID, PIN kodu vai galveno paroli</value>
+    <value>Aizsargā savu glabātavu ar Touch ID, PIN kodu vai galveno paroli</value>
   </data>
   <data name="Screenshot4" xml:space="preserve">
     <value>Automātiski aizpildi pierakstīšanās veidnes Safari, Chrome un simtos citu lietotņu</value>

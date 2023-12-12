@@ -1,14 +1,22 @@
 using System;
+using Bit.App.Controls;
+using Bit.Core.Utilities;
+using Bit.iOS.Core.Utilities;
 using UIKit;
 
 namespace Bit.iOS.Autofill
 {
-    public partial class LockPasswordViewController : Core.Controllers.LockPasswordViewController
+    public partial class LockPasswordViewController : Core.Controllers.BaseLockPasswordViewController
     {
+        AccountSwitchingOverlayView _accountSwitchingOverlayView;
+        AccountSwitchingOverlayHelper _accountSwitchingOverlayHelper;
+
+        public override UITableView TableView => MainTableView;
+
         public LockPasswordViewController(IntPtr handle)
             : base(handle)
         {
-            BiometricIntegrityKey = Bit.Core.Constants.iOSAutoFillBiometricIntegrityKey;
+            BiometricIntegritySourceKey = Bit.Core.Constants.iOSAutoFillBiometricIntegritySourceKey;
             DismissModalAction = Cancel;
             autofillExtension = true;
         }
@@ -20,9 +28,24 @@ namespace Bit.iOS.Autofill
         public override Action Success => () => CPViewController.DismissLockAndContinue();
         public override Action Cancel => () => CPViewController.CompleteRequest();
 
+        public override async void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+
+            _accountSwitchingOverlayHelper = new AccountSwitchingOverlayHelper();
+            AccountSwitchingBarButton.Image = await _accountSwitchingOverlayHelper.CreateAvatarImageAsync();
+
+            _accountSwitchingOverlayView = _accountSwitchingOverlayHelper.CreateAccountSwitchingOverlayView(OverlayView);
+        }
+
+        partial void AccountSwitchingBarButton_Activated(UIBarButtonItem sender)
+        {
+            _accountSwitchingOverlayHelper.OnToolbarItemActivated(_accountSwitchingOverlayView, OverlayView);
+        }
+
         partial void SubmitButton_Activated(UIBarButtonItem sender)
         {
-            var task = CheckPasswordAsync();
+            CheckPasswordAsync().FireAndForget();
         }
 
         partial void CancelButton_Activated(UIBarButtonItem sender)

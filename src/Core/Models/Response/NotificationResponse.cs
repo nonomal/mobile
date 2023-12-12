@@ -33,4 +33,17 @@ namespace Bit.Core.Models.Response
         public string UserId { get; set; }
         public DateTime Date { get; set; }
     }
+
+    public class SyncSendNotification
+    {
+        public string Id { get; set; }
+        public string UserId { get; set; }
+        public DateTime RevisionDate { get; set; }
+    }
+
+    public class PasswordlessRequestNotification
+    {
+        public string UserId { get; set; }
+        public string Id { get; set; }
+    }
 }
